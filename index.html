@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điều kiện Dự án Thương mại</title>
+
+<style>
+:root{
+  --bg:#0d1117;
+  --panel:#161b22;
+  --border:#30363d;
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --primary:#58a6ff;
+  --success:#3fb950;
+  --warning:#d29922;
+  --danger:#f85149;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 16px;
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:10px;
+}
+h2{
+  margin:30px 0 10px;
+  font-size:24px;
+  color:var(--primary);
+}
+h3{
+  margin:20px 0 8px;
+  font-size:18px;
+}
+
+p{color:var(--muted)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+}
+
+.card strong{color:#fff}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  margin-right:6px;
+}
+
+.ok{background:rgba(63,185,80,.15);color:var(--success)}
+.warn{background:rgba(210,153,34,.15);color:var(--warning)}
+.danger{background:rgba(248,81,73,.15);color:var(--danger)}
+
+ul{
+  padding-left:18px;
+}
+li{margin-bottom:6px}
+
+.checklist{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+
+.check{
+  background:var(--panel);
+  border:1px dashed var(--border);
+  border-radius:12px;
+  padding:14px;
+}
+
+.check span{
+  color:var(--success);
+  margin-right:6px;
+}
+
+.footer{
+  margin-top:40px;
+  padding:20px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:var(--muted);
+}
+
+.cta{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+button{
+  background:var(--primary);
+  color:#000;
+  border:none;
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:600;
+  cursor:pointer;
+}
+button.secondary{
+  background:#21262d;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>📌 Điều kiện cốt lõi để triển khai Dự án Thương mại</h1>
+<p>Kinh doanh – kiếm tiền hợp pháp – đúng luật – đúng kỹ thuật.  
+Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.</p>
+
+<!-- 1 -->
+<h2>1️⃣ Điều kiện PHÁP LÝ</h2>
+<div class="grid">
+  <div class="card">
+    <h3>🔹 Chủ thể pháp lý</h3>
+    <ul>
+      <li>✅ Cá nhân đăng ký kinh doanh</li>
+      <li>✅ Hộ kinh doanh cá thể</li>
+      <li>✅ Doanh nghiệp (TNHH / Cổ phần)</li>
+    </ul>
+    <span class="badge ok">Demo: OK</span>
+    <span class="badge danger">Thu tiền: Bắt buộc</span>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Ngành nghề hợp lệ</h3>
+    <ul>
+      <li>Website / App → Dịch vụ CNTT</li>
+      <li>Blockchain / Token → Công nghệ phần mềm</li>
+      <li>TMĐT → Sàn giao dịch điện tử</li>
+    </ul>
+    <span class="badge warn">⚠️ Tránh: phát hành tiền</span>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Nghĩa vụ thuế</h3>
+    <ul>
+      <li>Thuế TNCN / VAT</li>
+      <li>Tài khoản ngân hàng hợp pháp</li>
+      <li>Hóa đơn điện tử khi mở rộng</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2>2️⃣ Điều kiện KỸ THUẬT</h2>
+<div class="grid">
+  <div class="card">
+    <h3>🔹 Hạ tầng</h3>
+    <ul>
+      <li>Hosting / VPS rõ nguồn</li>
+      <li>Domain chính chủ</li>
+      <li>Backup định kỳ</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Bảo mật</h3>
+    <ul>
+      <li>HTTPS / SSL</li>
+      <li>Mã hóa dữ liệu (SHA-256 / MD5)</li>
+      <li>Phân quyền người dùng</li>
+      <li>Không public key bí mật</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Ổn định & Bảo trì</h3>
+    <ul>
+      <li>Maintenance mode</li>
+      <li>Log lỗi</li>
+      <li>Rollback khi sự cố</li>
+    </ul>
+    <span class="badge ok">Uy tín thương mại</span>
+  </div>
+</div>
+
+<!-- 3 -->
+<h2>3️⃣ Nội dung & Bản quyền</h2>
+<div class="grid">
+  <div class="card">
+    <h3>🔹 Nội dung hợp pháp</h3>
+    <ul>
+      <li>❌ Lừa đảo / đa cấp</li>
+      <li>❌ Vi phạm pháp luật</li>
+      <li>❌ Dữ liệu cá nhân trái phép</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Bản quyền</h3>
+    <ul>
+      <li>UI không copy y nguyên</li>
+      <li>Ảnh / font có license</li>
+      <li>Code tự viết hoặc open-source hợp lệ</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4 -->
+<h2>4️⃣ Kinh doanh & Vận hành</h2>
+<div class="grid">
+  <div class="card">
+    <h3>🔹 Mô hình kiếm tiền</h3>
+    <ul>
+      <li>Bán dịch vụ</li>
+      <li>Gói thành viên</li>
+      <li>Quảng cáo</li>
+      <li>Thu phí giao dịch</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🔹 Chính sách bắt buộc</h3>
+    <ul>
+      <li>Điều khoản sử dụng</li>
+      <li>Chính sách bảo mật</li>
+      <li>Thanh toán / hoàn tiền</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5 -->
+<h2>5️⃣ Dự án BLOCKCHAIN / TOKEN</h2>
+<div class="card">
+  <span class="badge danger">⚠️ Cảnh báo pháp lý Việt Nam</span>
+  <ul>
+    <li>Token không phải tiền</li>
+    <li>❌ Không cam kết lợi nhuận</li>
+    <li>❌ Không kêu gọi đầu tư</li>
+    <li>✅ Utility Token / điểm thưởng / quyền sử dụng</li>
+  </ul>
+</div>
+
+<!-- 6 -->
+<h2>6️⃣ Checklist nhanh</h2>
+<div class="checklist">
+  <div class="check"><span>✔</span>Có pháp nhân</div>
+  <div class="check"><span>✔</span>Ngành nghề phù hợp</div>
+  <div class="check"><span>✔</span>Bảo mật & backup</div>
+  <div class="check"><span>✔</span>Điều khoản & chính sách</div>
+  <div class="check"><span>✔</span>Mô hình kiếm tiền rõ</div>
+  <div class="check"><span>✔</span>Không vi phạm pháp luật</div>
+</div>
+
+<div class="cta">
+  <button>Đánh giá dự án</button>
+  <button class="secondary">Viết Điều khoản & Chính sách</button>
+  <button class="secondary">Kiểm tra rủi ro Blockchain</button>
+</div>
+
+<div class="footer">
+  © 2025 • Thương mại hợp pháp • Web • App • Blockchain
+</div>
+
+</div>
+</body>
+</html>
