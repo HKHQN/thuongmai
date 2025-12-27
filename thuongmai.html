@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dự án Thương mại Điện tử trong IT 2025</title>
+  <style>
+    :root {
+      --primary: #ee4d2d;     /* Shopee orange */
+      --dark: #111827;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --bg: var(--light);
+      --text: var(--dark);
+    }
+    [data-theme="dark"] {
+      --bg: #111827;
+      --text: #f3f4f6;
+      --light: #1f2937;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s, color 0.4s;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+    header {
+      background: linear-gradient(135deg, #ee4d2d, #ff6b6b);
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem 5rem;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+    h1 { margin: 0; font-size: 2.8rem; }
+    .theme-toggle {
+      position: fixed; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.2); color: white;
+      border: none; padding: 0.6rem 1rem;
+      border-radius: 50px; cursor: pointer; z-index: 100;
+    }
+    .section { margin: 4rem 0; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--light);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+    .card-header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .card-body { padding: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background: var(--primary); color: white; }
+    .highlight { color: var(--primary); font-weight: bold; }
+    footer { text-align: center; padding: 3rem 1rem; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">🌙 / ☀️</button>
+
+  <header>
+    <div class="container">
+      <h1>Dự án Thương mại Điện tử trong IT</h1>
+      <p style="font-size:1.3rem; max-width:700px; margin:1.5rem auto;">
+        Loại dự án "ăn tiền" nhất ngành IT Việt Nam 2020–2025 và vẫn đang bùng nổ mạnh mẽ!
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Bảng loại dự án dạng card -->
+    <section class="section">
+      <h2>Các loại dự án thương mại IT phổ biến nhất 2025</h2>
+      <div class="card-grid">
+        <div class="project-card">
+          <div class="card-header">1. Website/Sàn TMĐT B2C</div>
+          <div class="card-body">
+            <p>Bán lẻ trực tiếp cho người tiêu dùng</p>
+            <p><strong>Công nghệ:</strong> React/Next.js + Node/Laravel + AWS</p>
+            <p><strong>Ví dụ:</strong> Shopee, Tiki, Lazada clone</p>
+            <p><span class="highlight">Độ khó & Thu nhập:</span> ★★★★☆ – Cao</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-header">2. Website TMĐT B2B</div>
+          <div class="card-body">
+            <p>Đặt hàng số lượng lớn, báo giá, hợp đồng</p>
+            <p><strong>Công nghệ:</strong> Vue/Nuxt + Spring/NestJS + ERP</p>
+            <p><strong>Thu nhập:</strong> ★★★★☆ – Rất cao</p>
+          </div>
+        </div>
+
+        <!-- Bạn có thể thêm tiếp các card khác tương tự cho 3-8 -->
+      </div>
+      <p style="text-align:center; margin-top:2rem;">... và còn 6 loại hot khác (Marketplace, POS, Omnichannel, Fintech...)</p>
+    </section>
+
+    <!-- Minh họa UI/UX thực tế 2025 -->
+    <section class="section">
+      <h2>XU HƯỚNG UI/UX e-commerce ĐANG HOT 2025</h2>
+      <p>Mobile-first, minimal, animation mượt, dark mode, cá nhân hóa mạnh</p>
+
+      <!-- Product Grid examples -->
+      <h3>Product Grid hiện đại & Mobile-first</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        <img src="https://cdn.dribbble.com/userupload/45921871/file/2193737e89cf56498d8cb585610c0490.png?resize=400x0" alt="Modern product grid 2025" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+        <img src="https://intileo.com/wp-content/uploads/2024/08/30121124_7674006-1-1024x614.webp" alt="Ecommerce trends 2025" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+        <img src="https://cdn.dribbble.com/userupload/31913134/file/original-4cb063a152f3012685224059595f3456.png?resize=752x&vertical=center" alt="Minimalist e-commerce UI" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+      </div>
+
+      <!-- Product Detail examples -->
+      <h3>Trang Chi tiết Sản phẩm đẹp mắt</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem;">
+        <img src="https://themefisher.com/blog/ella.webp" alt="Beautiful product detail page" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+        <img src="https://miro.medium.com/v2/resize:fit:1200/1*FfLGLaUdmFBG5uHN3RoLNw.png" alt="Product page UX tips" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+      </div>
+
+      <!-- Checkout examples -->
+      <h3>Checkout siêu mượt – One-page</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem;">
+        <img src="https://thegood.com/wp-content/uploads/bh-photo.png" alt="Clean checkout page" style="max-width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Lời khuyên thực tế nếu bạn muốn làm dự án TMĐT</h2>
+      <ul>
+        <li><strong>Dễ bắt đầu nhất:</strong> Next.js + Strapi/Directus + Payment VN</li>
+        <li><strong>Tiềm năng cao nhất:</strong> Marketplace hoặc B2B tích hợp ERP/CRM</li>
+        <li><strong>Xu hướng hot 2025:</strong> Headless + PWA + AI gợi ý + Livestream</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 - Dự án Thương mại Điện tử IT Việt Nam • Học, làm freelance hay startup? Comment bên dưới nhé!</p>
+  </footer>
+
+</body>
+</html>
