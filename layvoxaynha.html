@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dựng Vợ Gả Chồng - Phong Tục Việt Nam</title>
+  <style>
+    :root {
+      --primary: #c41e3a;      /* đỏ son truyền thống */
+      --secondary: #2e4a2e;    /* xanh lá trầu cau */
+      --bg: #fffef7;
+      --text: #2d1e12;
+      --light-gold: #d4af37;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), #a1122c);
+      color: white;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .content {
+      padding: 2rem 1.8rem;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 1.65rem;
+      margin: 2.2rem 0 1rem;
+      border-left: 5px solid var(--light-gold);
+      padding-left: 12px;
+      position: relative;
+    }
+
+    h3 {
+      color: var(--secondary);
+      font-size: 1.35rem;
+      margin: 1.8rem 0 0.9rem;
+    }
+
+    p {
+      margin-bottom: 1.1rem;
+      font-size: 1.03rem;
+    }
+
+    .quote {
+      background: rgba(196, 30, 58, 0.05);
+      border-left: 5px solid var(--primary);
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #444;
+      font-size: 1.08rem;
+      position: relative;
+    }
+
+    .quote::before {
+      content: "“";
+      font-size: 3.5rem;
+      color: var(--primary);
+      opacity: 0.25;
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      line-height: 1;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .age-old {
+      display: inline-block;
+      background: #fff5e6;
+      color: #b85c00;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      margin: 0.4rem 0.3rem;
+      border: 1px solid #ffcc80;
+    }
+
+    .ending {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px dashed #ccc;
+      color: #555;
+      font-style: italic;
+    }
+
+    @media (max-width: 576px) {
+      .header h1 { font-size: 1.8rem; }
+      .content { padding: 1.6rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Dựng Vợ Gả Chồng</h1>
+    <div class="subtitle">Một trong ba việc hệ trọng nhất đời người theo quan niệm Việt Nam xưa</div>
+  </div>
+
+  <div class="content">
+
+    <h2>Câu nói bất hủ</h2>
+    <div class="quote">
+      Tậu trâu, lấy vợ, làm nhà<br>
+      Trong ba việc ấy đều là khó thay...
+    </div>
+
+    <p class="quote" style="font-weight:600; text-align:center; font-size:1.25rem;">
+      Trai khôn dựng vợ, gái lớn gả chồng
+    </p>
+
+    <h2>Tuổi "nên vợ nên chồng" thời xưa</h2>
+    <p>Người xưa quan niệm tuổi kết hôn rất sớm so với hiện nay:</p>
+    <p>
+      <span class="age-old">Gái thập tam (13 tuổi)</span>
+      <span class="age-old">Trai thập lục (16 tuổi)</span>
+      → đã có thể "nên vợ nên chồng".
+    </p>
+    <p>Nhiều nơi thậm chí <strong>cưới hỏi từ 8–10 tuổi</strong>, chờ lớn mới đón dâu.</p>
+
+    <div class="quote">
+      Gái lớn trong nhà như ma chưa cất<br>
+      Cha chết không lo bằng gái to trong nhà
+    </div>
+
+    <h2>Lục lễ cưới hỏi truyền thống</h2>
+    <ol>
+      <li><strong>Dạm ngõ</strong> — Trầu cau, rượu, chè thăm hỏi</li>
+      <li><strong>Ăn hỏi</strong> — Sính lễ chính thức (trầu cau, bánh chưng, lợn, gà, tiền...)</li>
+      <li><strong>Cưới xin</strong> — Rước dâu, lễ gia tiên</li>
+      <li><strong>Lại quả</strong> — Nhà gái trả lại một phần lễ vật</li>
+    </ol>
+
+    <p style="text-align:center; margin:1.8rem 0; font-style:italic;">
+      Trầu cau — biểu tượng tình nghĩa vợ chồng son sắt<br>
+      gắn liền với <span class="highlight">Sự tích Trầu Cau</span>
+    </p>
+
+    <h2>Một vài câu ca dao dí dỏm</h2>
+    <div class="quote">
+      Thuận vợ thuận chồng tát bể Đông cũng cạn<br><br>
+      Gái có chồng như gông đeo cổ<br><br>
+      Trai chưa vợ lơ lửng đứng đàng<br>
+      Gái chưa chồng trông mong đi chợ
+    </div>
+
+    <h2>Ngày nay thì sao?</h2>
+    <p>
+      Xã hội hiện đại: tự do yêu, tự quyết định, tuổi kết hôn thường <strong>25–35</strong>,<br>
+      thậm chí nhiều người chọn sống độc thân. Nhưng trong lòng nhiều gia đình Việt,<br>
+      việc <span class="highlight">"dựng vợ gả chồng cho con"</span> vẫn là niềm vui lớn,<br>
+      là lúc cha mẹ thấy mình <strong>"hết nợ"</strong> với con cái.
+    </p>
+
+    <div class="ending">
+      Bạn đang ở độ tuổi mà bố mẹ hay hỏi:<br>
+      <strong>“Bao giờ cho có cháu bế?”</strong> chưa? 😄
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
