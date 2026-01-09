@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Foxconn Hồng Hải - Tập đoàn Khoa học Kỹ thuật Hồng Hải tại Việt Nam</title>
+    <style>
+        :root {
+            --primary: #0047AB;
+            --primary-dark: #003366;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        header p {
+            font-size: 1.4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+        
+        .section {
+            padding: 70px 0;
+        }
+        
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            width: 100px;
+            height: 5px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 22px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        ul li {
+            padding: 14px 0;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1.1rem;
+        }
+        
+        ul li::before {
+            content: "✔";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-size: 1.4rem;
+        }
+        
+        .highlight {
+            background: rgba(0,71,171,0.07);
+            border-left: 6px solid var(--primary);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 10px;
+            font-size: 1.15rem;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 0;
+        }
+        
+        .tag {
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .center-text {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 40px 0;
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.4rem; }
+            header p { font-size: 1.2rem; }
+            h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Foxconn Hồng Hải</h1>
+            <p>Tập đoàn Khoa học Kỹ thuật Hồng Hải (Hon Hai Precision Industry) – Nhà sản xuất điện tử hợp đồng lớn nhất thế giới</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2>Giới thiệu</h2>
+            
+            <p class="center-text">
+                "Foxconn Hồng Hải" là tên gọi quen thuộc tại Việt Nam của Tập đoàn <strong>鴻海精密工業股份有限公司</strong><br>
+                (Hon Hai Precision Industry Co., Ltd.) – thương hiệu toàn cầu nổi tiếng với tên <strong>Foxconn</strong>.
+            </p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Thông tin cơ bản</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Thành lập: <strong>1974</strong></li>
+                            <li>Người sáng lập: <strong>Quách Đài Minh (Terry Gou)</strong></li>
+                            <li>Trụ sở chính: <strong>New Taipei City, Đài Loan</strong></li>
+                            <li>Tên giao dịch: Hon Hai Technology Group / Foxconn Technology Group</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Quy mô toàn cầu</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Nhà cung cấp EMS lớn nhất thế giới</li>
+                            <li>Hơn 1 triệu lao động toàn cầu (tùy thời điểm)</li>
+                            <li>Đối tác chiến lược của Apple, Sony, Microsoft, Google, Xiaomi, Amazon...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background:#fff;">
+        <div class="container">
+            <h2>Sản phẩm nổi bật</h2>
+            
+            <div class="highlight">
+                Foxconn là đối tác sản xuất chính cho rất nhiều thương hiệu công nghệ hàng đầu:
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Apple</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>iPhone</li>
+                            <li>iPad</li>
+                            <li>Một số linh kiện MacBook</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Gaming & Khác</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>PlayStation (Sony)</li>
+                            <li>Xbox (Microsoft)</li>
+                            <li>Nintendo Switch (một phần)</li>
+                            <li>Google Pixel, Xiaomi, Kindle...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Hướng phát triển mới</h2>
+            
+            <p class="center-text">Foxconn đang chuyển dịch mạnh mẽ sang các lĩnh vực công nghệ cao:</p>
+            
+            <div class="tags">
+                <span class="tag">Xe điện (EV)</span>
+                <span class="tag">Trí tuệ nhân tạo (AI)</span>
+                <span class="tag">Bán dẫn</span>
+                <span class="tag">Robot</span>
+                <span class="tag">Sức khỏe kỹ thuật số</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background:#fff;">
+        <div class="container">
+            <h2>Foxconn tại Việt Nam</h2>
+            
+            <div class="highlight">
+                Đầu tư từ năm <strong>2007</strong> • Một trong những nhà đầu tư FDI lớn nhất Việt Nam<br>
+                Hơn <strong>100.000 lao động</strong> tại các nhà máy hiện đại
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Các tỉnh thành</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Bắc Ninh</li>
+                            <li>Bắc Giang</li>
+                            <li>Hà Nội</li>
+                            <li>Quảng Ninh</li>
+                            <li>Nghệ An</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Sản phẩm chính</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Linh kiện điện thoại di động</li>
+                            <li>Màn hình</li>
+                            <li>Router</li>
+                            <li>Camera IP</li>
+                            <li>Linh kiện kết nối chính xác</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="center-text" style="margin-top: 60px;">
+                <p style="font-size: 1.4rem; margin-bottom: 20px;">
+                    Trang chính thức tại Việt Nam:<br>
+                    <a href="https://www.foxconn.com/vi-vn" target="_blank">https://www.foxconn.com/vi-vn</a>
+                </p>
+                <p>Bạn đang quan tâm đến tuyển dụng, tin tức mới nhất hay thông tin cụ thể về nhà máy? Hãy cho mình biết thêm nhé!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 - Thông tin tổng hợp về Foxconn Hồng Hải tại Việt Nam</p>
+        </div>
+    </footer>
+
+</body>
+  </html>
+
+
