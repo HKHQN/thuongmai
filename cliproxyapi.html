@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CLIProxyAPI - Proxy miễn phí cho các AI cao cấp 2026</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --card: #161b2e;
+      --accent: #00d4ff;
+      --accent-dark: #0088cc;
+      --text: #e0f0ff;
+      --text-light: #a0c0e0;
+      --green: #00ff9d;
+      --purple: #c678dd;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0,212,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(198,120,221,0.06) 0%, transparent 50%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, #00d4ff, #c678dd, #00ff9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      background: rgba(0,212,255,0.12);
+      border: 1px solid rgba(0,212,255,0.3);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .section {
+      margin: 4rem 0;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 4px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(0,212,255,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,212,255,0.15);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .code-block {
+      background: #0a0e14;
+      border-radius: 12px;
+      padding: 1.4rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      color: #a0d0ff;
+      overflow-x: auto;
+      border: 1px solid #1e2a38;
+      margin: 1.5rem 0;
+    }
+
+    .highlight {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 1rem 0.5rem 0 0;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,212,255,0.4);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 5rem;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.6rem; }
+      h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>CLIProxyAPI</h1>
+      <p class="subtitle">Biến subscription Claude / Gemini / ChatGPT Plus thành API miễn phí cho Cursor, Continue, Cline, VS Code...</p>
+      
+      <div class="stats">
+        <div class="stat-badge"><i class="fab fa-github"></i> ~6.000 Stars</div>
+        <div class="stat-badge"><i class="fas fa-clock"></i> Update mới nhất: 8/1/2026</div>
+        <div class="stat-badge"><i class="fas fa-code-branch"></i> >1.200 commits</div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Giới thiệu</h2>
+      <div class="card">
+        <p>CLIProxyAPI là proxy server viết bằng <span class="highlight">Go</span> cực kỳ phổ biến trong cộng đồng AI (tháng 1/2026), giúp bạn sử dụng các mô hình cao cấp <strong>miễn phí</strong> hoặc dựa trên subscription cá nhân:</p>
+        <ul>
+          <li>Gemini 2.5 Pro • Gemini 3 Pro</li>
+          <li>Claude Code/Max • Claude 3.5/4</li>
+          <li>GPT-5 • Codex</li>
+          <li>Qwen Code • Antigravity • iFlow</li>
+        </ul>
+        <p>Chỉ cần đăng nhập 1 lần → token lưu lại → dùng thoải mái trong IDE mà <strong>không tốn thêm API key trả phí</strong>.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Tính năng nổi bật (v6.6.x)</h2>
+      <div class="features">
+        <div class="feature-item">
+          <i class="fas fa-key feature-icon"></i>
+          <div>
+            <strong>OAuth login</strong><br>
+            Claude Code, ChatGPT Codex, Qwen, Gemini, iFlow...
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-balance-scale feature-icon"></i>
+          <div>
+            <strong>Multi-account load balancing</strong><br>
+            Round-robin, tăng quota & độ ổn định
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-stream feature-icon"></i>
+          <div>
+            <strong>Streaming + Tools + Multimodal</strong><br>
+            Gửi text + hình ảnh
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <div>
+            <strong>Smart fallback</strong><br>
+            Tự động chuyển provider khi quota hết
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-puzzle-piece feature-icon"></i>
+          <div>
+            <strong>Tích hợp cực tốt</strong><br>
+            Cursor • Continue • Cline • RooCode • Amp CLI...
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fab fa-docker feature-icon"></i>
+          <div>
+            <strong>Docker + WebUI + Go SDK</strong><br>
+            Deploy dễ dàng
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Cài đặt nhanh</h2>
+      <div class="card">
+        <!-- Docker (khuyên dùng) -->
+        <h3 style="margin-bottom:0.8rem">Docker (khuyên dùng)</h3>
+        <div class="code-block">
+docker run -d -p 8317:8317 \
+  -v ~/.cli-proxy-api:/root/.cli-proxy-api \
+  -v ./config.yaml:/CLIProxyAPI/config.yaml \
+  eceasy/cli-proxy-api:latest
+        </div>
+
+        <!-- Homebrew -->
+        <h3 style="margin:2rem 0 0.8rem">Homebrew (macOS)</h3>
+        <div class="code-block">
+brew install cliproxyapi
+brew services start cliproxyapi
+        </div>
+
+        <p style="margin-top:1.5rem">Sau khi chạy → trỏ client đến <code>http://localhost:8317/v1</code> và dùng model như <code>claude-3.5-sonnet</code>, <code>gemini-2.5-pro</code>...</p>
+      </div>
+    </section>
+
+    <section class="section" style="text-align:center;">
+      <h2>Bạn muốn setup chi tiết cho tool nào?</h2>
+      <a href="https://github.com/router-for-me/CLIProxyAPI" target="_blank" class="btn"><i class="fab fa-github"></i> Xem GitHub</a>
+      <a href="#" class="btn">Hướng dẫn Cursor</a>
+      <a href="#" class="btn">Hướng dẫn Continue.dev</a>
+      <p style="margin-top:1.5rem;color:var(--text-light);">Hoặc hỏi mình về config.yaml, multi-account, fallback, WebUI...</p>
+    </section>
+
+    <footer>
+      <p>CLIProxyAPI — Giải pháp tiết kiệm chi phí AI tốt nhất hiện nay (01/2026) • Open-source & cực kỳ active</p>
+    </footer>
+
+  </div>
+</body>
+</html>
