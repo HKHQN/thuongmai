@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Container Chain • Explorer v1.3.0</title>
+  <title>Container Chain • Explorer v1.3.1</title>
   <link rel="icon" href="https://raw.githubusercontent.com/lapgia57-netizen/gohome/main/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,18 +12,18 @@
   <style>
     :root {
       --bg: #0b0f1a;
-      --surface: rgba(20, 25, 40, 0.55);
-      --surface-hover: rgba(35, 45, 70, 0.65);
-      --surface-active: rgba(50, 65, 100, 0.75);
-      --glass: rgba(30, 40, 70, 0.28);
+      --surface: rgba(20, 25, 40, 0.58);
+      --surface-hover: rgba(35, 45, 70, 0.68);
+      --surface-active: rgba(50, 65, 100, 0.78);
+      --glass: rgba(30, 40, 70, 0.32);
       --text: #e0e7ff;
       --text-secondary: #a5b4fc;
       --accent: #7c3aed;
       --accent-neon: #c084fc;
       --accent-cyan: #22d3ee;
-      --accent-glow: rgba(124, 58, 237, 0.45);
-      --cyan-glow: rgba(34, 211, 238, 0.4);
-      --border: rgba(124, 58, 237, 0.25);
+      --accent-glow: rgba(124, 58, 237, 0.48);
+      --cyan-glow: rgba(34, 211, 238, 0.42);
+      --border: rgba(124, 58, 237, 0.28);
       --online-bg: #10b981;
       --warning: #facc15;
       --danger: #f87171;
@@ -36,26 +36,26 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100dvh;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(124,58,237,0.12) 0%, transparent 25%),
-        radial-gradient(circle at 85% 75%, rgba(34,211,238,0.09) 0%, transparent 30%);
+        radial-gradient(circle at 12% 12%, rgba(124,58,237,0.14) 0%, transparent 28%),
+        radial-gradient(circle at 88% 78%, rgba(34,211,238,0.11) 0%, transparent 32%);
       background-attachment: fixed;
     }
 
     .header {
-      background: rgba(11, 15, 26, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 1rem 1.5rem;
+      background: rgba(11, 15, 26, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 1.1rem 1.6rem;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.6rem;
       flex-wrap: wrap;
       position: sticky;
       top: 0;
@@ -64,31 +64,31 @@
 
     h1 {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(1.8rem, 6vw, 2.4rem);
+      font-size: clamp(2rem, 6.5vw, 2.6rem);
       font-weight: 900;
       background: linear-gradient(90deg, var(--accent), var(--accent-cyan), var(--accent-neon));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -1.2px;
-      text-shadow: 0 0 20px var(--accent-glow);
+      letter-spacing: -1.4px;
+      text-shadow: 0 0 24px var(--accent-glow);
     }
 
     .version-badge {
-      background: rgba(124,58,237,0.22);
+      background: rgba(124,58,237,0.25);
       color: var(--accent-neon);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      padding: 0.22rem 0.8rem;
+      font-size: 0.84rem;
+      padding: 0.24rem 0.9rem;
       border-radius: 999px;
       border: 1px solid var(--accent);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 12px var(--accent-glow);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 14px var(--accent-glow);
     }
 
     .stats {
       display: flex;
-      gap: 1.5rem;
-      font-size: 0.92rem;
+      gap: 1.8rem;
+      font-size: 0.94rem;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -97,22 +97,22 @@
     .main-layout {
       display: flex;
       flex-direction: column;
-      height: calc(100dvh - 68px);
+      height: calc(100dvh - 72px);
     }
 
     .sidebar {
-      background: rgba(15, 20, 35, 0.6);
-      backdrop-filter: blur(12px);
+      background: rgba(15, 20, 35, 0.65);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       overflow-y: auto;
-      padding: 1.2rem 0;
+      padding: 1.3rem 0;
       flex-shrink: 0;
     }
 
     @media (min-width: 960px) {
       .main-layout { flex-direction: row; }
       .sidebar {
-        width: 360px;
+        width: 380px;
         border-bottom: none;
         border-right: 1px solid var(--border);
       }
@@ -121,69 +121,69 @@
     .content {
       flex: 1;
       overflow-y: auto;
-      padding: 1.6rem;
-      background: linear-gradient(to bottom, transparent, rgba(11,15,26,0.4));
+      padding: 1.8rem;
+      background: linear-gradient(to bottom, transparent, rgba(11,15,26,0.45));
     }
 
     .search-wrapper {
       position: relative;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.8rem;
     }
 
     .search {
       width: 100%;
-      padding: 1rem 1rem 1rem 3rem;
+      padding: 1.1rem 1.1rem 1.1rem 3.2rem;
       background: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      backdrop-filter: blur(12px);
+      font-size: 1.02rem;
+      backdrop-filter: blur(14px);
       transition: all 0.3s ease;
     }
 
     .search:focus {
       outline: none;
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 0 5px var(--cyan-glow);
-      background: rgba(30,40,70,0.45);
+      box-shadow: 0 0 0 6px var(--cyan-glow);
+      background: rgba(30,40,70,0.5);
     }
 
     .search-icon {
       position: absolute;
-      left: 1.2rem;
+      left: 1.3rem;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-secondary);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
-    .tree { padding: 0 0.8rem; }
-    .tree ul { list-style: none; padding-left: 1.4rem; }
+    .tree { padding: 0 1rem; }
+    .tree ul { list-style: none; padding-left: 1.6rem; }
     .tree li {
-      padding: 0.6rem 1rem;
-      margin: 0.2rem 0;
-      border-radius: 10px;
+      padding: 0.7rem 1.1rem;
+      margin: 0.25rem 0;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.28s ease;
       user-select: none;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.96rem;
+      gap: 0.6rem;
+      font-size: 0.98rem;
       color: var(--text-secondary);
     }
 
     .tree li:hover {
       background: var(--surface-hover);
       color: var(--text);
-      transform: translateX(4px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transform: translateX(5px);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.32);
     }
 
     .tree li.active {
-      background: linear-gradient(to right, rgba(124,58,237,0.25), transparent);
+      background: linear-gradient(to right, rgba(124,58,237,0.3), transparent);
       color: white;
       font-weight: 600;
     }
@@ -196,9 +196,9 @@
     .tree .folder::before {
       content: "▸ ";
       display: inline-block;
-      width: 1.4em;
+      width: 1.5em;
       color: var(--accent-cyan);
-      transition: transform 0.35s ease;
+      transition: transform 0.4s ease;
     }
 
     .tree .folder.open::before {
@@ -208,8 +208,22 @@
     .tree .file::before {
       content: "◆ ";
       color: var(--accent-neon);
-      margin-right: 0.4rem;
-      font-size: 0.9rem;
+      margin-right: 0.5rem;
+      font-size: 0.92rem;
+    }
+
+    .file-title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-path-hint {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .loading-container {
@@ -219,79 +233,78 @@
       justify-content: center;
       min-height: 60vh;
       color: var(--accent-cyan);
-      gap: 1.4rem;
+      gap: 1.6rem;
     }
 
     .spinner {
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(124,58,237,0.2);
+      width: 64px;
+      height: 64px;
+      border: 6px solid rgba(124,58,237,0.22);
       border-top: 6px solid var(--accent);
       border-radius: 50%;
-      animation: spin 1.3s cubic-bezier(0.4,0,0.2,1) infinite;
+      animation: spin 1.4s cubic-bezier(0.4,0,0.2,1) infinite;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .realtime-panel {
       background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(18px);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-      transition: all 0.35s ease;
+      border-radius: 18px;
+      padding: 1.6rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.38);
+      transition: all 0.4s ease;
     }
 
     .realtime-panel:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(124,58,237,0.22);
+      transform: translateY(-7px);
+      box-shadow: 0 18px 52px rgba(124,58,237,0.25);
     }
 
     .panel-title {
       font-family: 'Orbitron', monospace;
-      font-size: 1.3rem;
+      font-size: 1.38rem;
       font-weight: 700;
       color: var(--accent-neon);
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.4rem;
       display: flex;
       align-items: center;
-      gap: 0.9rem;
-      text-shadow: 0 0 12px var(--accent-glow);
+      gap: 1rem;
+      text-shadow: 0 0 14px var(--accent-glow);
     }
 
     .pulse {
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
       background: var(--accent-cyan);
       border-radius: 50%;
       box-shadow: 0 0 0 0 var(--cyan-glow);
-      animation: pulse 2.4s infinite;
+      animation: pulse 2.6s infinite;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(34,211,238,0.7); }
-      70% { box-shadow: 0 0 0 16px rgba(34,211,238,0); }
+      0% { box-shadow: 0 0 0 0 rgba(34,211,238,0.8); }
+      70% { box-shadow: 0 0 0 18px rgba(34,211,238,0); }
       100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
     }
 
     .event-item {
-      padding: 0.9rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
+      font-size: 0.95rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: var(--text-secondary);
-      transition: all 0.25s ease;
+      transition: all 0.28s ease;
     }
 
     .event-item:hover {
       color: var(--text);
-      background: rgba(124,58,237,0.12);
-      transform: translateX(6px);
+      background: rgba(124,58,237,0.14);
+      transform: translateX(7px);
     }
 
     .event-item:last-child { border-bottom: none; }
@@ -304,7 +317,7 @@
 
     .time { 
       color: var(--text-secondary); 
-      font-size: 0.84rem; 
+      font-size: 0.86rem; 
       white-space: nowrap;
     }
 
@@ -313,40 +326,40 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(11,15,26,0.85);
-      backdrop-filter: blur(16px);
+      background: rgba(11,15,26,0.88);
+      backdrop-filter: blur(18px);
       border-top: 1px solid var(--border);
-      padding: 0.9rem 1.6rem;
+      padding: 1rem 1.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       z-index: 999;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
     .online-count {
       background: var(--online-bg);
       color: white;
-      padding: 0.45rem 1.3rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 999px;
       font-weight: 800;
-      box-shadow: 0 4px 16px rgba(16,185,129,0.45);
+      box-shadow: 0 5px 18px rgba(16,185,129,0.5);
     }
 
     @media (max-width: 480px) {
-      .content, .realtime-panel { padding: 1.2rem; }
-      .status-bar { font-size: 0.82rem; padding: 0.8rem 1.2rem; }
+      .content, .realtime-panel { padding: 1.4rem; }
+      .status-bar { font-size: 0.84rem; padding: 0.9rem 1.4rem; }
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <div style="display:flex; align-items:center; gap:1.1rem;">
+    <div style="display:flex; align-items:center; gap:1.2rem;">
       <h1>Container Chain</h1>
-      <span class="version-badge" title="Cập nhật: 10/01/2026 – Glassmorphism + Cyberpunk Neon">v1.3.0</span>
+      <span class="version-badge" title="Cập nhật: 10/01/2026 – Show HTML Title + UX Improve">v1.3.1</span>
     </div>
     <div class="stats">
       <span>Online: <strong id="online">0</strong></span>
@@ -358,8 +371,9 @@
     <div class="sidebar">
       <div class="search-wrapper">
         <span class="search-icon">🔍</span>
-        <input type="text" class="search" id="search" placeholder="Tìm file, hash, path..." autocomplete="off"/>
+        <input type="text" class="search" id="search" placeholder="Tìm theo tên, title, hash, path..." autocomplete="off"/>
       </div>
+      
       <div class="tree" id="tree">
         <div class="loading-container">
           <div class="spinner"></div>
@@ -390,7 +404,7 @@
   <div class="status-bar">
     <div>Last sync: <span id="time">—</span></div>
     <div class="online-count">Chain Online: <span id="online2">0</span></div>
-    <div style="color:var(--text-secondary);">v1.3.0 • 10/01/2026</div>
+    <div style="color:var(--text-secondary);">v1.3.1 • 10/01/2026</div>
   </div>
 
   <script>
@@ -400,6 +414,32 @@
     const HIDDEN_FILES = ['dev.html', 'index.html', 'CNAME', 'README.md', 'LICENSE', 'coder.html'];
 
     let allFiles = [];
+
+    // Cache để lưu title đã fetch tránh gọi lại nhiều lần
+    const titleCache = new Map();
+
+    async function getHtmlTitle(path) {
+      // Chỉ cố gắng lấy title với file .html / .htm
+      if (!path.match(/\.html?$|\.htm$/i)) return null;
+
+      // Đã có trong cache → trả về ngay
+      if (titleCache.has(path)) return titleCache.get(path);
+
+      try {
+        const url = CUSTOM_DOMAIN + path;
+        const response = await fetch(url, { cache: "force-cache" });
+        if (!response.ok) return null;
+
+        const text = await response.text();
+        const match = text.match(/<title[^>]*>(.*?)<\/title>/is);
+        const title = match ? match[1].trim() : null;
+
+        titleCache.set(path, title);
+        return title;
+      } catch {
+        return null;
+      }
+    }
 
     async function loadData() {
       const treeEl = document.getElementById("tree");
@@ -419,25 +459,28 @@
         document.getElementById("online").textContent = onlineCount;
         document.getElementById("online2").textContent = onlineCount;
 
-        renderTree(allFiles);
+        await renderTree(allFiles);
         renderRealTimePanels(allFiles);
         updateTime();
 
       } catch (e) {
-        treeEl.innerHTML = `<div style="color:var(--danger);padding:2rem;text-align:center;">
+        treeEl.innerHTML = `<div style="color:var(--danger);padding:2.5rem;text-align:center;">
           Lỗi kết nối: ${e.message}<br><small>Thử lại sau 30 giây...</small>
         </div>`;
       }
     }
 
-    function renderTree(files) {
+    async function renderTree(files) {
       const container = document.getElementById("tree");
       container.innerHTML = "";
 
       const rootUl = document.createElement("ul");
       const folders = {};
 
-      files.forEach(file => {
+      // Sắp xếp files theo đường dẫn để hiển thị đẹp hơn
+      const sortedFiles = [...files].sort((a,b) => a.path.localeCompare(b.path));
+
+      for (const file of sortedFiles) {
         const parts = file.path.split('/');
         const filename = parts.pop();
         let current = rootUl;
@@ -462,11 +505,26 @@
 
         const li = document.createElement("li");
         li.className = "file";
-        li.textContent = filename;
         li.title = file.path;
+
+        // Tạo phần hiển thị title + tên file
+        const titleSpan = document.createElement("span");
+        titleSpan.className = "file-title";
+
+        const pathHint = document.createElement("span");
+        pathHint.className = "file-path-hint";
+        pathHint.textContent = file.path;
+
+        // Lấy title (nếu có) hoặc fallback về tên file
+        const htmlTitle = await getHtmlTitle(file.path);
+        titleSpan.textContent = htmlTitle || filename;
+
+        li.appendChild(titleSpan);
+        li.appendChild(pathHint);
+
         li.onclick = () => openFile(file.path);
         current.appendChild(li);
-      });
+      }
 
       container.appendChild(rootUl);
     }
@@ -499,14 +557,14 @@
           <span><span class="hash">${f.path.split('/').pop().slice(0,16)}${f.path.length>16?'...':''}</span></span>
           <span class="time">${getFakeRelativeTime()}</span>
         </div>
-      `).join('') || "<div style='text-align:center;color:var(--text-secondary);padding:1.5rem;'>Chưa có block mới</div>";
+      `).join('') || "<div style='text-align:center;color:var(--text-secondary);padding:1.6rem;'>Chưa có block mới</div>";
 
       document.getElementById("latest-txs").innerHTML = sorted.slice(8, 16).map(f => `
         <div class="event-item">
           <span>Upload → <span class="hash">${f.path.split('/').pop().slice(0,20)}${f.path.length>20?'...':''}</span></span>
           <span class="time">${getFakeRelativeTime()}</span>
         </div>
-      `).join('') || "<div style='text-align:center;color:var(--text-secondary);padding:1.5rem;'>Chưa có upload mới</div>";
+      `).join('') || "<div style='text-align:center;color:var(--text-secondary);padding:1.6rem;'>Chưa có upload mới</div>";
     }
 
     function updateTime() {
@@ -518,12 +576,14 @@
     loadData();
     setInterval(loadData, 30000);
 
-    // Tìm kiếm
+    // Tìm kiếm (tìm cả title + filename + path)
     document.getElementById("search").addEventListener("input", (e) => {
       const term = e.target.value.toLowerCase().trim();
-      document.querySelectorAll(".tree li").forEach(el => {
-        const text = (el.textContent + (el.title || "")).toLowerCase();
-        el.style.display = term ? (text.includes(term) ? "" : "none") : "";
+      document.querySelectorAll(".tree li.file").forEach(el => {
+        const title = el.querySelector(".file-title")?.textContent?.toLowerCase() || "";
+        const path = el.title?.toLowerCase() || "";
+        const visible = !term || title.includes(term) || path.includes(term);
+        el.style.display = visible ? "" : "none";
       });
     });
   </script>
