@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chốt Hạ Sim 5550 - Luận Giải Phong Thủy & Thần Số Học 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Playfair+Display:wght@700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #d4a017;
+      --gold-dark: #b58900;
+      --red-lucky: #c41e3a;
+      --red-dark: #a0152f;
+      --bg-cream: #fffef5;
+      --text-dark: #2c1a0f;
+      --accent: #e67e22;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #fffef5, #f9f0d9);
+      color: var(--text-dark);
+      line-height: 1.7;
+      padding: 20px 15px;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(212,160,23,0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(196,30,58,0.08) 0%, transparent 60%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+      border: 2px solid rgba(212,160,23,0.25);
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--red-lucky) 0%, var(--red-dark) 70%);
+      color: white;
+      padding: 70px 30px 55px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: "5550";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      font-size: 9rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.11);
+      pointer-events: none;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -8px;
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      font-size: 1.35rem;
+      opacity: 0.95;
+      font-weight: 400;
+      margin-top: 8px;
+    }
+
+    .content {
+      padding: 45px 40px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--red-lucky);
+      font-size: 2.1rem;
+      margin: 50px 0 25px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 120px;
+      height: 3px;
+      background: var(--gold);
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fff8e1, #fff0c9);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 35px 0;
+      text-align: center;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #8b6a00;
+      box-shadow: 0 6px 20px rgba(212,160,23,0.2);
+    }
+
+    .info-card {
+      background: #fdf9f2;
+      border-left: 6px solid var(--gold);
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin: 30px 0;
+      font-size: 1.08rem;
+    }
+
+    .warning {
+      background: #fff5f5;
+      border-left: 6px solid var(--red-lucky);
+      padding: 22px 28px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+
+    .table-comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 40px 0;
+      font-size: 1.05rem;
+    }
+
+    .table-comparison th, .table-comparison td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid #e9d9b8;
+    }
+
+    .table-comparison th {
+      background: var(--gold);
+      color: white;
+      font-weight: 700;
+    }
+
+    .table-comparison tr:nth-child(even) {
+      background: rgba(212,160,23,0.04);
+    }
+
+    .final-blessing {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--red-lucky);
+      margin: 60px 0 40px;
+      line-height: 1.5;
+      padding: 0 20px;
+    }
+
+    .blessing-highlight {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    @media (max-width: 640px) {
+      .title-main { font-size: 2.6rem; }
+      .highlight-box { font-size: 1.28rem; padding: 24px; }
+      .content { padding: 35px 25px; }
+      .header { padding: 60px 25px 50px; }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title-main">CHỐT HẠ SIM 5550</h1>
+    <p class="subtitle">Đại Cát – Thay Đổi Tích Cực Dẫn Đến Thịnh Vượng Bền Vững</p>
+  </div>
+
+  <div class="content">
+
+    <div class="highlight-box">
+      5550 – Tam Quý 555 + Đuôi Quẻ Đỉnh (50)<br>
+      <span style="font-size:1.6em; color:#8b6a00;">ĐẠI CÁT • PHÁT TRIỂN • ỔN ĐỊNH LÂU DÀI</span>
+    </div>
+
+    <h2 class="section-title">1. Ý Nghĩa Tổng Quát</h2>
+    <div class="info-card">
+      <strong>555</strong> – Tam quý cực mạnh: Thay đổi lớn, tự do, phát triển nhanh, may mắn bền vững.<br><br>
+      <strong>Đuôi 50</strong> – Quẻ Hỏa Phong Đỉnh: Rèn luyện, vững chắc, trật tự, thành quả chín muồi.<br><br>
+      → <strong>Kết hợp hoàn hảo:</strong> Thay đổi tích cực nhưng có kế hoạch, phát triển mạnh mẽ mà vẫn giữ nền tảng chắc chắn.
+    </div>
+
+    <h2 class="section-title">2. Vận Hạn & Cơ Hội Năm 2026 (Bính Ngọ)</h2>
+    <div class="info-card">
+      Năm 2026 = Thế giới số <strong>1</strong> → Khởi đầu mới, sáng tạo, độc lập.<br><br>
+      <strong>Vận tốt:</strong> Cơ hội lớn cho chuyển việc, khởi nghiệp, đầu tư, thay đổi cuộc sống.<br>
+      555 đẩy nhanh + 50 giữ vững → Thành công bền vững.<br><br>
+      <strong>Vận hạn tiềm ẩn:</strong> Người mệnh Thủy/Hỏa mạnh có thể áp lực, mệt mỏi (cần xem bát tự chi tiết).<br>
+      Người mệnh Thổ/Kim → Cực kỳ hợp, tài lộc dồi dào.
+    </div>
+
+    <div class="warning">
+      <strong>Lời khuyên vận hạn 2026:</strong><br><br>
+      • Cúng Ông Công Ông Táo ngày <strong>10/2/2026</strong> thật trang nghiêm để xin phù hộ.<br>
+      • Tránh quyết định bốc đồng – lập kế hoạch rõ ràng.<br>
+      • Kết hợp vật phẩm hành Kim (vòng bạc, thạch anh trắng) để vượng Thổ.
+    </div>
+
+    <h2 class="section-title">3. So Sánh Các Góc Nhìn</h2>
+    <table class="table-comparison">
+      <tr>
+        <th>Góc nhìn</th>
+        <th>Ý nghĩa chính</th>
+        <th>Mức độ may mắn</th>
+        <th>Phù hợp với ai?</th>
+      </tr>
+      <tr>
+        <td>Phong thủy sim số</td>
+        <td>Thay đổi + Ổn định, phát triển bền vững</td>
+        <td>Rất tốt (8-9/10)</td>
+        <td>Kinh doanh, khởi nghiệp, thay đổi lớn</td>
+      </tr>
+      <tr>
+        <td>Thần số học & Thiên thần</td>
+        <td>Thay đổi tích cực, tự do, báo hiệu từ vũ trụ</td>
+        <td>Tốt (9/10)</td>
+        <td>Người muốn "lột xác", phiêu lưu</td>
+      </tr>
+      <tr>
+        <td>Kinh Dịch</td>
+        <td>Quẻ Đỉnh (50) + Tam quý 5 = Cát khí cực mạnh</td>
+        <td>Tốt</td>
+        <td>Người cần nền tảng vững chắc</td>
+      </tr>
+    </table>
+
+    <div class="final-blessing">
+      CHỐT HẠ CUỐI CÙNG:<br>
+      5550 là con số <span class="blessing-highlight">ĐẠI CÁT</span><br>
+      Không phải hạn – mà là <span class="blessing-highlight">CƠ HỘI VÀNG</span> đón thay đổi dẫn đến thịnh vượng!<br><br>
+      Năm Bính Ngọ 2026 – Hãy mạnh dạn tin tưởng và hành động!<br>
+      Vũ trụ đang ủng hộ bạn!
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
