@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commit trong Git là gì? Giải thích đơn giản nhất</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #2860e1;
+      --primary-dark: #1e4bb8;
+      --bg: #f8f9ff;
+      --text: #1a1a2e;
+      --gray: #4b5563;
+      --light: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 60px 40px 50px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .comparison-item {
+      background: var(--light);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .comparison-item span {
+      display: block;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: var(--primary);
+    }
+
+    .commit-example {
+      background: #f0f4ff;
+      border-left: 5px solid var(--primary);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+    }
+
+    .fun-fact {
+      background: #fffbeb;
+      border-left: 5px solid #f59e0b;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 30px 0;
+      font-style: italic;
+    }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 50px;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      counter-increment: step;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-table { grid-template-columns: 1fr; }
+      .header { padding: 50px 25px 40px; }
+      .content { padding: 30px; }
+      .header h1 { font-size: 2.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Commit trong Git là gì?</h1>
+    <p>Giải thích đơn giản nhất cho người mới bắt đầu</p>
+  </div>
+
+  <div class="content">
+
+    <section>
+      <h2>Commit = "Lưu lại một phiên bản"</h2>
+      <p>Nói đơn giản nhất: <strong>Commit</strong> giống như bạn <strong>chụp một bức ảnh</strong> toàn bộ dự án tại thời điểm đó và lưu vào "album lịch sử" (repository).</p>
+      <p>Mỗi lần commit = một bức ảnh. Bạn có thể quay lại xem bất kỳ bức ảnh nào trong quá khứ!</p>
+
+      <!-- Hình minh họa đẹp -->
+      <div style="text-align:center; margin: 30px 0;">
+        <img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/efae32ce-863f-4773-852c-4335e3ce4709_rw_3840.png" alt="Git commit illustration" style="max-width:100%; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+      </div>
+    </section>
+
+    <section>
+      <h2>So sánh dễ hiểu</h2>
+      <div class="comparison-table">
+        <div class="comparison-item">
+          Ý nghĩa đời thường<br>
+          <span>Chụp ảnh lưu kỷ niệm</span>
+        </div>
+        <div class="comparison-item">
+          Trong Git (Commit)<br>
+          <span>Lưu toàn bộ code tại thời điểm đó</span>
+        </div>
+        <div class="comparison-item">
+          Mỗi bức ảnh có ngày giờ + chú thích<br>
+          <span>Mỗi commit có: ID, ngày giờ, người commit, message</span>
+        </div>
+        <div class="comparison-item">
+          Có thể xem lại ảnh cũ bất kỳ lúc nào<br>
+          <span>Có thể quay về bất kỳ commit cũ nào</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin: 30px 0;">
+        <img src="https://ammonshepherd.github.io/git-for-beginners/assets/images/commit-map.jpg" alt="Commit như snapshot" style="max-width:100%; border-radius:12px;">
+      </div>
+    </section>
+
+    <section>
+      <h2>Một commit thường gồm những gì?</h2>
+      <ul>
+        <li><strong>Commit ID (hash)</strong>: Chuỗi ký tự dài độc nhất (ví dụ: a1b2c3d4...)</li>
+        <li><strong>Message</strong>: Đoạn mô tả bạn viết (rất quan trọng!)</li>
+        <li>Tác giả + thời gian</li>
+        <li>Thay đổi thực tế: File nào thêm/sửa/xóa và nội dung thay đổi</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Ví dụ commit message tốt (theo chuẩn Conventional Commits)</h2>
+      <div class="commit-example">
+feat: thêm chức năng đăng nhập bằng Google
+fix: sửa lỗi hiển thị giá sản phẩm trên mobile
+refactor: cải cấu trúc lại component Cart
+docs: cập nhật hướng dẫn cài đặt project
+chore: update package dependencies
+      </div>
+
+      <div style="text-align:center; margin: 25px 0;">
+        <img src="https://media2.dev.to/dynamic/image/width=1280,height=720,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fi2vl7tqsggx8txaoxhqw.png" alt="Conventional commits examples" style="max-width:100%; border-radius:12px;">
+      </div>
+    </section>
+
+    <section>
+      <h2>Quy trình cơ bản để tạo commit</h2>
+      <ol class="steps">
+        <li>Chỉ định file muốn lưu<br><code>git add file.js</code> &nbsp; hoặc &nbsp; <code>git add .</code> (tất cả)</li>
+        <li>Tạo commit<br><code>git commit -m "feat: thêm tính năng search sản phẩm"</code></li>
+        <li>Hoặc viết message dài hơn<br><code>git commit</code> → mở editor để viết chi tiết</li>
+      </ol>
+
+      <div style="text-align:center; margin: 35px 0;">
+        <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvpxeexqyfvf4hw3zxtbn.png" alt="Git add commit workflow" style="max-width:100%; border-radius:12px;">
+      </div>
+    </section>
+
+    <div class="fun-fact">
+      <strong>Nói vui một chút:</strong><br>
+      "Không commit = không có bằng chứng bạn đã làm việc hôm nay" 😂
+    </div>
+
+    <p style="text-align:center; font-size:1.2rem; margin-top:40px; color:var(--gray);">
+      Bạn đang học Git hay thắc mắc phần nào cụ thể về commit không? Mình giải thích thêm được nha! 🚀
+    </p>
+
+  </div>
+</div>
+
+</body>
+</html>
