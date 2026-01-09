@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lộ Trình Xây Dựng Tài Sản Từ 0 - Việt Nam 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #2c5282;
+      --primary-dark: #1a365d;
+      --accent: #ed8936;
+      --text: #1f2937;
+      --text-light: #4a5568;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 60px 40px 50px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      font-size: 1.18rem;
+      opacity: 0.9;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 1.85rem;
+      margin: 2.2rem 0 1rem;
+      border-left: 5px solid var(--accent);
+      padding-left: 14px;
+    }
+
+    h3 {
+      color: var(--primary-dark);
+      font-size: 1.4rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .priority-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.8rem 0;
+      font-size: 0.98rem;
+    }
+
+    .priority-table th, .priority-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .priority-table th {
+      background: var(--primary);
+      color: white;
+    }
+
+    .priority-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .stars {
+      color: #f6ad55;
+      font-weight: bold;
+    }
+
+    .formula-box {
+      background: #ebf4ff;
+      border-left: 5px solid var(--primary);
+      padding: 20px 24px;
+      margin: 2rem 0;
+      border-radius: 8px;
+      font-style: italic;
+    }
+
+    .allocation {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .alloc-item {
+      background: #f0f9ff;
+      border: 1px solid #bee3f8;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .alloc-item strong {
+      color: var(--primary-dark);
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .principles {
+      counter-reset: principle;
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .principles li {
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 1.4rem;
+      font-size: 1.05rem;
+    }
+
+    .principles li::before {
+      content: counter(principle);
+      counter-increment: principle;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding: 30px;
+      background: #fefcbf;
+      border-radius: 12px;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 50px 25px 40px; }
+      .header h1 { font-size: 2.2rem; }
+      .content { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Xây Dựng Khối Tài Sản Vững Chắc<br>Từ Con Số 0</h1>
+    <p>Hành trình dài 10–20 năm tại Việt Nam 2026 • Kỷ luật • Tư duy đúng • Kiên trì</p>
+  </div>
+
+  <div class="content">
+
+    <h2>Giai đoạn 0–2 năm: Xây nền móng</h2>
+    <p><strong>Mục tiêu:</strong> Quỹ khẩn cấp 3–6 tháng chi tiêu + Thu nhập tăng dần + Thói quen tài chính tốt</p>
+
+    <table class="priority-table">
+      <thead>
+        <tr>
+          <th>Thứ tự</th>
+          <th>Việc cần làm ngay</th>
+          <th>Lý do quan trọng nhất</th>
+          <th>Khẩn cấp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Tăng thu nhập (ít nhất +20–50% trong 1–2 năm)</td><td>Không có tiền thì không có gì để tích lũy</td><td class="stars">★★★★★</td></tr>
+        <tr><td>2</td><td>Cắt giảm chi tiêu vô nghĩa, sống dưới mức thu nhập</td><td>Tạo khoảng cách → tiền để đầu tư</td><td class="stars">★★★★</td></tr>
+        <tr><td>3</td><td>Quỹ khẩn cấp (tiết kiệm không động tới)</td><td>Tránh nợ nần khi tai nạn, mất việc</td><td class="stars">★★★★★</td></tr>
+        <tr><td>4</td><td>Trả sạch nợ xấu (lãi suất >12–15%/năm)</td><td>Nợ lãi cao là “kẻ giết” giàu có nhanh nhất</td><td class="stars">★★★★★</td></tr>
+        <tr><td>5</td><td>Học tài chính cá nhân cơ bản (3–6 tháng)</td><td>Tránh mất tiền oan vì thiếu kiến thức</td><td class="stars">★★★★</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-box">
+      <strong>Công thức sống đúng giai đoạn này:</strong><br>
+      Thu nhập – Tiết kiệm/Đầu tư (20–50%) – Chi tiêu còn lại<br>
+      <small>(Cách sai phổ biến: Thu nhập – Chi tiêu – Tiết kiệm = 0 hoặc âm)</small>
+    </div>
+
+    <h2>Giai đoạn 3–10 năm: Tích sản chủ động + Tạo đòn bẩy an toàn</h2>
+    <p><strong>Mục tiêu:</strong> Tài sản sinh tiền đều đặn, thu nhập thụ động đạt 50–70% chi tiêu hiện tại</p>
+
+    <h3>Các kênh phù hợp nhất 2026 (theo độ an toàn → tăng trưởng)</h3>
+    <div class="allocation">
+      <div class="alloc-item">
+        <strong>An toàn nhất</strong>
+        Trái phiếu tốt / Quỹ trái phiếu / Tiền gửi (6–8%/năm)
+      </div>
+      <div class="alloc-item">
+        <strong>Cân bằng tốt nhất</strong>
+        Chứng khoán VN30 + Midcap + ETF (12–18%/năm dài hạn)
+      </div>
+      <div class="alloc-item">
+        <strong>Tăng trưởng cao hơn</strong>
+        Bất động sản cho thuê (chỉ khi đã có dòng tiền ổn)
+      </div>
+      <div class="alloc-item">
+        <strong>Rủi ro cao – Tiềm năng lớn</strong>
+        Tài sản số (crypto, token) – chỉ 5–10% tài sản
+      </div>
+    </div>
+
+    <h3>Tỷ lệ phân bổ gợi ý phổ biến (lương 15–40tr/tháng)</h3>
+    <div class="allocation">
+      <div class="alloc-item"><strong>30–40%</strong> Quỹ khẩn cấp + Trái phiếu/Tiền gửi</div>
+      <div class="alloc-item"><strong>40–50%</strong> Chứng khoán dài hạn (DCA)</div>
+      <div class="alloc-item"><strong>10–20%</strong> Bất động sản (khi đủ vốn tự có)</div>
+      <div class="alloc-item"><strong>0–10%</strong> Crypto / Kinh doanh nhỏ / Đầu tư bản thân</div>
+    </div>
+
+    <h2>Công thức vàng đã chứng minh ở Việt Nam</h2>
+    <p style="font-size:1.1rem; margin:1.5rem 0;">
+      <strong>Tài sản ròng sau 15 năm ≈</strong><br>
+      (Tích lũy hàng tháng × Hệ số lãi kép) + Giá trị tăng từ kỹ năng/kinh doanh
+    </p>
+    <p>Ví dụ thực tế rất phổ biến 2025–2026:</p>
+    <ul>
+      <li>Tích lũy đều 8 triệu/tháng</li>
+      <li>Lợi suất trung bình 13%/năm</li>
+      <li>Sau 15 năm → <strong>~4,1–4,8 tỷ</strong> (chưa tính tăng lương)</li>
+      <li>Nếu tăng tích lũy 15–20%/năm → dễ dàng <strong>7–12 tỷ</strong> sau 15–18 năm</li>
+    </ul>
+
+    <h2>8 Nguyên tắc sống còn (khắc cốt ghi tâm)</h2>
+    <ol class="principles">
+      <li>Đừng bao giờ dùng đòn bẩy nợ cao khi chưa có kinh nghiệm</li>
+      <li>Đa dạng hóa nhưng đừng dàn trải quá mỏng (3–4 kênh là đủ)</li>
+      <li>Không FOMO, không revenge trading, không all-in</li>
+      <li>Đầu tư vào bản thân trước (kỹ năng kiếm tiền > tất cả)</li>
+      <li>Kỷ luật > Thông minh (chuyển tiền tự động trước khi tiêu)</li>
+      <li>Chấp nhận sống "kém sang" 5–10 năm đầu để đổi lấy tự do sau</li>
+      <li>Không khoe của, không so sánh (cách nhanh nhất để mất tiền)</li>
+      <li>Khi đã giàu → Chuyển sang bảo toàn là chính (giảm rủi ro dần)</li>
+    </ol>
+
+    <div class="cta">
+      <p><strong>Bạn đang ở tháng thứ mấy của hành trình?</strong></p>
+      <p>Thu nhập hiện tại? Đã có quỹ khẩn cấp chưa?</p>
+      <p style="margin-top:1.5rem;">Trả lời cụ thể để mình giúp bạn điều chỉnh lộ trình sát thực tế nhất nhé! 💪</p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
