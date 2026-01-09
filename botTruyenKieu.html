@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ngẫm hay muôn sự tại trời – Truyện Kiều</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1a0f00;
+      --paper: #fdfaf5;
+      --accent: #8b5a2b;
+      --deep-red: #a6262e;
+      --gold: #c9a347;
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', serif;
+      background: linear-gradient(to bottom, #fdfaf5, #f5efe3);
+      color: var(--ink);
+      line-height: 1.8;
+      padding: 20px 12px;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(139,90,43,0.06) 0%, transparent 60%),
+        radial-gradient(circle at 85% 80%, rgba(166,38,46,0.05) 0%, transparent 60%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 14px 48px var(--shadow);
+      border: 1px solid rgba(201,163,71,0.18);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2f1a0a 0%, #3d220f 100%);
+      color: #f5efe3;
+      padding: 70px 35px 55px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: "TRUYỆN KIỀU";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      font-size: 7.8rem;
+      font-weight: 900;
+      color: rgba(245,239,227,0.08);
+      pointer-events: none;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 12px;
+      white-space: nowrap;
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.1rem;
+      margin-bottom: 14px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.55);
+    }
+
+    .subtitle {
+      font-size: 1.32rem;
+      opacity: 0.9;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .content {
+      padding: 45px 38px;
+      background: var(--paper);
+    }
+
+    .poem {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.85rem;
+      line-height: 1.9;
+      text-align: center;
+      color: var(--deep-red);
+      margin: 40px 0 50px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      padding: 30px;
+      background: rgba(201,163,71,0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(139,90,43,0.15);
+      box-shadow: inset 0 0 20px rgba(139,90,43,0.03);
+    }
+
+    .poem span {
+      display: block;
+      margin: 12px 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.95rem;
+      color: var(--accent);
+      margin: 50px 0 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .explanation {
+      background: rgba(139,90,43,0.04);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 28px 0;
+      font-size: 1.08rem;
+    }
+
+    .highlight {
+      color: var(--deep-red);
+      font-weight: 700;
+    }
+
+    .philosophy {
+      font-style: italic;
+      color: #4a2c12;
+      margin: 35px 0;
+      padding: 20px 30px;
+      background: rgba(245,239,227,0.6);
+      border-radius: 10px;
+      border: 1px dashed rgba(201,163,71,0.4);
+    }
+
+    .ending-blessing {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--deep-red);
+      margin: 60px 0 40px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .decoration {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 40px 0;
+    }
+
+    @media (max-width: 640px) {
+      .title-main { font-size: 2.5rem; }
+      .poem { font-size: 1.58rem; padding: 24px; }
+      .content { padding: 35px 25px; }
+      .header { padding: 55px 28px 45px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title-main">NGẪM HAY MUÔN SỰ TẠI TRỜI</h1>
+    <p class="subtitle">Truyện Kiều – Nguyễn Du</p>
+  </div>
+
+  <div class="content">
+    <div class="poem">
+      <span>Ngẫm hay muôn sự tại trời</span>
+      <span>Trời kia đã bắt làm người có thân</span>
+      <span>Bắt phong trần phải phong trần</span>
+      <span>Cho thanh cao mới được phần thanh cao</span>
+    </div>
+
+    <h2 class="section-title">Ý nghĩa sâu sắc</h2>
+    <div class="explanation">
+      <strong>Phong trần</strong> → cuộc đời gió bụi, gian truân, vất vả, truân chuyên, lênh đênh khổ đau.<br><br>
+      <strong>Thanh cao</strong> → sự trong sạch, cao quý, phẩm hạnh cao thượng, cuộc sống an nhàn, danh dự tinh thần thanh tịnh.<br><br>
+      Nguyễn Du dùng lối <span class="highlight">đối lập chặt chẽ</span>, giàu tính triết lý để khẳng định quy luật của "trời":<br>
+      → Đời phong trần thì phải sống trọn vẹn với phong trần.<br>
+      → Được thanh cao thì đó mới thực sự là phần thanh cao xứng đáng.<br><br>
+      Mọi sự đều có nguyên do. Trời đất công bằng, không thiên vị. <strong>Có tài thường kèm tai ương</strong>, có phúc phải trả nghiệp…
+    </div>
+
+    <h2 class="section-title">Triết lý nhân sinh</h2>
+    <div class="philosophy">
+      Đây là quan điểm <strong>tài mệnh tương đố</strong> rất đặc trưng trong tư tưởng Nguyễn Du.<br><br>
+      Không kêu gọi cam chịu thụ động, mà khuyên con người:<br>
+      • Đừng oán trách trời<br>
+      • Đừng cậy tài mà khinh đời<br>
+      • Hãy giữ <span class="highlight">chữ tâm</span> – vì cuối cùng<br>
+      <strong>"Chữ tâm kia mới bằng ba chữ tài"</strong>
+    </div>
+
+    <div class="decoration"></div>
+
+    <div class="ending-blessing">
+      Cuộc đời vốn dĩ là gió bụi,<br>
+      chấp nhận mới nhẹ lòng…
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
