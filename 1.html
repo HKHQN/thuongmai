@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Món Ăn Mầm Đá - Trạng Quỳnh</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #d35400;
+      --light: #ecf0f1;
+      --gray: #7f8c8d;
+      --highlight: #e67e22;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #e8ecef);
+      color: var(--primary);
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .content {
+      padding: 2.5rem 2rem;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.15rem;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin: 1rem 0;
+    }
+
+    h2 {
+      color: var(--accent);
+      border-bottom: 3px solid var(--light);
+      padding-bottom: 0.6rem;
+      margin: 2rem 0 1.2rem;
+      font-size: 1.8rem;
+    }
+
+    blockquote {
+      background: #f8f9fa;
+      border-left: 5px solid var(--accent);
+      padding: 1.2rem 1.6rem;
+      margin: 1.4rem 0;
+      font-style: italic;
+      color: #2d3436;
+    }
+
+    .trang {
+      background: #fff3e0;
+      border-left-color: #e67e22;
+      font-weight: 500;
+    }
+
+    .keyword {
+      color: var(--accent);
+      font-weight: bold;
+      background: rgba(211, 84, 0, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .timeline {
+      margin: 2rem 0;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      background: var(--light);
+      top: 0;
+      bottom: 0;
+      left: 12px;
+    }
+
+    .event {
+      position: relative;
+      margin: 1.8rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .event .time {
+      position: absolute;
+      left: -90px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .event.climax {
+      background: #fff0e6;
+      border: 2px dashed var(--accent);
+    }
+
+    .food-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .food-list li {
+      background: var(--light);
+      padding: 0.7rem 1.3rem;
+      border-radius: 30px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .moral {
+      background: #e8f5e9;
+      padding: 1.8rem;
+      border-radius: 12px;
+      margin: 2.5rem 0;
+      border-left: 6px solid #27ae60;
+    }
+
+    .moral h3 {
+      color: #27ae60;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .footer em {
+      color: #f39c12;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 { font-size: 2rem; }
+      .event .time { position: static; display: block; margin-bottom: 0.6rem; transform: none; }
+      .timeline::before { display: none; }
+      .timeline { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Món Ăn Mầm Đá</h1>
+    <div class="subtitle">Trạng Quỳnh – Truyện cười dân gian bất hủ</div>
+  </div>
+
+  <div class="content">
+    <div class="intro">
+      <p>Truyện nổi tiếng trong sách giáo khoa Tiếng Việt lớp 4</p>
+      <p class="highlight">Bài học sâu sắc: <strong>“Lúc đói thì ăn gì cũng ngon!”</strong></p>
+    </div>
+
+    <h2>Câu chuyện</h2>
+
+    <p>Một hôm, chúa Trịnh than thở với Trạng Quỳnh:</p>
+    <blockquote>
+      “Ta ăn đủ sơn hào hải vị, của ngon vật lạ trên đời mà miệng vẫn đắng, chẳng thấy ngon miệng gì cả. Trạng có biết món gì ngon thì nói cho ta hay!”
+    </blockquote>
+
+    <p>Trạng Quỳnh cười mỉm, tâu ngay:</p>
+    <blockquote class="trang">
+      “Tâu chúa, chúa đã từng xơi <span class="keyword">mầm đá</span> bao giờ chưa ạ?”
+    </blockquote>
+
+    <p>Chúa ngạc nhiên:</p>
+    <blockquote>“Mầm đá là món gì? Chắc ngon lắm nhỉ?”</blockquote>
+
+    <p>Trạng đáp:</p>
+    <blockquote class="trang">“Dạ, tuyệt trần đời! Nhưng muốn ăn phải kỳ công lắm ạ.”</blockquote>
+
+    <p>Chúa thích thú, nằng nặc:</p>
+    <blockquote>“Sợ gì công phu! Miễn được ăn ngon. Trạng mau làm cho ta món mầm đá đi!”</blockquote>
+
+    <p>Trạng sai người lấy đá về ninh nhừ, còn mình lén mang lọ tương bịt kín ghi hai chữ <span class="keyword">“Đại phong”</span>…</p>
+
+    <div class="timeline">
+      <div class="event">
+        <span class="time">Sáng sớm</span>
+        <p>Chúa đến chờ. Nồi đá sôi sùng sục…</p>
+      </div>
+      <div class="event">
+        <span class="time">Trưa</span>
+        <p>Chúa đói hỏi: “Chín chưa?”<br>Trạng: “Dạ chưa ạ.”</p>
+      </div>
+      <div class="event">
+        <span class="time">Chiều</span>
+        <p>Chúa sốt ruột: “Chín chưa?”<br>Trạng: “Phải ninh thật kỹ…”</p>
+      </div>
+      <div class="event climax">
+        <span class="time">Khuya</span>
+        <p><strong>Chúa đói lả thú thật:</strong><br>“Ta đói lắm rồi! Có gì dọn lên tạm đi…”</p>
+      </div>
+    </div>
+
+    <p>Trạng dâng lên:</p>
+    <ul class="food-list">
+      <li>Cơm trắng nóng hổi</li>
+      <li>Đĩa tương đậu thơm lừng</li>
+      <li>Chút muối trắng tinh</li>
+    </ul>
+
+    <p>Chúa đói meo, ăn ngon lành, ngạc nhiên hỏi:</p>
+    <blockquote>“Món <span class="keyword">Đại phong</span> này là gì mà ngon thế?”</blockquote>
+
+    <p class="trang" style="font-weight:600; font-size:1.1rem;">
+      Trạng cười bảo: “Chúa nhìn hai chữ '<span class="keyword">Đại phong</span>' thì tự hiểu ạ!” 
+      <br><small>(Đại phong = Đói thì phong = Đói thì ngon)</small>
+    </p>
+
+    <div class="moral">
+      <h3>Bài học</h3>
+      <p>
+        <strong>Lúc đói thì ăn gì cũng ngon,</strong> dù chỉ là cơm với tương muối.<br>
+        Còn lúc nào cũng no nê sơn hào hải vị thì dù món gì cũng thấy nhạt nhẽo…
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Câu chuyện vừa hài hước, vừa sâu cay, thể hiện trí tuệ dân gian của Trạng Quỳnh.</p>
+    <p><em>“Mầm đá” – biểu tượng châm biếm thói xa hoa, quên đi giá trị của những điều giản dị.</em></p>
+  </div>
+</div>
+
+</body>
+</html>
