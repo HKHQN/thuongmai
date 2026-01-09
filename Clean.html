@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio / Projects - Clean UI</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacOSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f8f9fa;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 5rem 0 3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      padding: 4rem 0;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.28s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #e9ecef;
+    }
+
+    .project-content {
+      padding: 1.8rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #1a1a1a;
+    }
+
+    .project-description {
+      color: #555;
+      font-size: 0.98rem;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: auto;
+      font-size: 0.88rem;
+    }
+
+    .tag {
+      background: #e9ecef;
+      color: #444;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    .link-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.4rem;
+      background: #6366f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .link-btn:hover {
+      background: #4f46e5;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 4rem 0 2.5rem;
+      }
+      
+      .projects-grid {
+        gap: 1.6rem;
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Dự Án & Sản Phẩm</h1>
+      <p>Các dự án cá nhân, freelance và sản phẩm đã thực hiện</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="projects-grid" id="projects-container">
+      <!-- Cards sẽ được render bằng JS -->
+    </div>
+  </main>
+
+  <!-- ====================== DỮ LIỆU TỪ GIST ====================== -->
+  <script src="https://gist.github.com/456498156/356c8c81ef3df6c097f1568a23362572.js"></script>
+
+  <script>
+    // Giả sử dữ liệu từ gist đã load và có biến global tên là `projectsData`
+    // Nếu tên biến khác → bạn sửa lại dòng dưới đây cho đúng
+    const projects = window.projectsData || []; // thay projectsData bằng tên biến thật
+
+    const container = document.getElementById('projects-container');
+
+    if (projects.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:#777; font-size:1.2rem;">Không tìm thấy dữ liệu dự án...</p>';
+    } else {
+      projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+
+        // Bạn có thể tùy chỉnh cấu trúc theo đúng key trong dữ liệu của bạn
+        card.innerHTML = `
+          ${project.image ? `<img src="${project.image}" alt="${project.title || 'Project'}" class="project-image">` : '<div class="project-image" style="background:#e2e8f0;"></div>'}
+          
+          <div class="project-content">
+            <h3 class="project-title">${project.title || 'Không có tiêu đề'}</h3>
+            
+            <p class="project-description">
+              ${project.description || project.desc || 'Chưa có mô tả...'}
+            </p>
+
+            <div class="project-meta">
+              ${project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+              ${project.year ? `<span class="tag">${project.year}</span>` : ''}
+              ${project.role ? `<span class="tag">${project.role}</span>` : ''}
+            </div>
+
+            ${(project.link || project.url || project.demo) ? `
+              <a href="${project.link || project.url || project.demo}" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="link-btn">
+                Xem dự án →
+              </a>
+            ` : ''}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
