@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tai nạn Nam OK - Nhắc nhở về an toàn giao thông</title>
+  <style>
+    :root {
+      --primary: #c0392b;
+      --dark: #1e272e;
+      --light: #f5f6fa;
+      --gray: #7f8c8d;
+      --border: #dfe6e9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      color: white;
+      padding: 50px 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 40px 30px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      left: 0;
+      border-radius: 3px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 5px solid var(--primary);
+      transition: all 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .highlight {
+      background: #fff5f5;
+      border-left: 5px solid #e74c3c;
+      padding: 20px;
+      margin: 24px 0;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .victim-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .victim-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .victim-list li:last-child {
+      border-bottom: none;
+    }
+
+    .victim-list .deceased {
+      color: #c0392b;
+      font-weight: bold;
+    }
+
+    .footer-note {
+      background: #2c3e50;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .warning {
+      background: #f1c40f;
+      color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2rem; }
+      .content { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>Tai nạn Nam OK</h1>
+    <p class="subtitle">Vụ tai nạn giao thông đặc biệt nghiêm trọng ngày 4/10/2021 tại ngã tư cầu Táo Đôi, Bắc Ninh</p>
+  </div>
+
+  <div class="content">
+
+    <div class="section">
+      <h2>Thông tin cơ bản</h2>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Nhân vật chính</h3>
+          <p><strong>Nguyễn Văn Nam</strong> (Nam OK)</p>
+          <p>Sinh năm: 2000 (21 tuổi)</p>
+          <p>Quê quán: Tân Yên, Bắc Giang</p>
+          <p>YouTuber & TikToker - Duy Thường TV</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Thời gian & Địa điểm</h3>
+          <p>Chiều ngày: 4/10/2021</p>
+          <p>Vị trí: Ngã tư cầu Táo Đôi, tỉnh lộ 285</p>
+          <p>Giáp ranh: Xã Trung Chính & TT. Thứa, huyện Lương Tài, Bắc Ninh</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Phương tiện</h3>
+          <p>Xe Kia (biển 98A-206.33) do Nam OK lái</p>
+          <p>Chở tổng cộng: 6 người (quá tải - xe 4 chỗ)</p>
+          <p>Hết hạn đăng kiểm: 5 tháng (từ 29/4/2021)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Hậu quả thương tâm</h2>
+      
+      <div class="highlight">
+        Chiếc Kia va chạm mạnh với xe tải (biển 99C-145.12) → lật úp, biến dạng nặng phần đầu bên ghế lái
+      </div>
+
+      <h3>Nạn nhân tử vong (3 người)</h3>
+      <ul class="victim-list">
+        <li class="deceased">• Nguyễn Văn Nam (Nam OK) – tử vong tại chỗ</li>
+        <li class="deceased">• Nguyễn Thị Hằng (Yên Dũng, Bắc Giang) – tử vong tại chỗ</li>
+        <li class="deceased">• Lê Văn Thắng (Lục Ngạn, Bắc Giang) – tử vong sau cấp cứu</li>
+      </ul>
+
+      <p style="margin-top: 20px;">3 người còn lại bị thương, đã được đưa đi cấp cứu và điều trị (một số đã xuất viện sau đó).</p>
+    </div>
+
+    <div class="section">
+      <h2>Những yếu tố góp phần</h2>
+      <ul style="padding-left: 20px; font-size: 1.1rem;">
+        <li>Xe chở quá số người quy định (6 người/4 chỗ)</li>
+        <li>Xe hết hạn đăng kiểm 5 tháng</li>
+        <li>Tốc độ cao trước khi xảy ra va chạm (theo clip và lời kể)</li>
+      </ul>
+    </div>
+
+    <div class="warning">
+      Hơn 4 năm trôi qua (2026)...<br>
+      Vẫn là bài học đau thương về AN TOÀN GIAO THÔNG<br>
+      Đừng chủ quan khi cầm lái – đặc biệt khi chở nhóm đông, chạy nhanh, xe không đảm bảo điều kiện kỹ thuật.
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    Mong linh hồn các nạn nhân được yên nghỉ.<br>
+    Hãy lái xe an toàn để bảo vệ chính mình và mọi người xung quanh.
+  </div>
+
+</div>
+
+</body>
+</html>
