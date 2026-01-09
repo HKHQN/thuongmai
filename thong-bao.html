@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Danh sách tin nhắn thông báo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacOSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .message {
+      margin: 15px 0;
+      max-width: 80%;
+      position: relative;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    /* Tin nhắn từ hệ thống (bên trái) */
+    .system {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    /* Tin nhắn quảng cáo / lừa đảo (bên phải) */
+    .promo, .scam {
+      background: #fff9e6;
+      border: 1px solid #ffc107;
+      color: #333;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .scam {
+      background: #ffebee;
+      border-color: #f44336;
+    }
+
+    .messages {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .messages .message:first-child {
+      margin-top: 0;
+    }
+
+    /* Phần mũi tên (tail) đơn giản */
+    .message:after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+    }
+
+    .system:after {
+      left: 12px;
+      border-right-color: #ddd;
+      border-left: 0;
+    }
+
+    .promo:after, .scam:after {
+      right: 12px;
+      border-left-color: inherit;
+      border-right: 0;
+    }
+
+    .scam:after {
+      border-left-color: #f44336;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Các tin nhắn thông báo gần đây</h1>
+
+    <div class="messages">
+
+      <div class="message system">
+        Để đảm bảo an toàn khi tham gia giao thông dịp Giỗ Tổ Hùng Vương, Lễ 30/4-01/5 và cao điểm du lịch hè năm 2024, đề nghị người dân chấp hành pháp luật về trật tự, an toàn giao thông, điều khiển phương tiện đúng tốc độ, giữ khoảng cách an toàn, tuyệt đối không điều khiển phương tiện khi đã sử dụng rượu, bia.
+      </div>
+
+      <div class="message promo">
+        Bạn đủ điều kiện để nhận hoàn 20.000đ khi thanh toán hóa đơn điện từ 300.000đ trên VNPT Money. Thêm tích điểm đổi quà tới 10.000đ dành cho Bạn. Xem thêm thông tin tại https://km.vnptmoney.vn/diennuoct3. LH 18001091 (#3).
+      </div>
+
+      <div class="message system">
+        Gói cước D6V của QK gia hạn không thành công do không đủ số dư 6.000đ. QK vui lòng nạp tiền và duy trì tài khoản chính tối thiểu 6.000đ trước ngày 30/04/2024 để được gia hạn tự động gói D6V. CSKH: 18001091 (0đ)
+      </div>
+
+      <div class="message scam">
+        <#> 664755 is your GRAB verification code. It expires in 2 minutes. Do not share it with anyone, including GRAB. H9CMNjtZ1r6
+      </div>
+
+      <div class="message promo">
+        [FPTShop] 429160 là mã OTP để đăng nhập chương trình tích điểm khách hàng thân thiết tại fptshop.com.vn. Liên hệ 18006601 (0đ)
+      </div>
+
+      <div class="message system">
+        [TB] Quỹ Bảo trợ trẻ em Việt Nam kêu gọi ủng hộ trẻ em có hoàn cảnh đặc biệt, khó khăn trên toàn quốc nhân Tháng hành động vì trẻ em năm 2024 bằng cách ủng hộ qua tài khoản: TEVN tại Vietcombank.
+      </div>
+
+      <div class="message scam">
+        Chỉ Cần CCCD Quý Khách Có Thể Vay Tiền Tại Ngân Hàng MBBank KHÔNG CẦN THẾ CHẤP. Trả góp hàng tháng LS ưu đãi Hotline: 0374130882 Call/Zalo [Gửi Từ Phần Mềm Top SMS]
+      </div>
+
+      <div class="message system">
+        CIC thông báo Mã OTP của quý khách là 535832. Mã OTP của quý khách sẽ hết hạn sau 5 phút.
+      </div>
+
+      <div class="message promo">
+        +84969920555 thưởng Viettel
+      </div>
+
+      <div class="message scam">
+        vn6 nkaC nh0 b4n,h4Y D4nG kjy ,t4i ,kh0an ,ng4y ,V4 nkan 58k,kh0ng gi0i h4n g4me,den ,Ng4y vn2999.c0m
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
