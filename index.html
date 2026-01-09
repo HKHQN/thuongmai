@@ -38,16 +38,18 @@ h1{
   margin-bottom:10px;
 }
 h2{
-  margin:30px 0 10px;
-  font-size:24px;
+  margin:40px 0 16px;
+  font-size:26px;
   color:var(--primary);
+  border-bottom:1px solid var(--border);
+  padding-bottom:8px;
 }
 h3{
-  margin:20px 0 8px;
-  font-size:18px;
+  margin:24px 0 10px;
+  font-size:19px;
 }
 
-p{color:var(--muted)}
+p{color:var(--muted); font-size:15.5px;}
 
 .grid{
   display:grid;
@@ -78,6 +80,7 @@ p{color:var(--muted)}
 
 ul{
   padding-left:18px;
+  margin:12px 0;
 }
 li{margin-bottom:6px}
 
@@ -85,6 +88,7 @@ li{margin-bottom:6px}
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:12px;
+  margin:24px 0;
 }
 
 .check{
@@ -92,26 +96,30 @@ li{margin-bottom:6px}
   border:1px dashed var(--border);
   border-radius:12px;
   padding:14px;
+  font-size:14.5px;
 }
 
 .check span{
   color:var(--success);
-  margin-right:6px;
+  margin-right:8px;
+  font-size:16px;
 }
 
 .footer{
-  margin-top:40px;
-  padding:20px;
+  margin-top:60px;
+  padding:24px;
   border-top:1px solid var(--border);
   text-align:center;
   color:var(--muted);
+  font-size:14px;
 }
 
 .cta{
-  margin-top:20px;
+  margin-top:32px;
   display:flex;
   flex-wrap:wrap;
   gap:12px;
+  justify-content:center;
 }
 
 button{
@@ -119,9 +127,10 @@ button{
   color:#000;
   border:none;
   border-radius:10px;
-  padding:12px 18px;
+  padding:12px 20px;
   font-weight:600;
   cursor:pointer;
+  font-size:15px;
 }
 button.secondary{
   background:#21262d;
@@ -135,25 +144,27 @@ button.secondary{
 <div class="container">
 
 <h1>📌 Điều kiện cốt lõi để triển khai Dự án Thương mại</h1>
-<p>Kinh doanh – kiếm tiền hợp pháp – đúng luật – đúng kỹ thuật.  
+<p>Kinh doanh – kiếm tiền hợp pháp – đúng luật – đúng kỹ thuật.<br>
 Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.</p>
 
-<!-- 1 -->
-<h2>1️⃣ Điều kiện PHÁP LÝ</h2>
+<!-- PHÁP LÝ -->
+<h2>PHÁP LÝ</h2>
 <div class="grid">
   <div class="card">
-    <h3>🔹 Chủ thể pháp lý</h3>
+    <h3>Chủ thể pháp lý</h3>
     <ul>
       <li>✅ Cá nhân đăng ký kinh doanh</li>
       <li>✅ Hộ kinh doanh cá thể</li>
       <li>✅ Doanh nghiệp (TNHH / Cổ phần)</li>
     </ul>
-    <span class="badge ok">Demo: OK</span>
-    <span class="badge danger">Thu tiền: Bắt buộc</span>
+    <div style="margin-top:12px;">
+      <span class="badge ok">Demo: OK</span>
+      <span class="badge danger">Thu tiền: Bắt buộc</span>
+    </div>
   </div>
 
   <div class="card">
-    <h3>🔹 Ngành nghề hợp lệ</h3>
+    <h3>Ngành nghề hợp lệ</h3>
     <ul>
       <li>Website / App → Dịch vụ CNTT</li>
       <li>Blockchain / Token → Công nghệ phần mềm</li>
@@ -163,7 +174,7 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 
   <div class="card">
-    <h3>🔹 Nghĩa vụ thuế</h3>
+    <h3>Nghĩa vụ thuế</h3>
     <ul>
       <li>Thuế TNCN / VAT</li>
       <li>Tài khoản ngân hàng hợp pháp</li>
@@ -172,11 +183,11 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 </div>
 
-<!-- 2 -->
-<h2>2️⃣ Điều kiện KỸ THUẬT</h2>
+<!-- KỸ THUẬT -->
+<h2>KỸ THUẬT</h2>
 <div class="grid">
   <div class="card">
-    <h3>🔹 Hạ tầng</h3>
+    <h3>Hạ tầng</h3>
     <ul>
       <li>Hosting / VPS rõ nguồn</li>
       <li>Domain chính chủ</li>
@@ -185,7 +196,7 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 
   <div class="card">
-    <h3>🔹 Bảo mật</h3>
+    <h3>Bảo mật</h3>
     <ul>
       <li>HTTPS / SSL</li>
       <li>Mã hóa dữ liệu (SHA-256 / MD5)</li>
@@ -195,7 +206,7 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 
   <div class="card">
-    <h3>🔹 Ổn định & Bảo trì</h3>
+    <h3>Ổn định & Bảo trì</h3>
     <ul>
       <li>Maintenance mode</li>
       <li>Log lỗi</li>
@@ -205,11 +216,11 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 </div>
 
-<!-- 3 -->
-<h2>3️⃣ Nội dung & Bản quyền</h2>
+<!-- NỘI DUNG & BẢN QUYỀN -->
+<h2>NỘI DUNG & BẢN QUYỀN</h2>
 <div class="grid">
   <div class="card">
-    <h3>🔹 Nội dung hợp pháp</h3>
+    <h3>Nội dung hợp pháp</h3>
     <ul>
       <li>❌ Lừa đảo / đa cấp</li>
       <li>❌ Vi phạm pháp luật</li>
@@ -218,7 +229,7 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 
   <div class="card">
-    <h3>🔹 Bản quyền</h3>
+    <h3>Bản quyền</h3>
     <ul>
       <li>UI không copy y nguyên</li>
       <li>Ảnh / font có license</li>
@@ -227,11 +238,11 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 </div>
 
-<!-- 4 -->
-<h2>4️⃣ Kinh doanh & Vận hành</h2>
+<!-- KINH DOANH & VẬN HÀNH -->
+<h2>KINH DOANH & VẬN HÀNH</h2>
 <div class="grid">
   <div class="card">
-    <h3>🔹 Mô hình kiếm tiền</h3>
+    <h3>Mô hình kiếm tiền</h3>
     <ul>
       <li>Bán dịch vụ</li>
       <li>Gói thành viên</li>
@@ -241,7 +252,7 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 
   <div class="card">
-    <h3>🔹 Chính sách bắt buộc</h3>
+    <h3>Chính sách bắt buộc</h3>
     <ul>
       <li>Điều khoản sử dụng</li>
       <li>Chính sách bảo mật</li>
@@ -250,8 +261,8 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </div>
 </div>
 
-<!-- 5 -->
-<h2>5️⃣ Dự án BLOCKCHAIN / TOKEN</h2>
+<!-- BLOCKCHAIN / TOKEN -->
+<h2>DỰ ÁN BLOCKCHAIN / TOKEN</h2>
 <div class="card">
   <span class="badge danger">⚠️ Cảnh báo pháp lý Việt Nam</span>
   <ul>
@@ -262,14 +273,14 @@ Phù hợp với các dự án <strong>Web / App / Blockchain / Token</strong>.<
   </ul>
 </div>
 
-<!-- 6 -->
-<h2>6️⃣ Checklist nhanh</h2>
+<!-- CHECKLIST -->
+<h2>Checklist nhanh</h2>
 <div class="checklist">
   <div class="check"><span>✔</span>Có pháp nhân</div>
   <div class="check"><span>✔</span>Ngành nghề phù hợp</div>
   <div class="check"><span>✔</span>Bảo mật & backup</div>
   <div class="check"><span>✔</span>Điều khoản & chính sách</div>
-  <div class="check"><span>✔</span>Mô hình kiếm tiền rõ</div>
+  <div class="check"><span>✔</span>Mô hình kiếm tiền rõ ràng</div>
   <div class="check"><span>✔</span>Không vi phạm pháp luật</div>
 </div>
 
