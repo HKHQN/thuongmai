@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>G98 - Công ty Cổ phần Tài sản số G98</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --text: #e2e8f0;
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --card: #1a1a2e;
+      --border: #334155;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --primary: #6d28d9;
+      --primary-dark: #5b21b6;
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .logo {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .date-badge {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--primary);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin: 1rem 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    .highlight {
+      color: #c084fc;
+      font-weight: 600;
+    }
+
+    .partners {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .partner {
+      background: rgba(124, 58, 237, 0.1);
+      padding: 1rem 1.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      font-weight: 500;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .pillar-item {
+      background: rgba(124, 58, 237, 0.08);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+
+    .pillar-item strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+    }
+
+    .tether {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(167,139,250,0.08));
+      border-radius: 16px;
+      border: 1px solid rgba(124,58,237,0.25);
+    }
+
+    .goodnight {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 2.8rem;
+      font-weight: 800;
+      opacity: 0.15;
+      user-select: none;
+      letter-spacing: -2px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.3rem;
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+  <div class="container">
+
+    <header>
+      <div class="logo">G98</div>
+      <div class="tagline">Công ty Cổ phần Tài sản số G98</div>
+      <div class="date-badge">Ra mắt chính thức: 08/01/2026</div>
+    </header>
+
+    <div class="card">
+      <h2>Giới thiệu</h2>
+      <p>G98 là liên doanh chiến lược giữa <span class="highlight">G-Group</span> – tập đoàn công nghệ Việt Nam hàng đầu về Fintech, Mediatech, Cybersecurity và <span class="highlight">Ninety Eight</span> – hệ sinh thái blockchain toàn cầu, nổi tiếng với dự án <strong>Coin98</strong> – một trong những dự án DeFi lớn nhất Việt Nam.</p>
+    </div>
+
+    <div class="card">
+      <h2>Mục tiêu chính</h2>
+      <p>Nghiên cứu, phát triển và ứng dụng công nghệ blockchain vào các sản phẩm, nền tảng số hiện có.</p>
+      <p>Xây dựng hạ tầng blockchain <strong>an toàn – quy mô lớn</strong> ngay tại thị trường Việt Nam.</p>
+    </div>
+
+    <div class="card">
+      <h2>4 Trụ cột chiến lược</h2>
+      <div class="pillars">
+        <div class="pillar-item">
+          <strong>Hạ tầng công nghệ</strong>
+          Xây dựng blockchain layer mạnh mẽ, ổn định
+        </div>
+        <div class="pillar-item">
+          <strong>Sản phẩm tài sản số</strong>
+          Stablecoin, DeFi, Digital Assets
+        </div>
+        <div class="pillar-item">
+          <strong>An ninh mạng</strong>
+          Bảo mật cấp doanh nghiệp cho Web3
+        </div>
+        <div class="pillar-item">
+          <strong>Mạng lưới toàn cầu</strong>
+          Kết nối đối tác quốc tế
+        </div>
+      </div>
+    </div>
+
+    <div class="tether">
+      <h2>Hợp tác chiến lược ngay từ ngày đầu</h2>
+      <p style="font-size: 1.3rem; margin: 1.5rem 0;">
+        G98 chính thức ký kết thỏa thuận hợp tác với <strong style="color:#00aaff">Tether</strong><br>
+        — nhà phát hành <span style="font-weight:700">USDT</span> – stablecoin lớn nhất thế giới
+      </p>
+      <p>Bước đi lịch sử đưa blockchain & tài sản số tiến sâu hơn vào thị trường Việt Nam.</p>
+    </div>
+
+    <div class="goodnight">Good night G98 ✦</div>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute('data-theme');
+      body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+    }
+  </script>
+
+</body>
+</html>
