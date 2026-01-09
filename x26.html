@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Công ty Cổ phần 26 - X26 | Quân dụng & Dân dụng</title>
+  <style>
+    :root {
+      --primary: #1a3c34;
+      --primary-light: #2e5c52;
+      --accent: #d4a017;
+      --text: #2d2d2d;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--light);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 3.5rem 0 2.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header .subtitle {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .section {
+      padding: 3.5rem 0;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-bottom: 0.6rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent);
+      border-radius: 2px;
+    }
+
+    .intro-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    ul.feature-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    ul.feature-list li {
+      background: white;
+      padding: 1.3rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: all 0.25s ease;
+    }
+
+    ul.feature-list li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    ul.feature-list li strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .status {
+      background: #e8f5e9;
+      border-left: 5px solid #2e7d32;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(26,60,52,0.25);
+    }
+
+    .btn:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(26,60,52,0.35);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Công ty Cổ phần 26 <span style="opacity:0.85;">(X26)</span></h1>
+      <p class="subtitle">Đơn vị sản xuất Quân trang - Quân dụng hàng đầu Việt Nam<br>Thuộc Tổng cục Hậu cần - Bộ Quốc phòng</p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <section class="section">
+      <div class="intro-card">
+        <h2>Lịch sử hình thành</h2>
+        <p>
+          Thành lập năm <strong>1978</strong> với tên gọi ban đầu là <strong>Xưởng quân dụng 26</strong> (thuộc Cục Quân nhu).<br>
+          Chuyên sản xuất các sản phẩm quân trang phục vụ lực lượng vũ trang: mũ, giày, cáng, võng, balo, nhà bạt...
+        </p>
+        <p style="margin-top:1rem;">
+          Năm <strong>2006</strong>: Chuyển đổi mô hình theo Quyết định số <strong>3614/QĐ-BQP</strong> → Công ty Cổ phần.<br>
+          Vốn điều lệ hiện tại khoảng <strong>50 tỷ đồng</strong>, trong đó Nhà nước (Bộ Quốc phòng) nắm giữ <strong class="highlight">51%</strong>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Lĩnh vực kinh doanh chính</h2>
+      <ul class="feature-list">
+        <li><strong>Quân trang & Quân dụng</strong>Phục vụ cả quân đội và thị trường dân sinh</li>
+        <li><strong>Giày dép quân đội</strong>Nổi tiếng: giày sĩ quan, giày da kiểu quân đội, giày dã chiến</li>
+        <li><strong>May mặc</strong>Đồng phục, quần áo bảo hộ, trang phục quân dụng, thời trang</li>
+        <li><strong>Sản phẩm gỗ</strong>Đồ nội thất, gỗ ghép thanh, bàn ghế, tủ gỗ cao cấp</li>
+        <li><strong>Khác</strong>Mũ cối (duy nhất cho toàn quân), sản phẩm nhựa/da, lương khô...</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Tình hình gần đây (2024–2026)</h2>
+      <div class="status">
+        <p><strong>Năm 2024:</strong> Đạt <strong>122,6%</strong> kế hoạch doanh thu.</p>
+        <p>Giá cổ phiếu X26 (UPCoM) dao động khoảng <strong>26.000 – 35.000 VNĐ</strong> (tùy thời điểm).</p>
+        <p>Công ty đang tích cực mở rộng thị trường dân sinh, xuất khẩu và hợp tác liên doanh.</p>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <h2 style="margin-bottom: 1.5rem;">Bạn đang tìm sản phẩm chính hãng?</h2>
+      <p style="margin-bottom: 2rem; font-size: 1.15rem; color: var(--gray);">
+        Đơn vị sản xuất chính hãng nổi tiếng nhất Việt Nam về <strong>giày sĩ quan</strong>, giày da quân đội, đồng phục, đồ gỗ...
+      </p>
+      <a href="https://26jsc.vn" class="btn" target="_blank">Website chính thức</a>
+      <a href="https://shopee.vn/congtycp26" class="btn" target="_blank" style="margin-left:1rem;background:#ee4d2d;">Mua trên Shopee</a>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 - Công ty Cổ phần 26 | Mã chứng khoán: <strong>X26</strong> - UPCoM</p>
+  </footer>
+
+</body>
+</html>
