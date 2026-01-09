@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Truy Lùng - NamLee × Rap Việt Underground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f0f11;
+      --text: #f0f0f5;
+      --accent: #00ff9d;
+      --accent-dark: #00cc7a;
+      --card: #1a1a1f;
+      --border: #33333a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0,255,157,0.08) 0%, transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(120,0,255,0.06) 0%, transparent 35%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin: 40px 0 50px;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(3.2rem, 12vw, 5.8rem);
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #00ff9d, #c300ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 0.92;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,255,157,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .lyrics {
+      font-family: 'JetBrains Mono', monospace;
+      background: #111114;
+      border-left: 4px solid var(--accent);
+      padding: 20px 24px;
+      margin: 28px 0;
+      border-radius: 0 12px 12px 0;
+      white-space: pre-wrap;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e5;
+    }
+
+    .question {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 40px 0 24px;
+      text-align: center;
+      color: var(--accent);
+    }
+
+    .choice-btn {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 16px auto;
+      padding: 18px 24px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: white;
+    }
+
+    .btn-namlee {
+      background: linear-gradient(90deg, #00cc7a, #00ff9d);
+      color: #000;
+    }
+
+    .btn-24k {
+      background: linear-gradient(90deg, #6b00ff, #c300ff);
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        padding: 20px 22px;
+      }
+      h1 {
+        font-size: 4.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>TRUY LÙNG</h1>
+      <div class="subtitle">Underground Việt Nam • NamLee vibe 2023</div>
+    </header>
+
+    <div class="card">
+      <p>
+        "Truy Lùng" là một bài rap khá hot trong cộng đồng <span class="highlight">underground/rap Việt</span>, 
+        phổ biến nhất hiện nay là bản của <strong>NamLee</strong> (hay còn gọi là NamCocain trong một số ngữ cảnh cũ).
+      </p>
+      <p>
+        Bài này ra mắt khoảng năm <strong>2023</strong>, phong cách vui tươi, tự tin, diss nhẹ nhàng, 
+        beat cực bắt tai và lyrics <span class="highlight">"lầy lội"</span> kiểu khoe khoang hài hước. 
+        Nhiều bạn trẻ hay nghe để <strong>"quẩy"</strong> hoặc <strong>up mood</strong>.
+      </p>
+
+      <div class="lyrics">
+Woah Woah Woah
+Yeah
+Và em Quân bán tao cái quần Bape
+Tao mặc tao dùng để lau bếp
+Bọn nó biết NamLee này chơi nét
+Và khu nhà tao gần Pleikêp
+
+Tóc của tao mượt không sợ bết
+Vì tao nấu dầu gội từ bồ kết
+Tao đang viết lyrics trên Canvas
+Để tao mở triển lãm ở bên BERLIN
+
+Không cần phải xem xét
+Bọn ló biết nhạc tao như Kanye West
+Vần câu tao búng như tôm tép
+Và tao còn cả 1 đống các Concept
+
+Và bọn nó dính nhạc tao như Cocain
+Và khi đã lỡ nghe éo thể dứt ra được...
+      </div>
+
+      <p style="margin-top: 24px;">
+        (Phần sau còn nhiều đoạn diss vui và khoe flow nữa, nghe rất "chất" và giải trí)
+      </p>
+    </div>
+
+    <div class="card">
+      <p>
+        <strong>Lưu ý:</strong> Nếu bạn đang tìm bản 
+        <span class="highlight">"Truy Lùng Bảo Vật"</span> thì đó là bài khác, 
+        của <strong>24K.Right ft. Sofia</strong> trong <strong>Rap Việt mùa 3 (2025)</strong>. 
+        Nội dung sâu sắc hơn, nói về hành trình theo đuổi ước mơ và áp lực hào quang.
+      </p>
+    </div>
+
+    <div class="question">Bạn đang tìm bản nào vậy? 🔥</div>
+
+    <a href="#" class="choice-btn btn-namlee">Bản lầy lội vui vui của NamLee (2023)</a>
+    <a href="#" class="choice-btn btn-24k">Bản sâu sắc "Truy Lùng Bảo Vật" - 24K.Right (2025)</a>
+
+    <footer>
+      Drop comment hoặc DM nếu muốn lyrics đầy đủ + link nghe nhé! 🎤<br>
+      Last update: 2026 vibe
+    </footer>
+
+  </div>
+</body>
+</html>
