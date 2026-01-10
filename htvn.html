@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hạ tầng Việt Nam 2025: Bứt phá mọi giới hạn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0066cc;
+      --primary-dark: #004080;
+      --accent: #ff6b00;
+      --text: #1a1a1a;
+      --text-light: #f0f0f0;
+      --bg: #ffffff;
+      --bg-dark: #0f172a;
+      --gray: #64748b;
+      --light-gray: #e2e8f0;
+    }
+
+    [data-theme="dark"] {
+      --text: #f0f0f0;
+      --bg: #0f172a;
+      --light-gray: #334155;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0,102,204,0.08) 0%, rgba(255,107,0,0.05) 100%);
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.35rem;
+      color: var(--gray);
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .meta {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-top: 1.5rem;
+    }
+
+    article {
+      padding: 40px 0 80px;
+    }
+
+    h2, h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 2.5rem 0 1.2rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    p {
+      margin-bottom: 1.4rem;
+      font-size: 1.08rem;
+    }
+
+    .highlight {
+      background: rgba(0,102,204,0.08);
+      padding: 1.5rem 2rem;
+      border-left: 5px solid var(--primary);
+      border-radius: 6px;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-card {
+      background: var(--light-gray);
+      padding: 1.8rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .stat-number {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    .source {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--light-gray);
+      text-align: center;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    .hashtag {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.3s;
+    }
+
+    [data-theme="dark"] .theme-toggle {
+      background: rgba(15,23,42,0.6);
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 60px 0 40px; }
+      .title-main { font-size: 3.2rem; }
+      .subtitle { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeBtn" aria-label="Chuyển theme">☀️</button>
+
+  <header>
+    <div class="container">
+      <h1 class="title-main">HẠ TẦNG VIỆT NAM 2025<br>BỨT PHÁ MỌI GIỚI HẠN</h1>
+      <p class="subtitle">
+        Năm 2025, Việt Nam bứt phá hạ tầng với 564 dự án và hơn 5 triệu tỷ đồng đầu tư, mở ra không gian phát triển mới, nâng tầm kết nối vùng và thúc đẩy tăng trưởng kinh tế.
+      </p>
+      <div class="meta">Ngày đăng: 11/01/2026 • Nguồn: Báo Kinh tế Môi trường</div>
+    </div>
+  </header>
+
+  <article class="container">
+    <p>Năm 2025 đánh dấu bước tiến mạnh mẽ của Việt Nam trong phát triển kết cấu hạ tầng và nâng cao chất lượng an sinh xã hội.</p>
+
+    <p>Tại Hội nghị tổng kết công tác năm 2025, triển khai nhiệm vụ năm 2026 do Chính phủ phối hợp với chính quyền địa phương tổ chức ngày 8/1, Bộ trưởng Bộ Xây dựng <strong>Trần Hồng Minh</strong> đã trình bày những con số ấn tượng: trong năm vừa qua, cả nước đã khởi công và hoàn thành <strong>564 dự án</strong>, với tổng mức đầu tư trên <strong>5,14 triệu tỷ đồng</strong>.</p>
+
+    <div class="highlight">
+      Những con số này không chỉ phản ánh quy mô đầu tư mà còn thể hiện chiều sâu trong chiến lược phát triển hạ tầng quốc gia.
+    </div>
+
+    <h2>Đột phá chiến lược quốc gia</h2>
+    <p>Phát triển hệ thống kết cấu hạ tầng đồng bộ, hiện đại là một trong <strong>ba đột phá chiến lược</strong> mà Nghị quyết Đại hội XIII của Đảng đề ra. Trong đó, hạ tầng giao thông giữ vai trò “xương sống”...</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">3.345 km</div>
+        <div class="stat-label">Tuyến chính cao tốc hoàn thiện</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5,14 triệu tỷ</div>
+        <div class="stat-label">Tổng vốn đầu tư năm 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">564</div>
+        <div class="stat-label">Dự án khởi công & hoàn thành</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.000 km</div>
+        <div class="stat-label">Mục tiêu cao tốc (vượt kế hoạch)</div>
+      </div>
+    </div>
+
+    <h3>Các dự án biểu tượng</h3>
+    <p>Một loạt dự án lớn mang tầm quốc gia và khu vực đã trở thành biểu tượng mới: <strong>Cảng hàng không quốc tế Long Thành</strong>, nhà ga T3 Tân Sơn Nhất, nhà ga T2 Nội Bài, các cảng biển chiến lược Lạch Huyện, Cái Mép – Thị Vải, đường sắt đô thị Bến Thành – Suối Tiên...</p>
+
+    <h2>Bài học kinh nghiệm quý giá</h2>
+    <p>Từ quá trình triển khai, Bộ trưởng Trần Hồng Minh rút ra nhiều bài học quan trọng:</p>
+    <ul style="margin: 1.5rem 0 2rem 1.8rem; font-size: 1.08rem;">
+      <li>Ưu tiên nguồn lực cho các dự án trọng điểm quốc gia</li>
+      <li>Hoàn thiện thể chế, tháo gỡ điểm nghẽn giải phóng mặt bằng, vật liệu</li>
+      <li>Phát huy sức mạnh tổng hợp cả hệ thống chính trị và sự đồng thuận của người dân</li>
+      <li>Phân công rõ ràng: “rõ người, rõ việc, rõ trách nhiệm, rõ thời gian, rõ sản phẩm và rõ kết quả”</li>
+    </ul>
+
+    <div class="source">
+      Báo Kinh tế Môi trường<br>
+      <span class="hashtag">#c32</span>
+    </div>
+  </article>
+
+  <script>
+    const themeBtn = document.getElementById('themeBtn');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    themeBtn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+
+    themeBtn.addEventListener('click', () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>
