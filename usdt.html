@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>USDT - So sánh trên các Blockchain</title>
+  <style>
+    :root {
+      --primary: #26a17b;
+      --primary-dark: #1e805f;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --light-text: #555;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacC, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin: 2rem 0 1rem;
+      font-size: 1.65rem;
+      border-left: 5px solid var(--primary);
+      padding-left: 1rem;
+    }
+
+    h3 {
+      color: #333;
+      margin: 1.8rem 0 0.9rem;
+      font-size: 1.35rem;
+    }
+
+    .point {
+      margin-bottom: 1.4rem;
+      padding-left: 1.8rem;
+      position: relative;
+    }
+
+    .point::before {
+      content: "•";
+      color: var(--primary);
+      font-size: 1.6rem;
+      position: absolute;
+      left: 0;
+      top: -0.1rem;
+    }
+
+    .highlight {
+      background-color: rgba(38, 161, 123, 0.08);
+      padding: 1.2rem 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.98rem;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(38,161,123,0.03);
+    }
+
+    .warning {
+      background-color: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 1.2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      color: #664d03;
+    }
+
+    .warning strong {
+      color: #856404;
+    }
+
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.7rem; }
+      .content { padding: 1.5rem; }
+      table { font-size: 0.92rem; }
+      th, td { padding: 10px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>USDT (Tether) trên các Blockchain</h1>
+    <p>Điểm chung & sự khác biệt quan trọng</p>
+  </div>
+
+  <div class="content">
+
+    <h2>Những đặc điểm CỐT LÕI – Giống nhau trên MỌI chain</h2>
+
+    <div class="point">1. <strong>Giá trị được neo (peg) 1:1 với USD</strong><br>
+      Đây là đặc điểm quan trọng nhất • 1 USDT ≈ 1 USD (thường dao động rất nhẹ 0.99–1.01 USD)<br>
+      Tether Limited cam kết mỗi USDT đều được bảo chứng bởi tài sản tương đương.
+    </div>
+
+    <div class="point">2. <strong>Cùng một giá trị kinh tế & quyền sở hữu</strong><br>
+      Dù là ERC-20, TRC-20, SPL… thì <strong>1 USDT vẫn = 1 USDT</strong><br>
+      Tổng cung toàn cầu là một con số chung (hiện >140 tỷ USDT – đầu 2025).
+    </div>
+
+    <div class="point">3. <strong>Phát hành & quản lý tập trung bởi Tether Limited</strong><br>
+      Tất cả USDT trên mọi chain đều do cùng một công ty mint/burn.<br>
+      Quy trình phát hành/redemption và tính minh bạch dự trữ là chung cho toàn bộ.
+    </div>
+
+    <div class="point">4. <strong>Chức năng sử dụng giống nhau</strong><br>
+      • Tránh biến động giá crypto<br>
+      • Lưu trữ giá trị tạm thời<br>
+      • Giao dịch/trade trên sàn<br>
+      • Thanh toán cross-border<br>
+      • Cung cấp thanh khoản trong DeFi<br>
+      → Được chấp nhận rộng rãi trên hầu hết CEX, DEX và ví.
+    </div>
+
+    <h2>Bảng so sánh nhanh: Chung vs Khác nhau</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Đặc điểm</th>
+          <th>Chung cho mọi chain?</th>
+          <th>Ghi chú khác nhau giữa các chain</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Giá trị peg 1:1 với USD</td>
+          <td>Có</td>
+          <td>Không thay đổi</td>
+        </tr>
+        <tr>
+          <td>Tổng cung toàn cầu</td>
+          <td>Có</td>
+          <td>Một con số duy nhất</td>
+        </tr>
+        <tr>
+          <td>Công ty phát hành</td>
+          <td>Có</td>
+          <td>Tether Limited quản lý tất cả</td>
+        </tr>
+        <tr>
+          <td>Chức năng sử dụng</td>
+          <td>Có</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Tiêu chuẩn token</td>
+          <td>Không</td>
+          <td>ERC-20, TRC-20, BEP-20, SPL...</td>
+        </tr>
+        <tr>
+          <td>Phí giao dịch</td>
+          <td>Không</td>
+          <td>Tron rẻ nhất, Ethereum thường đắt nhất</td>
+        </tr>
+        <tr>
+          <td>Tốc độ giao dịch</td>
+          <td>Không</td>
+          <td>Solana/Tron nhanh (giây), Ethereum chậm hơn</td>
+        </tr>
+        <tr>
+          <td>Định dạng địa chỉ ví</td>
+          <td>Không</td>
+          <td>Bắt đầu bằng 0x (ETH), T... (Tron),...</td>
+        </tr>
+        <tr>
+          <td>Khả năng tương thích ví/sàn</td>
+          <td>Không hoàn toàn</td>
+          <td>Một số ví/sàn chỉ hỗ trợ 3–5 chain phổ biến</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Tóm lại</h2>
+    <div class="highlight">
+      Dù nằm trên mạng nào, <strong>USDT vẫn là cùng một stablecoin</strong> với giá trị, mục đích và độ tin cậy cơ bản giống nhau.<br><br>
+      Sự khác biệt chủ yếu nằm ở <strong>phí gas</strong>, <strong>tốc độ</strong> và <strong>cách triển khai kỹ thuật</strong> của từng blockchain.
+    </div>
+
+    <div class="warning">
+      <strong>Cảnh báo quan trọng:</strong><br>
+      Khi chuyển USDT, hãy <strong>kiểm tra kỹ network</strong> (ERC-20, TRC-20, BEP-20...) để tránh mất tiền oan!
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
