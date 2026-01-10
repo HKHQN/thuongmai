@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Các Khu Công Nghiệp Tại Thành Phố Từ Sơn, Bắc Ninh</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004c99;
+            --light-bg: #f8f9fa;
+            --dark-text: #1a1a1a;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro-text {
+            background: white;
+            padding: 40px 30px;
+            margin: -60px auto 60px;
+            max-width: 1100px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .industrial-park {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .industrial-park:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .park-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        
+        .park-content {
+            padding: 30px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .info-item {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .info-item strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+        
+        .highlight {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+        
+        .conclusion {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .conclusion p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,102,204,0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,102,204,0.4);
+        }
+        
+        footer {
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .intro-text { padding: 30px 20px; margin: -40px auto 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Các Khu Công Nghiệp Tại Thành Phố Từ Sơn</h1>
+            <p class="subtitle">Trung tâm công nghiệp công nghệ cao và đô thị hiện đại của tỉnh Bắc Ninh</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="intro-text">
+            <p>Các khu công nghiệp (KCN) tại thành phố Từ Sơn, tỉnh Bắc Ninh đã hình thành và phát triển mạnh mẽ từ cuối những năm 1990, góp phần đưa Từ Sơn trở thành một trong những trung tâm công nghiệp quan trọng của tỉnh, với định hướng công nghiệp sạch, công nghệ cao và đô thị hiện đại.</p>
+            <p>Dưới đây là các KCN chính hiện diện tại địa bàn Từ Sơn (dựa trên quy hoạch và tình hình cập nhật đến năm 2025-2026):</p>
+        </div>
+
+        <div class="section">
+            <h2>1. Khu công nghiệp Tiên Sơn</h2>
+            <div class="industrial-park">
+                <div class="park-header">Khu công nghiệp Tiên Sơn</div>
+                <div class="park-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Hình thành:</strong>
+                            Thành lập ngày 18/12/1998 theo Quyết định số 1129/QĐ-TTg
+                        </div>
+                        <div class="info-item">
+                            <strong>Chủ đầu tư:</strong>
+                            Tổng công ty Viglacera (nay là Viglacera - CTCP)
+                        </div>
+                        <div class="info-item">
+                            <strong>Diện tích:</strong>
+                            Khoảng 400-450 ha (sau nhiều lần mở rộng)
+                        </div>
+                        <div class="info-item">
+                            <strong>Tỷ lệ lấp đầy:</strong>
+                            Gần 100%
+                        </div>
+                    </div>
+                    <p><strong>Phát triển:</strong> Trải qua nhiều lần mở rộng (2003, 2006, 2016 - sáp nhập KCN Tân Hồng - Hoàn Sơn), đến nay đã thu hút hơn 125 dự án, tổng vốn đầu tư khoảng 2,5 tỷ USD, tạo việc làm cho gần 40.000 lao động.</p>
+                    <p><strong>Ngành nghề chính:</strong> Cơ khí, chế tạo máy, linh kiện điện tử, gốm sứ, các ngành công nghiệp hỗ trợ.</p>
+                    <p><strong>Doanh nghiệp tiêu biểu:</strong> <span class="highlight">Canon (Nhật Bản), ABB (Thụy Sĩ), THK (Nhật Bản), Vinamilk</span> và nhiều công ty trong nước.</p>
+                    <p>KCN Tiên Sơn là mô hình thành công kiểu mẫu, kết hợp công nghiệp - đô thị - dịch vụ, góp phần đặt nền móng cho sự phát triển công nghiệp của tỉnh Bắc Ninh.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Khu công nghiệp và Đô thị VSIP Bắc Ninh (KCN Từ Sơn - VSIP I)</h2>
+            <div class="industrial-park">
+                <div class="park-header">Khu công nghiệp và Đô thị VSIP Bắc Ninh</div>
+                <div class="park-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Hình thành:</strong>
+                            Phê duyệt ngày 04/06/2007, khởi công tháng 12/2007
+                        </div>
+                        <div class="info-item">
+                            <strong>Chủ đầu tư:</strong>
+                            Hợp tác Việt Nam - Singapore
+                        </div>
+                        <div class="info-item">
+                            <strong>Diện tích:</strong>
+                            700 ha (KCN 500 ha + đô thị 200 ha)
+                        </div>
+                        <div class="info-item">
+                            <strong>Lao động:</strong>
+                            Hơn 50.000 người
+                        </div>
+                    </div>
+                    <p><strong>Ngành nghề chính:</strong> Điện tử, linh kiện máy tính, hàng gia dụng, công nghệ cao.</p>
+                    <p><strong>Vị trí:</strong> Phường Phù Chẩn, xã Đại Đồng (một phần giáp huyện Tiên Du).</p>
+                    <p>VSIP Bắc Ninh nổi tiếng với mô hình KCN xanh, hiện đại, đạt tiêu chuẩn quốc tế.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Khu công nghiệp Đại Đồng - Hoàn Sơn</h2>
+            <div class="industrial-park">
+                <div class="park-header">Khu công nghiệp Đại Đồng - Hoàn Sơn</div>
+                <div class="park-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Hình thành:</strong>
+                            Thành lập năm 2005, giai đoạn I khởi công 2011
+                        </div>
+                        <div class="info-item">
+                            <strong>Chủ đầu tư:</strong>
+                            CTCP Công nghệ Viễn thông Sài Gòn (SaigonTel)
+                        </div>
+                        <div class="info-item">
+                            <strong>Diện tích:</strong>
+                            Khoảng 380-400 ha
+                        </div>
+                        <div class="info-item">
+                            <strong>Tỷ lệ lấp đầy:</strong>
+                            Gần 100%
+                        </div>
+                    </div>
+                    <p><strong>Ngành nghề chính:</strong> Linh kiện điện tử, vệ tinh cho Samsung, Canon, Microsoft; công nghiệp nhẹ, lắp ráp điện tử.</p>
+                    <p><strong>Vị trí:</strong> Xã Đại Đồng (huyện Tiên Du) và một phần tại thành phố Từ Sơn.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. Khu công nghiệp Hanaka</h2>
+            <div class="industrial-park">
+                <div class="park-header">Khu công nghiệp Hanaka</div>
+                <div class="park-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Hình thành:</strong>
+                            Bổ sung vào quy hoạch năm 2008
+                        </div>
+                        <div class="info-item">
+                            <strong>Diện tích:</strong>
+                            Khoảng 55 ha (sau điều chỉnh)
+                        </div>
+                        <div class="info-item">
+                            <strong>Đối tác chính:</strong>
+                            Nhật Bản, Hàn Quốc
+                        </div>
+                    </div>
+                    <p><strong>Vị trí:</strong> Phường Đồng Nguyên và Trang Hạ.</p>
+                    <p>Tập trung thu hút đầu tư từ Nhật Bản, Hàn Quốc với hạ tầng hiện đại.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section conclusion">
+            <h2>Tình hình phát triển chung tại Từ Sơn</h2>
+            <p>Từ Sơn (nay là thành phố) đã trở thành "đầu tàu" kinh tế của tỉnh Bắc Ninh nhờ vị trí chiến lược (cửa ngõ Hà Nội, kết nối QL1A, cao tốc, đường sắt). Các KCN tập trung vào công nghiệp sạch, công nghệ cao, thu hút FDI lớn từ Nhật Bản, Hàn Quốc, Singapore, Đài Loan...</p>
+            <p>Các KCN này không chỉ thúc đẩy tăng trưởng kinh tế mà còn tạo việc làm, đô thị hóa và phát triển bền vững tại Từ Sơn.</p>
+            <p>Hình ảnh minh họa một số khu công nghiệp tại Từ Sơn (các khu vực hiện đại, nhà máy và hạ tầng đồng bộ).</p>
+            
+            <a href="#" class="cta-button">Tìm hiểu thêm về cơ hội đầu tư & tuyển dụng tại Từ Sơn</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Dữ liệu cập nhật đến năm 2025-2026 • Thành phố Từ Sơn - Bắc Ninh</p>
+    </footer>
+
+</body>
+</html>
