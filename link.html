@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Phân tích 3 Token Polygon • 11/01/2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0f0f17;
+            --bg-card: rgba(25, 25, 45, 0.65);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 8px 32px rgba(0,0,0,0.45);
+        }
+
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --bg-card: rgba(255,255,255,0.75);
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --border: rgba(0,0,0,0.06);
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99,102,241,0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(99,102,241,0.06) 0%, transparent 35%);
+            transition: background 0.6s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.08);
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        ul.info-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul.info-list li {
+            background: rgba(255,255,255,0.03);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.15);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: #fbbf24;
+        }
+
+        pre {
+            background: rgba(0,0,0,0.35);
+            padding: 1.4rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            border: 1px solid var(--border);
+            margin: 1.2rem 0;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #818cf8;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Phân tích 3 Token trên Polygon</h1>
+        <div class="theme-toggle" onclick="toggleTheme()" title="Chuyển theme">☀️/🌙</div>
+    </header>
+
+    <div class="card">
+        <p style="color:var(--text-muted); margin-bottom:1.5rem;">
+            Dữ liệu cập nhật đến: <strong>11/01/2026</strong> • Nguồn: Polygonscan • 
+            <strong>Cảnh báo:</strong> Cả 3 token hiện có hoạt động rất thấp, market cap gần bằng 0, chưa niêm yết trên DEX lớn.
+        </p>
+
+        <!-- Token 1 -->
+        <div class="card">
+            <h2>1. PHOcoin <span style="color:var(--text-muted); font-size:1rem;">(PIN)</span></h2>
+            
+            <ul class="info-list">
+                <li><strong>Total Supply:</strong> 6,000,000,000 PIN</li>
+                <li><strong>Decimals:</strong> 18</li>
+                <li><strong>Mintable:</strong> Có (chỉ Owner)</li>
+                <li><strong>Verified:</strong> ✓ Yes</li>
+                <li><strong>Transactions:</strong> Chỉ 1 (approve)</li>
+                <li><strong>Rủi ro chính:</strong> Owner vẫn có quyền mint thêm</li>
+            </ul>
+
+            <div class="warning">
+                Chưa renounce ownership → Có khả năng mint thêm bất kỳ lúc nào
+            </div>
+
+            <h3>Mã nguồn (Solidity 0.8.30)</h3>
+            <pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PHOcoin is ERC20, Ownable {
+    uint256 public constant TOTAL_SUPPLY = 6_000_000_000 * 10**18;
+
+    constructor() ERC20("PHOcoin", "PIN") {
+        _mint(msg.sender, TOTAL_SUPPLY);
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    // ... (các hàm burn khác)
+}</code></pre>
+
+            <p><a href="https://polygonscan.com/address/0x60ebfaa6071382c9c9b5487942fefe3e9b798c1b#code" target="_blank">Xem full contract trên Polygonscan →</a></p>
+        </div>
+
+        <!-- Token 2 -->
+        <div class="card">
+            <h2>2. PCcoin <span style="color:var(--text-muted); font-size:1rem;">(PCC)</span></h2>
+            
+            <ul class="info-list">
+                <li><strong>Ownership:</strong> Đã renounce (tốt)</li>
+                <li><strong>Verified:</strong> ✗ No (chỉ có bytecode)</li>
+                <li><strong>Transactions:</strong> ~10 tx (chủ yếu transfer/approve)</li>
+                <li><strong>Tuổi:</strong> ~57 ngày</li>
+                <li><strong>Rủi ro chính:</strong> Không xem được source code</li>
+            </ul>
+
+            <div class="warning">
+                Vì chưa verify source → Khó đánh giá có backdoor hay không
+            </div>
+
+            <p><a href="https://polygonscan.com/address/0x648b6175992ffb99fbea05f53a21550c7afe7984" target="_blank">Xem contract (bytecode) →</a></p>
+        </div>
+
+        <!-- Token 3 -->
+        <div class="card">
+            <h2>3. Lapcoin <span style="color:var(--text-muted); font-size:1rem;">(LOP)</span></h2>
+            
+            <ul class="info-list">
+                <li><strong>Initial Supply:</strong> 1,000,000 LOP</li>
+                <li><strong>Trading:</strong> Phải được owner enable</li>
+                <li><strong>Verified:</strong> ✓ Yes</li>
+                <li><strong>Transactions:</strong> ~31 tx (hoạt động cao nhất trong 3 token)</li>
+                <li><strong>Rủi ro chính:</strong> Trading có thể bị khóa vĩnh viễn</li>
+            </ul>
+
+            <h3>Mã nguồn nổi bật (phần kiểm soát trading)</h3>
+            <pre><code>function enableTrading() external onlyOwner {
+    tradingEnabled = true;
+}
+
+function _update(address from, address to, uint256 amount) internal override {
+    require(tradingEnabled || from == owner() || to == owner(), "Trading not active");
+    super._update(from, to, amount);
+}</code></pre>
+
+            <p><a href="https://polygonscan.com/address/0x9d475bd4f8d1b462ee4eda5aa6fa238bdd252103#code" target="_blank">Xem full contract →</a></p>
+        </div>
+
+        <div class="card" style="text-align:center; margin-top:3rem;">
+            <h2>Kết luận nhanh</h2>
+            <p style="margin:1.5rem 0; font-size:1.1rem;">
+                Cả 3 token đều rất sớm / thử nghiệm • Hoạt động thấp • <strong>Chưa có giá trị thực</strong><br>
+                <strong>Khuyến nghị hiện tại:</strong> Chỉ nghiên cứu – <strong>không nên đầu tư</strong>
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Được tạo với ♥ bởi Grok • Dữ liệu on-chain từ Polygonscan • Cập nhật realtime nếu cần
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
+</script>
+
+</body>
+</html>
