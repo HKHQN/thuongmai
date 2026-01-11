@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giai đoạn chuyển giao 16/10/2024 – 30/06/2025 | Viettel Theme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --viettel-red:    #C8102E;
+      --viettel-gold:   #FCD116;
+      --viettel-dark:   #1A1A1A;
+      --viettel-gray:   #333333;
+      --light-bg:       #f8f9fa;
+      --card-bg:        #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, var(--light-bg), #e9ecef);
+      color: var(--viettel-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px 12px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 32px 0 24px;
+      background: var(--viettel-red);
+      color: white;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 60%);
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.92;
+      font-weight: 300;
+    }
+
+    .duration-box {
+      background: rgba(0,0,0,0.7);
+      color: var(--viettel-gold);
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 50px;
+      margin: 20px 0 12px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+
+    main {
+      background: var(--card-bg);
+      border-radius: 0 0 12px 12px;
+      padding: 32px 28px 40px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+    }
+
+    h2 {
+      color: var(--viettel-red);
+      font-size: 1.65rem;
+      margin: 32px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--viettel-gold);
+      display: inline-block;
+    }
+
+    h3 {
+      color: #222;
+      margin: 24px 0 12px;
+      font-size: 1.32rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      font-size: 1.03rem;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--viettel-red);
+      font-size: 1.8rem;
+      position: absolute;
+      left: 0;
+      top: -4px;
+      line-height: 1;
+    }
+
+    .highlight {
+      background: rgba(200,16,46,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--viettel-red);
+      font-weight: 500;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.8rem; }
+      .duration-box { font-size: 1.1rem; padding: 10px 20px; }
+      main { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>GIAI ĐOẠN CHUYỂN GIAO QUAN TRỌNG</h1>
+    <p class="subtitle">16/10/2024 → 30/06/2025</p>
+    <div class="duration-box">
+      Tổng cộng: <span id="days-result">đang tính...</span> ngày
+    </div>
+  </header>
+
+  <main>
+    <h2>Trên thế giới (tháng 10/2024 – 6/2025)</h2>
+    <p>Giai đoạn chứng kiến nhiều biến động lớn về chính trị, xung đột và thiên tai:</p>
+    
+    <ul>
+      <li>Donald Trump <span class="highlight">nhậm chức Tổng thống Mỹ lần 2</span> (tháng 1/2025)</li>
+      <li>Khủng hoảng chính trị châu Âu: Pháp thay 4 Thủ tướng, Đức bầu cử sớm (2/2025), Hàn Quốc phế truất Tổng thống Yoon Suk Yeol (4/2025)</li>
+      <li>Xung đột Trung Đông leo thang: Israel mở <span class="highlight">Operation Rising Lion</span> tấn công cơ sở hạt nhân & quân sự Iran (6/2025), sau đó đạt thỏa thuận ngừng bắn mong manh</li>
+      <li>Thiên tai kỷ lục: Siêu bão Helene & Milton (Mỹ 2024), nắng nóng cực đoan >50°C tại châu Á & châu Âu (2025)</li>
+      <li>Khác: Expo 2025 Osaka khai mạc (4/2025), Bitcoin tăng vọt, Nga tái chiếm Kursk từ Ukraine (3/2025)</li>
+    </ul>
+
+    <h2>Tại Việt Nam</h2>
+    <p>Giai đoạn tập trung phục hồi kinh tế mạnh mẽ bất chấp thiên tai:</p>
+    
+    <ul>
+      <li><span class="highlight">Thiên tai nghiêm trọng</span>: Lũ lụt miền Trung kéo dài (đỉnh điểm từ 16/10 trở đi), trước đó bão Matmo cuối 2024</li>
+      <li>Kinh tế bứt phá: Xuất khẩu kỷ lục, hoàn thành hàng trăm km cao tốc (hướng tới 3.000 km vào 2025)</li>
+      <li>Chính sách lớn: Phát triển kinh tế tư nhân, khoa học công nghệ, an ninh năng lượng; tinh gọn bộ máy (đỉnh điểm 2025)</li>
+      <li>Công nghệ & thể thao: Ra mắt 5G chính thức (10/2024), đội tuyển bóng đá Việt Nam <span class="highlight">vô địch ASEAN Cup</span> (đầu 2025)</li>
+    </ul>
+
+    <div class="footer-note">
+      Đây là thời kỳ chuyển giao đầy biến động nhưng Việt Nam vẫn giữ được đà phát triển ấn tượng
+    </div>
+  </main>
+</div>
+
+<script>
+  function calculateDays() {
+    const start = new Date(2024, 9, 16);   // Tháng bắt đầu từ 0 → 9 = October
+    const end   = new Date(2025, 5, 30);   // Tháng 6 = 5
+    
+    const diffTime = Math.abs(end - start);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    document.getElementById('days-result').textContent = 
+      diffDays.toLocaleString('vi-VN') + ' ngày (chính xác)';
+  }
+
+  // Chạy khi load trang
+  window.onload = calculateDays;
+</script>
+
+</body>
+</html>
