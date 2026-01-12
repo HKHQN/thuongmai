@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Họa Bì - Painted Skin</title>
+    <style>
+        :root {
+            --primary: #8b0000;
+            --dark: #111;
+            --light: #f5f5f5;
+            --accent: #d4af37;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            color: white;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: rgba(0,0,0,0.6);
+            position: relative;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af5929?auto=format&fit=crop&w=2000') center/cover no-repeat;
+            opacity: 0.25;
+            z-index: -1;
+        }
+        h1 {
+            font-size: 3.8rem;
+            margin: 0;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(212,175,55,0.8);
+            letter-spacing: 4px;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin: 10px 0 0;
+            font-style: italic;
+        }
+        .year {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 5px 0 20px;
+        }
+        section {
+            background: rgba(20,20,40,0.75);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(139,0,0,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+        h2 {
+            color: var(--accent);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        h3 {
+            color: #ffcc00;
+            margin-top: 2em;
+        }
+        p {
+            font-size: 1.1rem;
+            margin: 1.2em 0;
+        }
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(139,0,0,0.2);
+            border-left: 6px solid var(--primary);
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        .cast {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .cast-item {
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 10px;
+            width: 180px;
+        }
+        .cast-item strong {
+            color: var(--accent);
+            display: block;
+            margin-top: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .cast-item { width: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HỌA BÌ</h1>
+        <div class="subtitle">画皮 - Huà Pí - Painted Skin</div>
+        <div class="year">2008 • Bom tấn huyền ảo Trung Quốc</div>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2>Khái niệm "Họa Bì"</h2>
+            <p>
+                "Hoạ bì" (hay Họa bì, tiếng Trung: 画皮 - Huà pí) có nghĩa đen là <span class="highlight">"vẽ da"</span> hoặc "bức tranh da người". 
+                Đây là một khái niệm nổi tiếng xuất phát từ truyện cổ <strong>Liêu Trai Chí Dị</strong> của nhà văn <strong>Bồ Tùng Linh</strong> (thế kỷ 17).
+            </p>
+            <p>
+                Câu chuyện kể về một <span class="highlight">hồ ly tinh (yêu quái)</span> dùng phép thuật vẽ và khoác lên mình một lớp da người đẹp đẽ để hóa thành mỹ nhân, 
+                quyến rũ đàn ông, nhưng bên trong là hình hài ghê rợn (thân thể thối rữa, giòi bọ...).
+            </p>
+            <p>
+                Nó thường tượng trưng cho <span class="highlight">vẻ đẹp giả tạo</span>, bề ngoài hào nhoáng che giấu bản chất xấu xa hoặc nguy hiểm.
+            </p>
+        </section>
+
+        <section>
+            <h2>Thành ngữ quen thuộc trong tiếng Việt</h2>
+            <div class="quote">
+                "Họa hổ họa bì nan họa cốt, tri nhân tri diện bất tri tâm"<br>
+                → Vẽ hổ thì dễ vẽ da (bề ngoài) nhưng khó vẽ xương (bản chất bên trong). Biết người thì biết mặt chứ khó biết lòng.
+            </div>
+            <p>
+                Nói chung, "Hoạ bì" thường gợi lên ý nghĩa: <span class="highlight">đừng tin vào vẻ bề ngoài</span>, 
+                vì đằng sau lớp "da đẹp" có thể là thứ gì đó đáng sợ hoặc giả dối.
+            </p>
+        </section>
+
+        <section>
+            <h2>Các tác phẩm chuyển thể nổi tiếng</h2>
+            <h3>Phim điện ảnh nổi tiếng nhất: Họa Bì (Painted Skin) năm 2008</h3>
+            <p>
+                Đạo diễn <strong>Trần Gia Thượng</strong>, với dàn sao đình đám: 
+            </p>
+            <div class="cast">
+                <div class="cast-item"><strong>Châu Tấn</strong><br>vai hồ ly Tiểu Duy</div>
+                <div class="cast-item"><strong>Triệu Vy</strong><br>vai Bội Dung - người vợ chung thủy</div>
+                <div class="cast-item"><strong>Trần Khôn</strong></div>
+                <div class="cast-item"><strong>Chân Tử Đan</strong></div>
+                <div class="cast-item"><strong>Tôn Lệ</strong></div>
+            </div>
+            <p>
+                Phim kết hợp yếu tố tình cảm, võ thuật, huyền ảo, xoay quanh tam giác tình yêu giữa người và yêu quái, 
+                rất ăn khách và được coi là <span class="highlight">bom tấn Hoa ngữ</span> một thời.
+            </p>
+
+            <h3>Phần tiếp theo</h3>
+            <p>
+                Họa Bì 2 (2012) với Triệu Vy, Châu Tấn, Trần Khôn, Dương Mịch...
+            </p>
+            <p>
+                Ngoài ra còn có các phiên bản khác như phim truyền hình hoặc remake năm 2022.
+            </p>
+        </section>
+
+    </div>
+
+    <footer>
+        Dựa trên truyện Liêu Trai Chí Dị của Bồ Tùng Linh • Họa Bì - biểu tượng của vẻ đẹp giả tạo và sự nguy hiểm ẩn giấu
+    </footer>
+
+</body>
+</html>
