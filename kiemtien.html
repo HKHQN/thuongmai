@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yên Định - Sơn Động: Định hướng phát triển đến 2040</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Font Awesome cho icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    :root {
+      --primary: #2c3e50;      /* Xám đen công nghiệp */
+      --secondary: #e67e22;     /* Cam công nghiệp */
+      --light: #ecf0f1;
+      --dark: #1a252f;
+      --steel: #95a5a6;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    .navbar {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .navbar-brand, .nav-link {
+      color: white !important;
+      font-weight: 600;
+    }
+    
+    .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 12px;
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .card-header {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 0;
+    }
+    
+    .btn-industrial {
+      background: var(--secondary);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 0;
+      transition: all 0.3s;
+    }
+    
+    .btn-industrial:hover {
+      background: #d35400;
+      transform: translateY(-2px);
+    }
+    
+    footer {
+      background: var(--dark);
+      color: #bdc3c7;
+      padding: 60px 0 30px;
+    }
+    
+    .icon-box i {
+      font-size: 2.5rem;
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Sơn Động 2040</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#gioi-thieu">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dinh-huong">Định hướng tổng thể</a></li>
+          <li class="nav-item"><a class="nav-link" href="#muc-tieu">Mục tiêu cụ thể</a></li>
+          <li class="nav-item"><a class="nav-link" href="#yen-dinh">Vai trò Yên Định</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-4">Yên Định – Sơn Động</h1>
+      <p class="lead fs-4">Huyện miền núi phát triển bền vững dựa trên rừng, du lịch tâm linh sinh thái và nông lâm nghiệp</p>
+      <p class="mt-4">Tầm nhìn đến năm 2040 – Cửa ngõ phía Đông Bắc Giang</p>
+    </div>
+  </section>
+
+  <main class="py-5">
+    <div class="container">
+
+      <!-- Giới thiệu -->
+      <section id="gioi-thieu" class="mb-5">
+        <h2 class="section-title text-center">Giới thiệu về Yên Định & Sơn Động</h2>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4><i class="fas fa-mountain me-2"></i>Yên Định</h4>
+                <p class="text-muted">Xã thuộc huyện Sơn Động, tỉnh Bắc Giang (trước đây). Nằm trong vùng miền núi phía Đông Bắc tỉnh, thế mạnh về rừng, du lịch sinh thái - tâm linh (Tây Yên Tử), nông lâm nghiệp và văn hóa dân tộc thiểu số.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4><i class="fas fa-map-marked-alt me-2"></i>Huyện Sơn Động</h4>
+                <p class="text-muted">Phát triển ổn định dựa trên Quy hoạch xây dựng vùng huyện Sơn Động đến năm 2040 (phê duyệt bởi UBND tỉnh Bắc Giang), kết hợp chương trình mục tiêu quốc gia và định hướng du lịch - kinh tế địa phương.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Định hướng tổng thể -->
+      <section id="dinh-huong" class="mb-5">
+        <h2 class="section-title text-center">Tính chất & Định hướng tổng thể đến 2040</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card border-0 shadow">
+              <div class="card-body p-4">
+                <ul class="list-unstyled fs-5">
+                  <li class="mb-3"><i class="fas fa-check-circle text-success me-3"></i>Huyện trở thành <strong>cửa ngõ phía Đông</strong> của tỉnh Bắc Giang.</li>
+                  <li class="mb-3"><i class="fas fa-check-circle text-success me-3"></i>Kinh tế dựa trên <strong>nông - lâm nghiệp, dịch vụ thương mại, du lịch tâm linh sinh thái</strong>.</li>
+                  <li class="mb-3"><i class="fas fa-check-circle text-success me-3"></i>Vị trí trung gian kết nối Bắc Giang – Quảng Ninh – Lạng Sơn.</li>
+                  <li class="mb-3"><i class="fas fa-check-circle text-success me-3"></i>Bảo tồn không gian sinh thái rừng, duy trì đa dạng sinh học, bảo vệ tài nguyên thiên nhiên.</li>
+                  <li><i class="fas fa-check-circle text-success me-3"></i>Phân thành 5 vùng phát triển, trong đó <strong>vùng 5</strong> (nông nghiệp hàng hóa + dịch vụ hỗ trợ) bao gồm Yên Định, Cẩm Đàn, Giáo Liêm, Đại Sơn, Phúc Sơn (12.454 ha, trung tâm tại Cẩm Đàn).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mục tiêu cụ thể -->
+      <section id="muc-tieu" class="mb-5">
+        <h2 class="section-title text-center">Mục tiêu cụ thể đến 2030 và xa hơn</h2>
+        
+        <div class="accordion accordion-flush shadow" id="accordionExample">
+          
+          <!-- Nông lâm nghiệp -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                <i class="fas fa-tractor me-3 text-warning"></i>Phát triển nông - lâm nghiệp bền vững (ưu tiên vùng 5 & Yên Định)
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <ul>
+                  <li>Tập trung sản xuất nông nghiệp hàng hóa (cây giá trị cao, chăn nuôi, lâm sản).</li>
+                  <li>Kinh tế từ rừng (độ che phủ >71,8%, Khu bảo tồn Tây Yên Tử).</li>
+                  <li>Kết hợp dịch vụ hỗ trợ tiêu thụ, giảm nghèo bền vững qua chương trình vùng dân tộc thiểu số & miền núi.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Du lịch -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                <i class="fas fa-compass me-3 text-warning"></i>Du lịch – động lực chính
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <ul>
+                  <li>Mô hình: văn hóa tâm linh, sinh thái trải nghiệm, cộng đồng, nông nghiệp.</li>
+                  <li>Yên Định hỗ trợ du lịch, kết nối Tây Yên Tử, Thác Ba Tia, Khe Rỗ, Đồng Cao.</li>
+                  <li>Mục tiêu: hàng trăm nghìn lượt khách/năm (2024: 545.000 lượt, 285 tỷ đồng), tăng trưởng 2025-2030 qua xúc tiến, chuyển đổi số, liên kết Hà Nội - Bắc Giang - Quảng Ninh.</li>
+                  <li>Bảo tồn văn hóa Dao, Tày, Nùng gắn với du lịch cộng đồng.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Hạ tầng & Kinh tế xã hội -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                <i class="fas fa-hard-hat me-3 text-warning"></i>Hạ tầng, đô thị hóa & Mục tiêu kinh tế - xã hội
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <ul>
+                  <li>Đầu tư đường sá, kết nối QL.279, QL.31, nâng cấp nông thôn mới.</li>
+                  <li>Tăng tỷ lệ đô thị hóa, phát triển dịch vụ thương mại hỗ trợ du lịch & nông nghiệp.</li>
+                  <li>Tăng trưởng giá trị sản xuất 12-14%/năm (dịch vụ 13-15%).</li>
+                  <li>Giảm nghèo bền vững, nâng cao đời sống (đặc biệt dân tộc thiểu số).</li>
+                  <li>Bảo vệ môi trường, phát triển xanh, bền vững.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Vai trò Yên Định -->
+      <section id="yen-dinh" class="text-center mb-5">
+        <h2 class="section-title">Vai trò quan trọng của Yên Định</h2>
+        <div class="card bg-dark text-white border-0 shadow">
+          <div class="card-body p-5">
+            <h3 class="mb-4">Trung tâm vùng nông nghiệp hàng hóa (vùng 5)</h3>
+            <p class="lead fs-5">Hỗ trợ tiêu thụ sản phẩm, kết nối du lịch & dịch vụ, góp phần vào mục tiêu ổn định, bền vững của huyện.</p>
+            <p>Triển khai qua chương trình mục tiêu quốc gia, quy hoạch tỉnh/huyện, khai thác lợi thế tự nhiên - văn hóa mà không tổn hại môi trường.</p>
+            <a href="#" class="btn btn-industrial btn-lg mt-4">Tìm hiểu chi tiết thêm <i class="fas fa-arrow-right ms-2"></i></a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-4">Nếu bạn cần chi tiết hơn về du lịch Yên Định, dự án hạ tầng hoặc bất kỳ khía cạnh nào, hãy cho mình biết!</p>
+      <p>&copy; 2026 - Quy hoạch phát triển huyện Sơn Động & xã Yên Định</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
