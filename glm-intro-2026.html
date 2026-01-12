@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GLM - Mô hình ngôn ngữ mạnh mẽ từ Zhipu AI</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --text-light: #4b5563;
+      --border: #e5e7eb;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    
+    h1 {
+      color: var(--primary);
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      color: var(--text-light);
+      font-size: 1.15rem;
+    }
+    
+    .section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    
+    h2 {
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      font-size: 1.65rem;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+    
+    ul, ol {
+      padding-left: 1.8rem;
+      margin: 1rem 0;
+    }
+    
+    li {
+      margin-bottom: 0.6rem;
+    }
+    
+    strong {
+      color: var(--primary-dark);
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.98rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .comparison-table th {
+      background-color: #eef2ff;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+    
+    .stars {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+    
+    .highlight {
+      background-color: #f0f9ff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+    
+    .conclusion {
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+      color: white;
+      padding: 2.2rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .comparison-table { font-size: 0.92rem; }
+      .comparison-table th, .comparison-table td { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header>
+      <h1>GLM - Dòng mô hình ngôn ngữ mạnh mẽ từ Zhipu AI</h1>
+      <p class="subtitle">Đối thủ đáng gờm của GPT, Claude, Gemini — Open-source & cực mạnh 2026</p>
+    </header>
+
+    <div class="section">
+      <h2>GLM nghĩa là gì?</h2>
+      <p>
+        GLM = <strong>General Language Model</strong><br>
+        (Mô hình Ngôn ngữ Tổng quát)
+      </p>
+      <p>Ban đầu được gọi là ChatGLM → sau đó phát triển thành series:<br>
+      <strong>GLM-4 → GLM-4.5 → GLM-4.6 → GLM-4.7,…</strong> (tính đến đầu 2026)</p>
+    </div>
+
+    <div class="section">
+      <h2>Đặc điểm nổi bật (đầu năm 2026)</h2>
+      <ul>
+        <li><strong>Mã nguồn mở</strong> (MIT License) → tải về, tự host, chỉnh sửa, dùng thương mại miễn phí</li>
+        <li><strong>Kiến trúc Mixture-of-Experts (MoE)</strong> cực mạnh:
+          <ul>
+            <li>GLM-4.5: 355 tỷ total, chỉ <span class="highlight">32 tỷ active</span></li>
+            <li>Bản nhẹ: GLM-4.5-Air (106 tỷ total / 12 tỷ active)</li>
+          </ul>
+        </li>
+        <li><strong>Thế mạnh chính (từ GLM-4.5 trở đi)</strong>:
+          <ul>
+            <li>Coding ★★★★★ (viết cả game mini, web, simulation…)</li>
+            <li>Agentic AI & Tool use ★★★★★</li>
+            <li>Reasoning & Toán học ★★★★½–★★★★★</li>
+            <li>Context dài: 128k–256k tokens</li>
+            <li>Tốc độ nhanh + API <span class="highlight">rẻ cực</span>: 0.2–1.1 USD/million tokens</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Phiên bản mới nhất (tháng 1/2026)</h2>
+      <p style="font-size:1.25rem; font-weight:700; color:#4f46e5;">
+        GLM-4.7 — một trong những mô hình open-weight mạnh nhất thế giới hiện nay<br>
+        (đặc biệt về coding và agentic capabilities)
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>So sánh nhanh (cộng đồng 2025–2026)</h2>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Tiêu chí</th>
+            <th>GLM-4.5/4.7 (Z.ai)</th>
+            <th>Claude 4.5 Sonnet / GPT-5.x</th>
+            <th>DeepSeek-R1 / Qwen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mã nguồn mở</td>
+            <td><strong>Có (MIT)</strong></td>
+            <td>Không</td>
+            <td>Có</td>
+          </tr>
+          <tr>
+            <td>Giá API</td>
+            <td><span class="highlight">Rất rẻ (~$0.2–1$/M token)</span></td>
+            <td>Đắt (20–200$/tháng)</td>
+            <td>Rẻ</td>
+          </tr>
+          <tr>
+            <td>Coding</td>
+            <td><span class="stars">★★★★★</span></td>
+            <td>★★★★½–★★★★★</td>
+            <td>★★★★</td>
+          </tr>
+          <tr>
+            <td>Agent/Tool use</td>
+            <td><span class="stars">★★★★★</span></td>
+            <td>★★★★½</td>
+            <td>★★★★</td>
+          </tr>
+          <tr>
+            <td>Toán & Reasoning</td>
+            <td>★★★★½–★★★★★</td>
+            <td>★★★★★</td>
+            <td>★★★★</td>
+          </tr>
+          <tr>
+            <td>Tốc độ inference</td>
+            <td><strong>Rất nhanh</strong> (nhất là bản Air)</td>
+            <td>Trung bình–chậm</td>
+            <td>Nhanh</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="conclusion">
+      <h2 style="color:white; margin-bottom:1rem;">Tóm lại</h2>
+      <p>
+        Nếu bạn cần một mô hình AI <strong>mạnh</strong>, <strong>miễn phí/open-source</strong>, <strong>giỏi code</strong>, <strong>biết dùng tool</strong>, <strong>giá rẻ</strong> và <strong>có thể tự deploy</strong> → <br><br>
+        <span style="font-size:1.4rem; font-weight:800;">GLM (đặc biệt GLM-4.5 / 4.7)</span> đang là một trong những lựa chọn <strong>đáng giá nhất</strong> trên thị trường vào đầu năm 2026!
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>
