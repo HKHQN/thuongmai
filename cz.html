@@ -2,133 +2,158 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEON SHADOW PROTOCOL - Concept & Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>NEON SHADOW PROTOCOL - Mobile Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background: #0d001a;
       color: #00ffea;
       font-family: 'Orbitron', sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
       background-image: 
-        radial-gradient(circle at 20% 30%, rgba(255,0,255,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(0,255,255,0.06) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(255,0,255,0.1) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(0,255,255,0.08) 0%, transparent 60%);
       background-attachment: fixed;
+      touch-action: none;
     }
     .container {
-      max-width: 1400px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 2rem;
-    }
-    h1, h2, h3 {
-      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
-      letter-spacing: 2px;
+      padding: 1rem;
     }
     h1 {
-      font-size: 3.8rem;
+      font-size: clamp(2.2rem, 8vw, 3.8rem);
       text-align: center;
-      margin: 1.5rem 0;
+      margin: 1rem 0;
       background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
     }
     .section {
-      background: rgba(10, 5, 30, 0.65);
+      background: rgba(10, 5, 30, 0.75);
       border: 1px solid #00ffea44;
       border-radius: 12px;
-      padding: 2rem;
-      margin: 2rem 0;
-      box-shadow: 0 0 30px rgba(0,255,255,0.15);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 0 30px rgba(0,255,255,0.2);
     }
-    .neon-text {
-      color: #00ffea;
-      text-shadow: 0 0 8px #00ffff;
-    }
-    .pink-neon {
-      color: #ff00ff;
-      text-shadow: 0 0 8px #ff00ff;
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .highlight {
-      color: #ffff00;
-      font-weight: bold;
-    }
-    ul {
-      list-style: none;
-      padding-left: 1.5rem;
-    }
-    ul li {
-      position: relative;
-      margin: 0.8rem 0;
-    }
-    ul li::before {
-      content: "▸";
-      color: #ff00ff;
-      position: absolute;
-      left: -1.5rem;
-    }
-    
-    /* GAME DEMO */
+    .neon-text { color: #00ffea; text-shadow: 0 0 10px #00ffff; }
+    .pink-neon { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+    .highlight { color: #ffff00; font-weight: bold; }
+
+    /* GAME CONTAINER - MOBILE FIRST */
     #game-container {
       position: relative;
       width: 100%;
       max-width: 900px;
-      margin: 3rem auto;
-      border: 3px solid #ff00ff88;
-      border-radius: 12px;
+      margin: 1.5rem auto;
+      border: 4px solid #ff00ff88;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 0 40px #ff00ff44;
+      box-shadow: 0 0 50px #ff00ff66;
+      background: #000;
     }
     canvas {
       display: block;
+      width: 100%;
+      height: auto;
       image-rendering: pixelated;
+      touch-action: none;
     }
     #hud {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      color: white;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      color: #fff;
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.1rem;
-      text-shadow: 0 0 6px black;
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
+      text-shadow: 0 0 8px #000;
       pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     #game-info {
       text-align: center;
-      margin: 1rem 0;
-      font-size: 1.3rem;
+      margin: 1rem 0 0.5rem;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      color: #ffff00;
     }
-    button {
+
+    /* TOUCH CONTROLS - MOBILE ONLY */
+    #touch-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      max-width: 420px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+    }
+    .ctrl-btn {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      color: #000;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 18px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 0 20px #00ffff88;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .ctrl-btn:active {
+      transform: scale(0.9);
+      box-shadow: 0 0 30px #ff00ff;
+      background: #ffff00;
+    }
+    #breach-btn {
+      grid-column: 2;
+      background: linear-gradient(45deg, #ffff00, #ff00ff);
+      font-size: 1.4rem;
+      padding: 22px 12px;
+      color: #000;
+      box-shadow: 0 0 25px #ffff0088;
+    }
+    #breach-btn:active {
+      background: #00ffea;
+      box-shadow: 0 0 35px #00ffea;
+    }
+
+    button.reset {
       background: linear-gradient(45deg, #ff00ff, #00ffff);
       border: none;
-      color: black;
+      color: #000;
       font-family: 'Orbitron', sans-serif;
       font-weight: bold;
-      padding: 0.8rem 1.8rem;
-      margin: 0.5rem;
-      border-radius: 8px;
+      padding: 1rem 2.5rem;
+      margin: 1.5rem auto;
+      display: block;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      box-shadow: 0 0 20px #00ffff;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ffff88;
-      transition: all 0.3s;
     }
-    button:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px #ff00ff;
+    button.reset:hover, button.reset:active {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ff00ff;
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 1rem; }
+      #touch-controls { display: grid; }
+    }
+    @media (min-width: 769px) {
+      #touch-controls { display: none; } /* Desktop dùng phím */
     }
   </style>
 </head>
@@ -137,168 +162,399 @@
 <div class="container">
 
   <h1>NEON SHADOW PROTOCOL</h1>
-  <p style="text-align:center; font-size:1.4rem; opacity:0.9; margin-bottom:3rem;">
-    Immersive sim FPS × Hacking Roguelite × Squad Tactics<br>
-    <span class="pink-neon">Neo-Hanoi 2147</span> — Where the city never sleeps... and the dead never truly die.
+  <p style="text-align:center; font-size:1.25rem; opacity:0.95; margin-bottom:1.5rem;">
+    Immersive sim FPS × Hacking Roguelite • Neo-Hanoi 2147
   </p>
 
-  <!-- Tổng quan -->
+  <!-- GAMEPLAY DEMO -->
   <div class="section">
-    <h2 class="neon-text">CONCEPT TỔNG QUAN</h2>
-    <p><strong>Thể loại:</strong> Immersive sim FPS + Hacking roguelite + Squad-based tactics (1-4 người chơi)</p>
-    <p><strong>Bối cảnh:</strong> Neo-Hanoi 2147 — siêu đô thị Việt Nam tương lai, nơi các tập đoàn kiểm soát não bộ qua Neural Net.</p>
-    <p class="highlight">Bạn thuộc <span class="pink-neon">Shadow Protocol</span> — nhóm hacker lính đánh thuê bị truy sát sau khi đánh cắp bí mật về <strong>"The Echo"</strong> — virus biến con người thành cyborg zombie.</p>
-  </div>
-
-  <!-- Hook độc đáo -->
-  <div class="section">
-    <h2 class="pink-neon">HOOK ĐỘC ĐÁO</h2>
-    <p style="font-size:1.5rem; text-align:center; margin:1.5rem 0;">
-      <strong style="color:#ffff00;">"ECHO INFECTION"</strong><br>
-      Mỗi lần <strong>chết</strong> → nhân vật bị <strong>nhiễm virus vĩnh viễn</strong><br>
-      → Nhận cyberware ngẫu nhiên + kỹ năng mới<br>
-      → Nhưng có nguy cơ <strong>mất kiểm soát</strong> (tự bắn đồng đội, tự nổ…)
-    </p>
-    <p>Mỗi run = một "protocol" mới → procedural megabuilding + kẻ thù tiến hoá</p>
-  </div>
-
-  <!-- Phong cách -->
-  <div class="section grid-2">
-    <div>
-      <h3>Visual & Atmosphere</h3>
-      <ul>
-        <li>Neon hồng - xanh lá đậm đặc</li>
-        <li>Phố chợ đêm holographic, xe máy bay</li>
-        <li>Mưa axit trên billboard phở tương lai</li>
-        <li>Chợ Bến Thành bán cyberware lậu</li>
-      </ul>
-    </div>
-    <div>
-      <h3>Âm thanh</h3>
-      <ul>
-        <li>Synthwave Việt Nam</li>
-        <li>Remix dân gian + beat điện tử</li>
-        <li>Tiếng mưa axit + tiếng neon rè</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Gameplay Demo -->
-  <div class="section">
-    <h2 class="neon-text" style="text-align:center;">MINI GAMEPLAY DEMO</h2>
-    <p id="game-info">Breach Protocol — Hack hệ thống bảo mật Megabuilding (dùng phím <span class="highlight">SPACE</span> để hack / <span class="highlight">← →</span> di chuyển)</p>
+    <h2 class="neon-text" style="text-align:center;">MINI GAMEPLAY DEMO – MOBILE OPTIMIZED</h2>
+    <p id="game-info">Di chuyển bằng nút + <span class="highlight">GẦN NODE</span> rồi giữ <span class="highlight">BREACH</span> để hack!<br>
+    Né Firewall • Thu thập 8 nodes trước khi Energy = 0 hoặc Security = 100%</p>
     
     <div id="game-container">
-      <div id="hud">ENERGY: <span id="energy">100</span>%  |  SECURITY: <span id="security">0</span>%  |  STATUS: <span id="status">Stable</span></div>
-      <canvas id="gameCanvas" width="900" height="500"></canvas>
+      <div id="hud">
+        <div>ENERGY: <span id="energy">100</span>%</div>
+        <div>NODES: <span id="nodes">0/8</span></div>
+        <div>SECURITY: <span id="security">0</span>%</div>
+        <div id="status" style="color:#00ffea;">STANDBY</div>
+      </div>
+      <canvas id="gameCanvas"></canvas>
     </div>
 
-    <div style="text-align:center; margin-top:1.5rem;">
-      <button onclick="resetGame()">RESET PROTOCOL</button>
+    <!-- TOUCH CONTROLS -->
+    <div id="touch-controls">
+      <div></div>
+      <button id="up-btn" class="ctrl-btn">↑</button>
+      <div></div>
+      
+      <button id="left-btn" class="ctrl-btn">←</button>
+      <button id="breach-btn" class="ctrl-btn">BREACH<br><small>(Giữ)</small></button>
+      <button id="right-btn" class="ctrl-btn">→</button>
+      
+      <div></div>
+      <button id="down-btn" class="ctrl-btn">↓</button>
+      <div></div>
+    </div>
+
+    <div style="text-align:center;">
+      <button onclick="resetGame()" class="reset">RESET PROTOCOL</button>
     </div>
   </div>
 
 </div>
 
 <script>
-// -------------------
-//   MINI GAME DEMO
-// -------------------
+// ==================== MOBILE-OPTIMIZED + HẤP DẪN HƠN ====================
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 let energy = 100;
 let security = 0;
-let playerX = 100;
+let score = 0;
+let player = { x: 150, y: 250, size: 32 };
 let hacking = false;
 let gameOver = false;
+let win = false;
 
+let leftPressed = false, rightPressed = false;
+let upPressed = false, downPressed = false;
+
+// Nodes: 8 data nodes cần hack (progress riêng)
+let nodes = [];
+function initNodes() {
+  nodes = [];
+  const positions = [
+    {x:280, y:140}, {x:480, y:90},  {x:680, y:180},
+    {x:320, y:320}, {x:520, y:380}, {x:720, y:280},
+    {x:380, y:210}, {x:610, y:340}
+  ];
+  positions.forEach(p => {
+    nodes.push({
+      x: p.x,
+      y: p.y,
+      progress: 0,
+      hacked: false,
+      radius: 22
+    });
+  });
+}
+
+// Particles (neon burst khi hack node)
+let particles = [];
+class Particle {
+  constructor(x, y) {
+    this.x = x; this.y = y;
+    this.vx = (Math.random()-0.5)*6;
+    this.vy = (Math.random()-0.5)*6;
+    this.life = 35;
+    this.color = Math.random() > 0.5 ? '#00ffff' : '#ff00ff';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.life--;
+    this.vx *= 0.96;
+    this.vy *= 0.96;
+  }
+}
+
+// Firewall quét (threat cần né)
+let firewalls = [];
+function initFirewall() {
+  firewalls = [{ y: 50, speed: 3.5, width: 900 }];
+}
+
+// Resize canvas responsive (giữ tỷ lệ 16:9-ish)
+function resizeCanvas() {
+  const containerWidth = Math.min(document.getElementById('game-container').clientWidth, 900);
+  canvas.width = containerWidth;
+  canvas.height = Math.floor(containerWidth * 500 / 900);
+  // Điều chỉnh vị trí player & nodes nếu cần (nhưng ta dùng tọa độ tương đối)
+}
+window.addEventListener('resize', resizeCanvas);
+
+// DRAW
 function draw() {
-  ctx.fillStyle = 'rgba(0,0,20,0.4)';
+  ctx.fillStyle = 'rgba(10,0,25,0.75)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  // Grid background
+
+  // Grid neon + scanlines
   ctx.strokeStyle = '#00ffea22';
-  for (let i = 0; i < canvas.width; i += 40) {
-    ctx.beginPath();
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i, canvas.height);
-    ctx.stroke();
+  ctx.lineWidth = 1;
+  for (let i = 0; i < canvas.width; i += 38) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
   }
-  for (let i = 0; i < canvas.height; i += 40) {
-    ctx.beginPath();
-    ctx.moveTo(0, i);
-    ctx.lineTo(canvas.width, i);
-    ctx.stroke();
+  for (let i = 0; i < canvas.height; i += 38) {
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
   }
 
-  // Player (hacker avatar)
-  ctx.fillStyle = hacking ? '#ffff00' : '#00ffff';
-  ctx.shadowBlur = 15;
-  ctx.shadowColor = hacking ? '#ffff00' : '#00ffff';
-  ctx.fillRect(playerX - 20, canvas.height/2 - 20, 40, 40);
-  
-  // Data nodes (targets to hack)
-  for (let i = 1; i <= 5; i++) {
-    const x = 200 + i * 120;
-    const y = 100 + Math.sin(Date.now()/500 + i)*30;
-    ctx.fillStyle = security > i*15 ? '#ff0044' : '#00ff88';
-    ctx.shadowColor = ctx.fillStyle;
+  // Firewall
+  ctx.strokeStyle = '#ff0044';
+  ctx.lineWidth = 6;
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = '#ff0044';
+  firewalls.forEach(f => {
     ctx.beginPath();
-    ctx.arc(x, y, 18, 0, Math.PI*2);
+    ctx.moveTo(0, f.y);
+    ctx.lineTo(canvas.width, f.y);
+    ctx.stroke();
+  });
+  ctx.shadowBlur = 0;
+
+  // Nodes
+  let hackedCount = 0;
+  nodes.forEach(node => {
+    if (node.hacked) {
+      hackedCount++;
+      ctx.fillStyle = '#00ff88';
+      ctx.shadowBlur = 25;
+      ctx.shadowColor = '#00ff88';
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius*0.7, 0, Math.PI*2);
+      ctx.fill();
+      return;
+    }
+
+    // Outer glow
+    ctx.shadowBlur = 30;
+    ctx.shadowColor = security > 65 ? '#ff0044' : '#00ff88';
+    ctx.fillStyle = security > 65 ? '#ff004455' : '#00ff8844';
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI*2);
     ctx.fill();
+
+    // Main node
+    ctx.fillStyle = '#00ff88';
+    ctx.shadowColor = '#00ff88';
+    ctx.shadowBlur = 18;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI*2);
+    ctx.fill();
+
+    // Progress arc
+    const prog = node.progress / 100;
+    ctx.strokeStyle = '#ffff00';
+    ctx.lineWidth = 5;
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#ffff00';
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, node.radius + 4, -Math.PI/2, -Math.PI/2 + prog * Math.PI*2);
+    ctx.stroke();
+  });
+
+  // Player – Neon Runner (cyborg silhouette)
+  const px = player.x;
+  const py = player.y;
+  ctx.shadowBlur = hacking ? 30 : 18;
+  ctx.shadowColor = hacking ? '#ffff00' : '#00ffff';
+
+  // Body
+  ctx.fillStyle = hacking ? '#ffff00' : '#00ffff';
+  ctx.fillRect(px - 14, py - 18, 28, 36);
+
+  // Head (helmet)
+  ctx.beginPath();
+  ctx.arc(px, py - 24, 14, 0, Math.PI*2);
+  ctx.fill();
+
+  // Neon eyes
+  ctx.fillStyle = '#000';
+  ctx.fillRect(px - 6, py - 27, 4, 4);
+  ctx.fillRect(px + 3, py - 27, 4, 4);
+
+  // Trail khi di chuyển
+  if (Math.abs(player.vx || 0) > 2 || Math.abs(player.vy || 0) > 2) {
+    ctx.fillStyle = 'rgba(0,255,255,0.3)';
+    ctx.fillRect(px - 22, py - 14, 8, 8);
   }
+
+  // Particles
+  ctx.shadowBlur = 8;
+  particles.forEach(p => {
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.life / 35;
+    ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
+  });
+  ctx.globalAlpha = 1;
 
   // HUD update
-  document.getElementById('energy').textContent = energy;
-  document.getElementById('security').textContent = security;
-  document.getElementById('status').textContent = gameOver ? "PROTOCOL TERMINATED" : (hacking ? "BREACHING..." : "STANDBY");
-  document.getElementById('status').style.color = gameOver ? "#ff0044" : (hacking ? "#ffff00" : "#00ffea");
+  document.getElementById('energy').textContent = Math.max(0, Math.floor(energy));
+  document.getElementById('security').textContent = Math.floor(security);
+  document.getElementById('nodes').textContent = hackedCount + '/8';
+  const statusEl = document.getElementById('status');
+  if (gameOver) {
+    statusEl.textContent = win ? "PROTOCOL SUCCESS!" : "ECHO INFECTION";
+    statusEl.style.color = win ? "#00ff88" : "#ff0044";
+  } else {
+    statusEl.textContent = hacking ? "BREACHING..." : "STANDBY";
+    statusEl.style.color = hacking ? "#ffff00" : "#00ffea";
+  }
 }
 
+// UPDATE LOGIC
 function update() {
   if (gameOver) return;
-  
+
+  // Movement (4 hướng)
+  let speed = 5.5;
+  if (leftPressed) player.x -= speed;
+  if (rightPressed) player.x += speed;
+  if (upPressed) player.y -= speed;
+  if (downPressed) player.y += speed;
+
+  // Giới hạn màn hình
+  player.x = Math.max(40, Math.min(canvas.width - 40, player.x));
+  player.y = Math.max(40, Math.min(canvas.height - 40, player.y));
+
+  // Hacking logic
   if (hacking) {
-    energy -= 0.4;
-    security += 0.45;
-    
-    if (energy <= 0) {
-      gameOver = true;
-      alert("ENERGY DEPLETED - Echo infection detected...");
+    energy -= 0.48;
+    security += 0.38;
+
+    // Check gần node nào
+    nodes.forEach(node => {
+      if (node.hacked) return;
+      const dx = player.x - node.x;
+      const dy = player.y - node.y;
+      if (dx*dx + dy*dy < 85*85) {
+        node.progress = Math.min(100, node.progress + 1.35);
+        if (node.progress >= 100) {
+          node.hacked = true;
+          score += 120;
+          // Particles burst
+          for (let i = 0; i < 28; i++) {
+            particles.push(new Particle(node.x, node.y));
+          }
+          energy = Math.min(100, energy + 14); // bonus
+        }
+      }
+    });
+  } else {
+    // Security tăng chậm ngay cả khi không hack
+    security += 0.09;
+  }
+
+  // Firewall movement & collision
+  firewalls.forEach(f => {
+    f.y += f.speed;
+    if (f.y > canvas.height + 20) f.y = -20;
+
+    // Collision với player
+    if (Math.abs(f.y - player.y) < 18 && !hacking) {
+      energy -= 1.8;
     }
-    if (security >= 100) {
-      gameOver = true;
-      alert("BREACH SUCCESS! Extracting data... Protocol complete.");
-    }
+  });
+
+  // Particles update
+  for (let i = particles.length - 1; i >= 0; i--) {
+    particles[i].update();
+    if (particles[i].life <= 0) particles.splice(i, 1);
+  }
+
+  // Glitch effect khi security cao (Echo Infection)
+  if (security > 68 && Math.random() < 0.25) {
+    ctx.save();
+    ctx.globalAlpha = 0.12;
+    ctx.fillStyle = '#ff0044';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  }
+
+  // Win / Lose
+  const allHacked = nodes.every(n => n.hacked);
+  if (allHacked) {
+    gameOver = true;
+    win = true;
+    setTimeout(() => alert("🎉 PROTOCOL COMPLETE!\nTẤT CẢ NODES ĐÃ HACKED!\nBạn đã sống sót qua Echo Infection!"), 120);
+  }
+  if (energy <= 0 || security >= 100) {
+    gameOver = true;
+    setTimeout(() => alert("💀 PROTOCOL TERMINATED\nEcho đã chiếm lấy cơ thể bạn..."), 80);
   }
 }
 
-function resetGame() {
-  energy = 100;
-  security = 0;
-  playerX = 100;
-  hacking = false;
-  gameOver = false;
-  alert("New Protocol initialized. Good luck, runner.");
+// INPUT - TOUCH + KEYBOARD
+function setupControls() {
+  // Touch buttons
+  const btns = {
+    left: document.getElementById('left-btn'),
+    right: document.getElementById('right-btn'),
+    up: document.getElementById('up-btn'),
+    down: document.getElementById('down-btn'),
+    breach: document.getElementById('breach-btn')
+  };
+
+  // Hold support
+  function setPress(btn, key, val) {
+    btn.addEventListener('touchstart', e => { e.preventDefault(); key = true; });
+    btn.addEventListener('touchend', e => { e.preventDefault(); key = false; });
+    btn.addEventListener('mousedown', () => key = true);
+    btn.addEventListener('mouseup', () => key = false);
+    btn.addEventListener('mouseleave', () => key = false);
+  }
+
+  setPress(btns.left, leftPressed, leftPressed = true);
+  setPress(btns.right, rightPressed, rightPressed = true);
+  setPress(btns.up, upPressed, upPressed = true);
+  setPress(btns.down, downPressed, downPressed = true);
+
+  // Breach special (hold)
+  btns.breach.addEventListener('touchstart', e => { e.preventDefault(); hacking = true; });
+  btns.breach.addEventListener('touchend', e => { e.preventDefault(); hacking = false; });
+  btns.breach.addEventListener('mousedown', () => hacking = true);
+  btns.breach.addEventListener('mouseup', () => hacking = false);
+
+  // Keyboard support (desktop)
+  document.addEventListener('keydown', e => {
+    if (gameOver) return;
+    switch(e.code) {
+      case 'ArrowLeft': leftPressed = true; break;
+      case 'ArrowRight': rightPressed = true; break;
+      case 'ArrowUp': upPressed = true; break;
+      case 'ArrowDown': downPressed = true; break;
+      case 'Space': hacking = true; e.preventDefault(); break;
+    }
+  });
+  document.addEventListener('keyup', e => {
+    switch(e.code) {
+      case 'ArrowLeft': leftPressed = false; break;
+      case 'ArrowRight': rightPressed = false; break;
+      case 'ArrowUp': upPressed = false; break;
+      case 'ArrowDown': downPressed = false; break;
+      case 'Space': hacking = false; break;
+    }
+  });
 }
 
-document.addEventListener('keydown', e => {
-  if (gameOver) return;
-  
-  if (e.code === 'Space') {
-    hacking = !hacking;
-  }
-  if (e.code === 'ArrowLeft' && playerX > 60) playerX -= 12;
-  if (e.code === 'ArrowRight' && playerX < canvas.width - 60) playerX += 12;
-});
-
+// GAME LOOP
 function loop() {
   update();
   draw();
   requestAnimationFrame(loop);
 }
 
+// RESET
+window.resetGame = function() {
+  energy = 100;
+  security = 0;
+  score = 0;
+  player.x = 150;
+  player.y = canvas.height / 2;
+  hacking = false;
+  gameOver = false;
+  win = false;
+  particles = [];
+  initNodes();
+  initFirewall();
+  alert("🟢 NEW PROTOCOL LOADED\nNeo-Hanoi 2147 – Chạy đi runner!");
+};
+
+// INIT
+initNodes();
+initFirewall();
+resizeCanvas();
+setupControls();
 loop();
 </script>
 </body>
