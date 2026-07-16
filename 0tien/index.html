@@ -13,13 +13,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body { font-family: 'Inter', system-ui, sans-serif; }
         .modal { animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        @keyframes modalPop { 
-            from { opacity: 0; transform: scale(0.92) translateY(20px); } 
-            to { opacity: 1; transform: scale(1) translateY(0); } 
-        }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
-        .fab { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .card:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen">
@@ -28,18 +24,13 @@
         <div class="text-center mb-12">
             <img src="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" alt="Icon" class="w-24 h-24 mx-auto mb-6">
             <h1 class="text-4xl font-bold text-slate-900">Tiền Bỏ Thi</h1>
-            <p class="text-slate-500 mt-2">Quản lý chi tiêu & thu nhập realtime</p>
+            <p class="text-slate-500 mt-2">Quản lý tài chính cá nhân</p>
         </div>
-        
         <button onclick="loginWithGoogle()" 
                 class="w-full max-w-sm flex items-center justify-center gap-x-3 bg-white border border-slate-300 hover:border-slate-400 shadow-sm py-4 rounded-3xl font-medium text-lg">
             <img src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" class="w-6 h-6" alt="Google">
-            Đăng nhập bằng Google
+            Đăng nhập Google
         </button>
-        
-        <p class="text-xs text-slate-400 mt-8 text-center max-w-xs">
-            Đăng nhập để đồng bộ dữ liệu trên mọi thiết bị
-        </p>
     </div>
 
     <!-- MAIN APP -->
@@ -47,42 +38,50 @@
         <div class="max-w-2xl mx-auto">
             <!-- Header -->
             <div class="bg-white border-b sticky top-0 z-50">
-                <div class="px-5 py-4 flex items-center justify-between">
+                <div class="px-5 py-4 flex justify-between items-center">
                     <div class="flex items-center gap-x-3">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" alt="Icon" class="w-9 h-9">
-                        <div>
-                            <h1 class="text-2xl font-semibold text-slate-900">Tiền Bỏ Thi</h1>
-                        </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" class="w-9 h-9">
+                        <h1 class="text-2xl font-semibold">Tiền Bỏ Thi</h1>
                     </div>
-                    <div class="flex items-center gap-x-4">
-                        <div id="user-info" class="flex items-center gap-x-2 text-sm"></div>
-                        <button onclick="logout()" 
-                                class="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-2xl">Đăng xuất</button>
+                    <div class="flex items-center gap-x-3">
+                        <div id="user-info" class="flex items-center gap-x-2"></div>
+                        <button onclick="logout()" class="text-red-600 text-sm font-medium">Đăng xuất</button>
+                    </div>
+                </div>
+
+                <!-- Balance -->
+                <div class="bg-emerald-600 text-white px-5 py-6 grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-emerald-100 text-sm">Số dư hiện tại</div>
+                        <div id="balance" class="text-3xl font-bold">0 đ</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-emerald-100 text-sm">Đã tiêu</div>
+                        <div id="total-spent" class="text-3xl font-bold text-red-200">0 đ</div>
                     </div>
                 </div>
 
                 <!-- Tabs -->
-                <div class="flex border-b border-slate-200 px-5">
-                    <button onclick="switchTab(0)" id="tab-0"
-                            class="tab-button flex-1 py-4 text-center font-semibold text-base border-b-4 border-transparent active">CHI TIÊU</button>
-                    <button onclick="switchTab(1)" id="tab-1"
-                            class="tab-button flex-1 py-4 text-center font-semibold text-base border-b-4 border-transparent">THU NHẬP</button>
+                <div class="flex border-b px-5">
+                    <button onclick="switchTab(0)" id="tab-0" class="tab-button flex-1 py-4 font-semibold border-b-4 border-transparent active">CHI TIÊU</button>
+                    <button onclick="switchTab(1)" id="tab-1" class="tab-button flex-1 py-4 font-semibold border-b-4 border-transparent">THU NHẬP</button>
                 </div>
             </div>
 
-            <!-- Content -->
             <div class="px-5 pt-6 pb-24">
                 <div id="content-0" class="tab-content">
                     <div id="table-chi-tieu" class="space-y-4"></div>
+                    <div id="pagination-chi" class="flex justify-center gap-2 mt-6"></div>
                 </div>
                 <div id="content-1" class="tab-content hidden">
                     <div id="table-thu-nhap" class="space-y-4"></div>
+                    <div id="pagination-thu" class="flex justify-center gap-2 mt-6"></div>
                 </div>
             </div>
 
             <!-- FAB -->
             <button onclick="showAddModal()" 
-                    class="fab fixed bottom-6 right-6 w-16 h-16 bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl flex items-center justify-center shadow-2xl z-50 transition-all active:scale-95">
+                    class="fixed bottom-6 right-6 w-16 h-16 bg-emerald-600 text-white rounded-3xl flex items-center justify-center shadow-2xl z-50 active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
@@ -91,58 +90,31 @@
     </div>
 
     <!-- Modal -->
-    <div id="modal" onclick="if(event.target===this) hideModal()" 
-         class="hidden fixed inset-0 bg-black/70 flex items-end md:items-center justify-center z-[100]">
-        <div onclick="event.stopImmediatePropagation()" 
-             class="modal bg-white w-full md:max-w-lg md:rounded-3xl rounded-t-3xl max-h-[92vh] overflow-auto">
-            <div class="sticky top-0 bg-white px-6 py-5 border-b flex justify-between items-center">
-                <h3 id="modal-title" class="text-2xl font-semibold">Thêm khoản mới</h3>
-                <button onclick="hideModal()" class="text-4xl leading-none text-slate-400 hover:text-slate-600">×</button>
+    <div id="modal" onclick="if(event.target===this)hideModal()" class="hidden fixed inset-0 bg-black/70 flex items-end md:items-center justify-center z-[100]">
+        <div onclick="event.stopImmediatePropagation()" class="modal bg-white w-full md:max-w-lg rounded-t-3xl md:rounded-3xl max-h-[92vh] overflow-auto">
+            <div class="sticky top-0 bg-white px-6 py-5 border-b flex justify-between">
+                <h3 id="modal-title" class="text-2xl font-semibold">Thêm khoản</h3>
+                <button onclick="hideModal()" class="text-4xl leading-none text-slate-400">×</button>
             </div>
-            
             <form id="edit-form" onsubmit="handleSubmit(event)" class="p-6 space-y-6">
                 <input type="hidden" id="node-type">
                 <input type="hidden" id="edit-key">
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-2">Ngày</label>
-                    <input type="date" id="ngay" required class="w-full px-5 py-4 border border-slate-200 rounded-2xl focus:border-emerald-500 text-base">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-2">Danh mục</label>
-                    <input type="text" id="danh_muc" required placeholder="Ăn uống, Lương..." 
-                           class="w-full px-5 py-4 border border-slate-200 rounded-2xl focus:border-emerald-500 text-base">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-2">Mô tả</label>
-                    <input type="text" id="mo_ta" required placeholder="Chi tiết..." 
-                           class="w-full px-5 py-4 border border-slate-200 rounded-2xl focus:border-emerald-500 text-base">
-                </div>
-                
+                <input type="date" id="ngay" required class="w-full px-5 py-4 border rounded-2xl">
+                <input type="text" id="danh_muc" required placeholder="Danh mục" class="w-full px-5 py-4 border rounded-2xl">
+                <input type="text" id="mo_ta" required placeholder="Mô tả" class="w-full px-5 py-4 border rounded-2xl">
                 <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-2">Số tiền (đ)</label>
-                        <input type="number" id="so_tien" required class="w-full px-5 py-4 border border-slate-200 rounded-2xl focus:border-emerald-500 text-base">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-2">Ghi chú</label>
-                        <input type="text" id="ghi_chu" placeholder="Tùy chọn" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-2xl focus:border-emerald-500 text-base">
-                    </div>
+                    <input type="number" id="so_tien" required placeholder="Số tiền" class="w-full px-5 py-4 border rounded-2xl">
+                    <input type="text" id="ghi_chu" placeholder="Ghi chú" class="w-full px-5 py-4 border rounded-2xl">
                 </div>
-
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="hideModal()" class="flex-1 py-4 border border-slate-300 rounded-2xl font-medium">Hủy</button>
-                    <button type="submit" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold">Lưu</button>
+                <div class="flex gap-4">
+                    <button type="button" onclick="hideModal()" class="flex-1 py-4 border rounded-2xl">Hủy</button>
+                    <button type="submit" class="flex-1 py-4 bg-emerald-600 text-white rounded-2xl font-semibold">Lưu</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // ==================== FIREBASE CONFIG (của bạn) ====================
         const firebaseConfig = {
             apiKey: "AIzaSyBIIWxW_jTP1BpGOaIa9atr_sFhRlz3fJ0",
             authDomain: "tienbothi.firebaseapp.com",
@@ -154,24 +126,22 @@
         };
 
         let app, auth, db, currentUser = null;
+        let ITEMS_PER_PAGE = 10;
 
         function initFirebase() {
             app = firebase.initializeApp(firebaseConfig);
             auth = firebase.auth();
             db = firebase.database();
-            
-            // Listen auth state
+
             auth.onAuthStateChanged(user => {
                 currentUser = user;
                 if (user) {
                     document.getElementById('login-screen').classList.add('hidden');
                     document.getElementById('main-app').classList.remove('hidden');
                     document.getElementById('user-info').innerHTML = `
-                        <img src="${user.photoURL || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}" 
-                             class="w-7 h-7 rounded-full">
-                        <span class="font-medium">${user.displayName || 'User'}</span>
-                    `;
-                    loadData();
+                        <img src="${user.photoURL || ''}" class="w-8 h-8 rounded-full"> 
+                        <span>${user.displayName}</span>`;
+                    loadAllData();
                 } else {
                     document.getElementById('login-screen').classList.remove('hidden');
                     document.getElementById('main-app').classList.add('hidden');
@@ -179,78 +149,108 @@
             });
         }
 
-        // ==================== GOOGLE LOGIN ====================
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .catch(err => alert("Đăng nhập thất bại: " + err.message));
+            auth.signInWithPopup(provider).catch(err => alert(err.message));
         }
 
-        function logout() {
-            if (confirm("Đăng xuất?")) {
-                auth.signOut();
-            }
+        function logout() { auth.signOut(); }
+
+        // User-specific path
+        function getUserRef(type) {
+            return db.ref(`users/${currentUser.uid}/${type}`);
         }
 
-        // ==================== DATA FUNCTIONS (giống code cũ) ====================
-        let currentTab = 0;
+        // Load + calculate balance
+        let allChi = {}, allThu = {};
 
-        function renderCard(nodeName, containerId, data) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
+        function loadAllData() {
+            if (!currentUser) return;
 
-            if (!data || Object.keys(data).length === 0) {
-                container.innerHTML = `<div class="bg-white rounded-3xl p-12 text-center text-slate-400">Chưa có dữ liệu</div>`;
-                return;
-            }
+            getUserRef('chi-tieu').on('value', snap => {
+                allChi = snap.val() || {};
+                renderPage('chi-tieu', 1);
+                calculateBalance();
+            });
 
-            Object.keys(data).forEach(key => {
-                const item = data[key];
-                const amount = Number(item.so_tien || 0);
-                const isChi = nodeName === 'chi-tieu';
-
-                const cardHTML = `
-                    <div class="card bg-white rounded-3xl p-5 border border-slate-100">
-                        <div class="flex justify-between">
-                            <div class="flex-1">
-                                <div class="text-xs text-slate-500">${item.ngay || ''}</div>
-                                <div class="font-semibold mt-1">${item.danh_muc || ''}</div>
-                                <div class="text-sm text-slate-600 mt-1">${item.mo_ta || ''}</div>
-                                ${item.ghi_chu ? `<div class="text-xs text-slate-500 mt-2 italic">${item.ghi_chu}</div>` : ''}
-                            </div>
-                            <div class="text-right font-bold text-xl ${isChi ? 'text-red-600' : 'text-blue-600'}">
-                                ${isChi ? '-' : '+'}${amount.toLocaleString('vi-VN')}
-                            </div>
-                        </div>
-                        <div class="flex gap-3 mt-6">
-                            <button onclick="editItem('${nodeName}', '${key}', event)" 
-                                    class="flex-1 py-3 text-sm font-medium bg-amber-100 text-amber-700 rounded-2xl">Sửa</button>
-                            <button onclick="deleteItem('${nodeName}', '${key}', event)" 
-                                    class="flex-1 py-3 text-sm font-medium bg-red-100 text-red-700 rounded-2xl">Xóa</button>
-                        </div>
-                    </div>`;
-                container.innerHTML += cardHTML;
+            getUserRef('thu-nhap').on('value', snap => {
+                allThu = snap.val() || {};
+                renderPage('thu-nhap', 1);
+                calculateBalance();
             });
         }
 
-        function loadData() {
-            if (!db || !currentUser) return;
+        function calculateBalance() {
+            let totalThu = 0, totalChi = 0;
+            Object.values(allThu).forEach(i => totalThu += Number(i.so_tien || 0));
+            Object.values(allChi).forEach(i => totalChi += Number(i.so_tien || 0));
 
-            db.ref('chi-tieu').on('value', snap => renderCard('chi-tieu', 'table-chi-tieu', snap.val()));
-            db.ref('thu-nhap').on('value', snap => renderCard('thu-nhap', 'table-thu-nhap', snap.val()));
+            document.getElementById('balance').textContent = (totalThu - totalChi).toLocaleString('vi-VN') + ' đ';
+            document.getElementById('total-spent').textContent = totalChi.toLocaleString('vi-VN') + ' đ';
+        }
+
+        // Render with pagination
+        function renderPage(type, page) {
+            const data = type === 'chi-tieu' ? allChi : allThu;
+            const keys = Object.keys(data);
+            const totalPages = Math.ceil(keys.length / ITEMS_PER_PAGE);
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const pageData = keys.slice(start, start + ITEMS_PER_PAGE);
+
+            const container = document.getElementById(type === 'chi-tieu' ? 'table-chi-tieu' : 'table-thu-nhap');
+            container.innerHTML = '';
+
+            pageData.forEach(key => {
+                const item = data[key];
+                const amount = Number(item.so_tien || 0);
+                const isChi = type === 'chi-tieu';
+                const html = `
+                    <div class="card bg-white rounded-3xl p-5 border">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-xs text-slate-500">${item.ngay}</div>
+                                <div class="font-semibold mt-1">${item.danh_muc}</div>
+                                <div class="text-sm text-slate-600">${item.mo_ta}</div>
+                                ${item.ghi_chu ? `<div class="text-xs italic text-slate-500 mt-2">${item.ghi_chu}</div>` : ''}
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-2xl ${isChi ? 'text-red-600' : 'text-blue-600'}">
+                                    ${isChi ? '-' : '+'}${amount.toLocaleString('vi-VN')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex gap-3">
+                            <button onclick="editItem('${type}', '${key}')" class="flex-1 py-3 bg-amber-100 text-amber-700 rounded-2xl text-sm font-medium">Sửa</button>
+                            <button onclick="deleteItem('${type}', '${key}')" class="flex-1 py-3 bg-red-100 text-red-700 rounded-2xl text-sm font-medium">Xóa</button>
+                        </div>
+                    </div>`;
+                container.innerHTML += html;
+            });
+
+            // Pagination buttons
+            const pagContainer = document.getElementById(type === 'chi-tieu' ? 'pagination-chi' : 'pagination-thu');
+            pagContainer.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = `px-4 py-2 rounded-2xl text-sm ${i === page ? 'bg-emerald-600 text-white' : 'bg-white border'}`;
+                btn.onclick = () => renderPage(type, i);
+                pagContainer.appendChild(btn);
+            }
         }
 
         function switchTab(tab) {
             currentTab = tab;
-            document.querySelectorAll('.tab-button').forEach((b, i) => {
-                b.classList.toggle('active', i === tab);
-                b.classList.toggle('border-emerald-600', i === tab);
-            });
-            document.getElementById('content-0').classList.toggle('hidden', tab !== 0);
-            document.getElementById('content-1').classList.toggle('hidden', tab !== 1);
+            document.querySelectorAll('.tab-button').forEach((b,i) => b.classList.toggle('active', i===tab));
+            document.getElementById('content-0').classList.toggle('hidden', tab!==0);
+            document.getElementById('content-1').classList.toggle('hidden', tab!==1);
         }
 
+        // Modal functions (giống cũ, chỉ thay ref)
+        let currentEditKey = null, currentTab = 0;
+
         function showAddModal() {
+            currentEditKey = null;
             document.getElementById('modal-title').textContent = currentTab === 0 ? 'Thêm chi tiêu' : 'Thêm thu nhập';
             document.getElementById('node-type').value = currentTab === 0 ? 'chi-tieu' : 'thu-nhap';
             document.getElementById('edit-form').reset();
@@ -259,13 +259,12 @@
             document.getElementById('modal').classList.add('flex');
         }
 
-        function editItem(nodeName, key, e) {
-            e.stopImmediatePropagation();
-            document.getElementById('node-type').value = nodeName;
-            document.getElementById('edit-key').value = key;
-            document.getElementById('modal-title').textContent = 'Sửa khoản';
+        function editItem(type, key) {
+            currentEditKey = key;
+            document.getElementById('node-type').value = type;
+            document.getElementById('modal-title').textContent = 'Sửa';
 
-            db.ref(nodeName + '/' + key).once('value', snap => {
+            getUserRef(type).child(key).once('value', snap => {
                 const d = snap.val();
                 if (d) {
                     document.getElementById('ngay').value = d.ngay || '';
@@ -286,9 +285,9 @@
 
         function handleSubmit(e) {
             e.preventDefault();
-            const nodeType = document.getElementById('node-type').value;
-            const key = document.getElementById('edit-key').value;
-            const ref = db.ref(nodeType);
+            const type = document.getElementById('node-type').value;
+            const ref = getUserRef(type);
+            const key = currentEditKey;
 
             const payload = {
                 danh_muc: document.getElementById('danh_muc').value.trim(),
@@ -299,24 +298,15 @@
                 thoi_gian: Date.now()
             };
 
-            if (key) {
-                ref.child(key).update(payload).then(() => { alert('Đã lưu!'); hideModal(); });
-            } else {
-                ref.push(payload).then(() => { alert('Đã thêm!'); hideModal(); });
-            }
+            if (key) ref.child(key).update(payload).then(() => hideModal());
+            else ref.push(payload).then(() => hideModal());
         }
 
-        function deleteItem(nodeName, key, e) {
-            e.stopImmediatePropagation();
-            if (confirm('Xóa khoản này?')) {
-                db.ref(nodeName + '/' + key).remove();
-            }
+        function deleteItem(type, key) {
+            if (confirm('Xóa khoản?')) getUserRef(type).child(key).remove();
         }
 
-        // ==================== KHỞI ĐỘNG ====================
-        window.onload = () => {
-            initFirebase();
-        };
+        window.onload = initFirebase;
     </script>
 </body>
 </html>
