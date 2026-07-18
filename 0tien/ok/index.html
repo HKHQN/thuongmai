@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Tiền Bỏ Thi - Audit Mode</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" type="image/png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+        body { 
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .safe-top { padding-top: env(safe-area-inset-top, 20px); }
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .pb-safe-fab { padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 85px); }
+        .bottom-sheet {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(100%);
+        }
+        .bottom-sheet.show { transform: translateY(0); }
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-slate-100 h-full flex flex-col text-slate-900 select-none">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="flex flex-col items-center justify-between h-full px-8 py-12 safe-top safe-bottom">
+        <div class="my-auto text-center">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-emerald-50 rounded-[2rem] shadow-xl shadow-emerald-100/50 mb-6">
+                <img src="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" alt="Icon" class="w-14 h-14">
+            </div>
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Tiền Bỏ Thi</h1>
+            <p class="text-slate-500 mt-1.5 text-sm font-medium">Báo cáo & Kiểm toán Tài chính</p>
+        </div>
+        <button onclick="loginWithGoogle()" class="w-full max-w-sm flex items-center justify-center gap-x-3 bg-white border border-slate-200 active:scale-95 transition-all shadow-sm py-4 rounded-2xl font-semibold text-slate-800">
+            <img src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" class="w-5 h-5" alt="Google">
+            Đăng nhập bằng Google
+        </button>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="main-app" class="hidden flex flex-col h-full overflow-hidden">
+        
+        <!-- AUDIT DASHBOARD HEADER -->
+        <header class="bg-slate-900 text-white safe-top shadow-lg z-30 flex-shrink-0">
+            <div class="px-4 py-3 flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-x-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-200">Bảng Đối Soát Số Liệu</h1>
+                </div>
+                <div class="flex items-center gap-x-3">
+                    <div id="user-info" class="text-xs font-medium text-slate-400"></div>
+                    <button onclick="logout()" class="text-slate-400 hover:text-white text-[11px] bg-slate-800 px-2.5 py-1 rounded-lg">Thoát</button>
+                </div>
+            </div>
+
+            <!-- Tổng quan số dư tài chính cấp cao -->
+            <div class="px-4 py-4 grid grid-cols-3 gap-2 text-center bg-slate-950/40">
+                <div class="border-r border-slate-800/60">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tổng Thu</span>
+                    <div id="audit-total-thu" class="text-sm font-bold text-emerald-400 mt-0.5">0 đ</div>
+                </div>
+                <div class="border-r border-slate-800/60">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tổng Chi</span>
+                    <div id="audit-total-chi" class="text-sm font-bold text-rose-400 mt-0.5">0 đ</div>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Thực Khả Dụng</span>
+                    <div id="audit-balance" class="text-sm font-bold text-sky-400 mt-0.5">0 đ</div>
+                </div>
+            </div>
+
+            <!-- Thanh điều hướng chuyển Tab Audit -->
+            <div class="px-4 py-2 bg-slate-900">
+                <div class="bg-slate-950 p-1 rounded-xl flex">
+                    <button onclick="switchTab(0)" id="tab-0" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 bg-transparent">
+                        SỔ CHI TIÊU
+                    </button>
+                    <button onclick="switchTab(1)" id="tab-1" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 bg-transparent">
+                        SỔ THU NHẬP
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CHRONOLOGICAL AUDIT LIST -->
+        <main class="flex-1 overflow-y-auto pb-safe-fab bg-slate-100">
+            <!-- Tab Chi Tiêu -->
+            <div id="content-0" class="tab-content hidden">
+                <div id="audit-log-chi" class="space-y-4"></div>
+                <div id="pagination-chi" class="flex justify-center gap-2 py-5"></div>
+            </div>
+            
+            <!-- Tab Thu Nhập -->
+            <div id="content-1" class="tab-content hidden">
+                <div id="audit-log-thu" class="space-y-4"></div>
+                <div id="pagination-thu" class="flex justify-center gap-2 py-5"></div>
+            </div>
+        </main>
+
+        <!-- NÚT THÊM NHANH (FAB) -->
+        <button onclick="showAddModal()" class="fixed bottom-6 right-5 w-14 h-14 bg-slate-900 text-white rounded-full flex items-center justify-center shadow-xl border border-slate-800 active:scale-95 transition-transform z-40 safe-bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- MODAL ĐÁY (BOTTOM SHEET) -->
+    <div id="modal-backdrop" onclick="hideModal()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0"></div>
+    <div id="modal" class="bottom-sheet fixed bottom-0 left-0 right-0 bg-white rounded-t-[2rem] z-50 flex flex-col max-h-[85vh] safe-bottom shadow-2xl text-slate-900">
+        <div class="w-12 h-1 bg-slate-200 rounded-full mx-auto my-3 flex-shrink-0" onclick="hideModal()"></div>
+        <div class="px-5 pb-3 flex justify-between items-center border-b border-slate-100">
+            <h3 id="modal-title" class="text-lg font-bold text-slate-800">Ghi nhận giao dịch</h3>
+            <button onclick="hideModal()" class="text-sm font-semibold text-slate-400 active:opacity-60">Hủy</button>
+        </div>
+        
+        <form id="edit-form" onsubmit="handleSubmit(event)" class="p-5 overflow-y-auto space-y-4">
+            <input type="hidden" id="node-type">
+            <input type="hidden" id="edit-key">
+            
+            <div>
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Ngày chứng từ</label>
+                <input type="date" id="ngay" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Danh mục kiểm toán</label>
+                <input type="text" id="danh_muc" required placeholder="Nguồn thu hoặc Khoản mục chi..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Nội dung diễn giải</label>
+                <input type="text" id="mo_ta" required placeholder="Ghi chú chi tiết lý do..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Số tiền quy đổi (đ)</label>
+                    <input type="number" id="so_tien" required placeholder="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-bold text-base mt-1">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mã tham chiếu / Note</label>
+                    <input type="text" id="ghi_chu" placeholder="Số hóa đơn, Số thẻ..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+                </div>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="w-full py-3.5 bg-slate-900 active:bg-slate-800 text-white rounded-xl font-bold text-sm tracking-wide shadow-md">
+                    XÁC THỰC LƯU DỮ LIỆU
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBIIWxW_jTP1BpGOaIa9atr_sFhRlz3fJ0",
+            authDomain: "tienbothi.firebaseapp.com",
+            databaseURL: "https://tienbothi-default-rtdb.firebaseio.com",
+            projectId: "tienbothi",
+            storageBucket: "tienbothi.firebasestorage.app",
+            messagingSenderId: "353470247741",
+            appId: "1:353470247741:web:2cf921cc96ba0353e2cb54"
+        };
+
+        let app, auth, db, currentUser = null;
+        let ITEMS_PER_PAGE = 15; // Tăng số lượng bản ghi hiển thị trên mỗi trang để dễ đối soát chuyên sâu
+        let currentTab = 0;
+        let allChi = {}, allThu = {};
+
+        function initFirebase() {
+            app = firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            db = firebase.database();
+
+            auth.onAuthStateChanged(user => {
+                currentUser = user;
+                if (user) {
+                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('main-app').classList.remove('hidden');
+                    document.getElementById('user-info').textContent = user.displayName;
+                    loadAllData();
+                    switchTab(0);
+                } else {
+                    document.getElementById('login-screen').classList.remove('hidden');
+                    document.getElementById('main-app').classList.add('hidden');
+                }
+            });
+        }
+
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(err => alert(err.message));
+        }
+        function logout() { auth.signOut(); }
+        function getUserRef(type) { return db.ref(`users/${currentUser.uid}/${type}`); }
+
+        function loadAllData() {
+            if (!currentUser) return;
+            getUserRef('chi-tieu').on('value', snap => {
+                allChi = snap.val() || {};
+                renderAuditLog('chi-tieu', 1);
+                calculateBalance();
+            });
+            getUserRef('thu-nhap').on('value', snap => {
+                allThu = snap.val() || {};
+                renderAuditLog('thu-nhap', 1);
+                calculateBalance();
+            });
+        }
+
+        function calculateBalance() {
+            let totalThu = 0, totalChi = 0;
+            Object.values(allThu).forEach(i => totalThu += Number(i.so_tien || 0));
+            Object.values(allChi).forEach(i => totalChi += Number(i.so_tien || 0));
+
+            document.getElementById('audit-total-thu').textContent = totalThu.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('audit-total-chi').textContent = totalChi.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('audit-balance').textContent = (totalThu - totalChi).toLocaleString('vi-VN') + ' đ';
+        }
+
+        // THUẬT TOÁN ĐỐI SOÁT: GOM NHÓM DỮ LIỆU THEO NGÀY CHỨNG TỪ VÀ PHÂN TRANG
+        function renderAuditLog(type, page) {
+            const data = type === 'chi-tieu' ? allChi : allThu;
+            const isChi = type === 'chi-tieu';
+            
+            // 1. Sắp xếp toàn bộ Key giao dịch theo thứ tự ngày mới nhất
+            const sortedKeys = Object.keys(data).sort((a,b) => new Date(data[b].ngay) - new Date(data[a].ngay));
+            
+            // 2. Cắt dữ liệu thô theo phân trang trước để đảm bảo tốc độ phản hồi UI
+            const totalPages = Math.ceil(sortedKeys.length / ITEMS_PER_PAGE);
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const pageKeys = sortedKeys.slice(start, start + ITEMS_PER_PAGE);
+
+            const container = document.getElementById(isChi ? 'audit-log-chi' : 'audit-log-thu');
+            container.innerHTML = '';
+
+            if (pageKeys.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-400 text-xs">Không có dữ liệu chứng từ giao dịch.</div>`;
+                return;
+            }
+
+            // 3. Tiến hành nhóm các bản ghi trong trang hiện tại vào các Day-Group (Ngày) tương ứng
+            const groupedData = {};
+            pageKeys.forEach(key => {
+                const item = data[key];
+                const dateStr = item.ngay; // Định dạng YYYY-MM-DD từ input date mặc định
+                if (!groupedData[dateStr]) {
+                    groupedData[dateStr] = { items: [], dayTotal: 0 };
+                }
+                groupedData[dateStr].items.push({ key, ...item });
+                groupedData[dateStr].dayTotal += Number(item.so_tien || 0);
+            });
+
+            // 4. Xây dựng giao diện dạng Bảng Dòng (Compact Table Row) lồng trong khối Ngày
+            Object.keys(groupedData).forEach(date => {
+                const group = groupedData[date];
+                const d = new Date(date);
+                const formatDayHeader = d.toLocaleDateString('vi-VN', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' });
+                
+                let groupHtml = `
+                    <div class="bg-white border-y border-slate-200 shadow-sm overflow-hidden">
+                        <!-- Tiêu đề nhóm ngày + Tổng kết ngày (Kiểm toán nhanh) -->
+                        <div class="bg-slate-50 px-4 py-2 border-b border-slate-200 flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-700 uppercase tracking-tight">${formatDayHeader}</span>
+                            <span class="text-xs font-extrabold ${isChi ? 'text-rose-600' : 'text-emerald-600'}">
+                                Quy về ngày: ${isChi ? '-' : '+'}${group.dayTotal.toLocaleString('vi-VN')} đ
+                            </span>
+                        </div>
+                        <!-- Danh sách dòng chứng từ tinh gọn -->
+                        <div class="divide-y divide-slate-100">`;
+
+                group.items.forEach(item => {
+                    groupHtml += `
+                        <div class="px-4 py-3 flex justify-between items-center gap-3 hover:bg-slate-50/60 transition-colors">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="font-bold text-sm text-slate-800 truncate">${item.danh_muc}</span>
+                                    ${item.ghi_chu ? `<span class="bg-slate-100 text-slate-500 font-semibold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wide truncate max-w-[100px]">${item.ghi_chu}</span>` : ''}
+                                </div>
+                                <div class="text-xs text-slate-500 truncate mt-0.5">${item.mo_ta}</div>
+                            </div>
+                            <!-- Thao tác kiểm toán nhanh dạng Inline nhỏ gọn -->
+                            <div class="flex items-center gap-3 flex-shrink-0">
+                                <span class="font-bold text-sm ${isChi ? 'text-rose-600' : 'text-emerald-600'}">
+                                    ${isChi ? '-' : '+'}${Number(item.so_tien).toLocaleString('vi-VN')}
+                                </span>
+                                <div class="flex gap-1">
+                                    <button onclick="editItem('${type}', '${item.key}')" class="p-1 text-slate-400 hover:text-amber-600 active:scale-90 transition-transform">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                                    </button>
+                                    <button onclick="deleteItem('${type}', '${item.key}')" class="p-1 text-slate-400 hover:text-rose-600 active:scale-90 transition-transform">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+
+                groupHtml += `</div></div>`;
+                container.innerHTML += groupHtml;
+            });
+
+            // Thanh phân trang thiết kế tối giản tinh gọn
+            const pagContainer = document.getElementById(isChi ? 'pagination-chi' : 'pagination-thu');
+            pagContainer.innerHTML = '';
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.textContent = i;
+                    btn.className = `w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center transition-all ${i === page ? 'bg-slate-900 text-white' : 'bg-white text-slate-500 border border-slate-200'}`;
+                    btn.onclick = () => renderAuditLog(type, i);
+                    pagContainer.appendChild(btn);
+                }
+            }
+        }
+
+        // Quản lý Tab Kiểm toán
+        function switchTab(tab) {
+            currentTab = tab;
+            const btn0 = document.getElementById('tab-0');
+            const btn1 = document.getElementById('tab-1');
+
+            if (tab === 0) {
+                btn0.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-slate-800 text-emerald-400 shadow";
+                btn1.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 bg-transparent";
+                document.getElementById('content-0').classList.remove('hidden');
+                document.getElementById('content-1').classList.add('hidden');
+            } else {
+                btn1.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-slate-800 text-emerald-400 shadow";
+                btn0.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 bg-transparent";
+                document.getElementById('content-1').classList.remove('hidden');
+                document.getElementById('content-0').classList.add('hidden');
+            }
+        }
+
+        let currentEditKey = null;
+
+        function showAddModal() {
+            currentEditKey = null;
+            document.getElementById('modal-title').textContent = currentTab === 0 ? 'Kiểm toán Khoản Chi' : 'Kiểm toán Khoản Thu';
+            document.getElementById('node-type').value = currentTab === 0 ? 'chi-tieu' : 'thu-nhap';
+            document.getElementById('edit-form').reset();
+            document.getElementById('ngay').value = new Date().toISOString().split('T')[0];
+            showSheet();
+        }
+
+        function editItem(type, key) {
+            currentEditKey = key;
+            document.getElementById('node-type').value = type;
+            document.getElementById('modal-title').textContent = 'Điều chỉnh Chứng từ';
+
+            getUserRef(type).child(key).once('value', snap => {
+                const d = snap.val();
+                if (d) {
+                    document.getElementById('ngay').value = d.ngay || '';
+                    document.getElementById('danh_muc').value = d.danh_muc || '';
+                    document.getElementById('mo_ta').value = d.mo_ta || '';
+                    document.getElementById('so_tien').value = d.so_tien || '';
+                    document.getElementById('ghi_chu').value = d.ghi_chu || '';
+                    showSheet();
+                }
+            });
+        }
+
+        function showSheet() {
+            const backdrop = document.getElementById('modal-backdrop');
+            const sheet = document.getElementById('modal');
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.add('opacity-100');
+                sheet.classList.add('show');
+            }, 10);
+        }
+
+        function hideModal() {
+            const backdrop = document.getElementById('modal-backdrop');
+            const sheet = document.getElementById('modal');
+            backdrop.classList.remove('opacity-100');
+            sheet.classList.remove('show');
+            setTimeout(() => { backdrop.classList.add('hidden'); }, 300);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const type = document.getElementById('node-type').value;
+            const ref = getUserRef(type);
+            const key = currentEditKey;
+
+            const payload = {
+                danh_muc: document.getElementById('danh_muc').value.trim(),
+                mo_ta: document.getElementById('mo_ta').value.trim(),
+                ngay: document.getElementById('ngay').value,
+                so_tien: parseInt(document.getElementById('so_tien').value) || 0,
+                ghi_chu: document.getElementById('ghi_chu').value.trim() || null,
+                thoi_gian: Date.now()
+            };
+
+            if (key) ref.child(key).update(payload).then(() => hideModal());
+            else ref.push(payload).then(() => hideModal());
+        }
+
+        function deleteItem(type, key) {
+            if (confirm('Hủy bỏ chứng từ giao dịch này khỏi hệ thống cơ sở dữ liệu?')) {
+                getUserRef(type).child(key).remove();
+            }
+        }
+
+        window.onload = initFirebase;
+    </script>
+</body>
+</html>
