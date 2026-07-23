@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CatTrip - Chuyến Xe & Mèo Nén</title>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:20px; background:#f0f8ff; }
+    .container { max-width: 900px; margin:auto; background:white; padding:20px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.1); }
+    button { padding:12px 20px; margin:5px; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
+    .google { background:#db4437; color:white; }
+    .facebook { background:#1877f2; color:white; }
+    .logout { background:#666; color:white; }
+    input, select { padding:10px; margin:8px 0; width:100%; max-width:400px; }
+    img { max-width:180px; border-radius:10px; margin:10px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐱 CatTrip - Thống Kê Chuyến Xe + Mèo Siêu Nén</h1>
+
+    <!-- Login -->
+    <div id="loginSection">
+      <h2>Đăng nhập</h2>
+      <button class="google" onclick="loginWithGoogle()">Google</button>
+      <button class="facebook" onclick="loginWithFacebook()">Facebook</button>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display:none;">
+      <div style="display:flex; justify-content:space-between;">
+        <h2>Xin chào, <span id="userName"></span> 🐱</h2>
+        <button class="logout" onclick="logout()">Đăng xuất</button>
+      </div>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+
+      <h3>📍 Thêm chuyến xe + Ảnh mèo</h3>
+      <input type="text" id="route" placeholder="Tuyến đường">
+      <input type="number" id="fare" placeholder="Tiền chuyến (VND)">
+      
+      <input type="file" id="catImage" accept="image/*">
+      <button onclick="addTripWithCat()">✅ Thêm chuyến + Nén mèo</button>
+
+      <h3>📋 Danh sách chuyến</h3>
+      <table id="tripTable" style="width:100%; border-collapse:collapse;">
+        <thead><tr><th>STT</th><th>Tuyến</th><th>Tiền</th><th>Ảnh mèo</th><th>Thời gian</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <div id="stats"></div>
+    </div>
+  </div>
+
+  <script>
+    const firebaseConfig = { /* Giữ nguyên config của bạn */ 
+      apiKey: "AIzaSyCR_2mrPthGL8gOzkbjThM5mlI7fKEG7Vg",
+      authDomain: "sound-19c50.firebaseapp.com",
+      databaseURL: "https://sound-19c50-default-rtdb.firebaseio.com",
+      projectId: "sound-19c50",
+      storageBucket: "sound-19c50.firebasestorage.app",
+      messagingSenderId: "150852760500",
+      appId: "1:150852760500:web:3c8a9c8318a26c6a7bf8e1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+    const storage = firebase.storage();
+
+    let currentUser = null;
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).then(r => showDashboard(r.user)).catch(e => alert(e.message));
+    }
+
+    function loginWithFacebook() {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      auth.signInWithPopup(provider).then(r => showDashboard(r.user)).catch(e => alert(e.message));
+    }
+
+    function showDashboard(user) {
+      currentUser = user;
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('userName').textContent = user.displayName || "Tài xế";
+      document.getElementById('userEmail').textContent = user.email;
+      loadTrips();
+    }
+
+    // ==================== NÉN ẢNH MÈO SIÊU NHỎ ====================
+    async function compressCatImage(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const MAX_SIZE = 300;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > MAX_SIZE) { height = (MAX_SIZE / width) * height; width = MAX_SIZE; }
+            } else {
+              if (height > MAX_SIZE) { width = (MAX_SIZE / height) * width; height = MAX_SIZE; }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Quality thấp để cực nhỏ
+            const base64 = canvas.toDataURL('image/jpeg', 0.28); // 28% quality
+            resolve(base64);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function addTripWithCat() {
+      if (!currentUser) return;
+
+      const route = document.getElementById('route').value.trim();
+      const fare = parseInt(document.getElementById('fare').value);
+      const fileInput = document.getElementById('catImage');
+
+      if (!route || !fare) {
+        alert("Vui lòng nhập tuyến đường và tiền chuyến!");
+        return;
+      }
+
+      let catBase64 = null;
+      if (fileInput.files[0]) {
+        catBase64 = await compressCatImage(fileInput.files[0]);
+      }
+
+      const tripRef = db.ref('catTrips/' + currentUser.uid).push();
+      tripRef.set({
+        route: route,
+        fare: fare,
+        catImage: catBase64,
+        timestamp: new Date().toISOString()
+      }).then(() => {
+        alert("✅ Đã thêm chuyến và nén ảnh mèo thành công!");
+        document.getElementById('route').value = '';
+        document.getElementById('fare').value = '';
+        document.getElementById('catImage').value = '';
+        loadTrips();
+      });
+    }
+
+    function loadTrips() {
+      const tbody = document.querySelector('#tripTable tbody');
+      tbody.innerHTML = '';
+
+      let totalTrips = 0, totalMoney = 0;
+
+      db.ref('catTrips/' + currentUser.uid).once('value', snapshot => {
+        snapshot.forEach(child => {
+          const t = child.val();
+          totalTrips++;
+          totalMoney += t.fare || 0;
+
+          let imgHtml = t.catImage 
+            ? `<img src="${t.catImage}" alt="mèo">` 
+            : 'Không có ảnh';
+
+          const row = `
+            <tr>
+              <td>${totalTrips}</td>
+              <td>${t.route}</td>
+              <td>${(t.fare||0).toLocaleString('vi-VN')} ₫</td>
+              <td>${imgHtml}</td>
+              <td>${new Date(t.timestamp).toLocaleString('vi-VN')}</td>
+            </tr>`;
+          tbody.innerHTML += row;
+        });
+
+        document.getElementById('stats').innerHTML = `
+          <h3>📊 Thống kê phiên</h3>
+          <p><strong>Số chuyến:</strong> ${totalTrips}</p>
+          <p><strong>Tổng thu:</strong> ${totalMoney.toLocaleString('vi-VN')} ₫</p>
+          <p>🐱 Đã nén ${totalTrips} ảnh mèo với kích thước siêu nhỏ!</p>
+        `;
+      });
+    }
+
+    function logout() { auth.signOut().then(() => location.reload()); }
+
+    auth.onAuthStateChanged(user => { if (user) showDashboard(user); });
+  </script>
+</body>
+</html>
