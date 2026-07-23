@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thống Kê Chuyến Xe - Driver App</title>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    button { padding: 12px 20px; margin: 5px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; }
+    .google { background: #db4437; color: white; }
+    .facebook { background: #1877f2; color: white; }
+    .logout { background: #666; color: white; }
+    input, select { padding: 10px; margin: 8px 0; width: 100%; max-width: 400px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #007bff; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Thống Kê Chuyến Xe</h1>
+
+    <!-- Phần Login -->
+    <div id="loginSection">
+      <h2>Đăng nhập để bắt đầu phiên làm việc</h2>
+      <button class="google" onclick="loginWithGoogle()">Đăng nhập bằng Google</button>
+      <button class="facebook" onclick="loginWithFacebook()">Đăng nhập bằng Facebook</button>
+    </div>
+
+    <!-- Phần Dashboard -->
+    <div id="dashboard" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Xin chào, <span id="userName"></span></h2>
+        <button class="logout" onclick="logout()">Đăng xuất</button>
+      </div>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+
+      <h3>📍 Ghi nhận chuyến xe mới</h3>
+      <input type="text" id="route" placeholder="Tuyến đường (VD: Quận 1 - Quận 7)">
+      <input type="number" id="fare" placeholder="Tiền chuyến (VND)">
+      <button onclick="addTrip()">✅ Thêm chuyến</button>
+
+      <h3>📋 Danh sách chuyến hôm nay</h3>
+      <table id="tripTable">
+        <thead>
+          <tr><th>STT</th><th>Tuyến đường</th><th>Tiền</th><th>Thời gian</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>📊 Thống kê phiên làm việc</h3>
+      <div id="stats"></div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== CONFIG FIREBASE ====================
+    const firebaseConfig = {
+      apiKey: "AIzaSyCR_2mrPthGL8gOzkbjThM5mlI7fKEG7Vg",
+      authDomain: "sound-19c50.firebaseapp.com",
+      databaseURL: "https://sound-19c50-default-rtdb.firebaseio.com",
+      projectId: "sound-19c50",
+      storageBucket: "sound-19c50.firebasestorage.app",
+      messagingSenderId: "150852760500",
+      appId: "1:150852760500:web:3c8a9c8318a26c6a7bf8e1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    let currentUser = null;
+
+    // ==================== LOGIN ====================
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => showDashboard(result.user))
+        .catch(error => alert("Lỗi: " + error.message));
+    }
+
+    function loginWithFacebook() {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => showDashboard(result.user))
+        .catch(error => alert("Lỗi: " + error.message));
+    }
+
+    // ==================== DASHBOARD ====================
+    function showDashboard(user) {
+      currentUser = user;
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      
+      document.getElementById('userName').textContent = user.displayName || "Tài xế";
+      document.getElementById('userEmail').textContent = user.email;
+
+      loadTrips();
+    }
+
+    // ==================== THÊM CHUYẾN ====================
+    function addTrip() {
+      if (!currentUser) return;
+
+      const route = document.getElementById('route').value.trim();
+      const fare = parseInt(document.getElementById('fare').value);
+
+      if (!route || !fare) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+
+      const tripRef = db.ref('trips/' + currentUser.uid).push();
+      tripRef.set({
+        route: route,
+        fare: fare,
+        timestamp: new Date().toISOString()
+      }).then(() => {
+        alert("✅ Đã ghi nhận chuyến xe!");
+        document.getElementById('route').value = '';
+        document.getElementById('fare').value = '';
+        loadTrips();
+      });
+    }
+
+    // ==================== LOAD CHUYẾN ====================
+    function loadTrips() {
+      const tbody = document.querySelector('#tripTable tbody');
+      tbody.innerHTML = '';
+
+      db.ref('trips/' + currentUser.uid).once('value', snapshot => {
+        let totalTrips = 0;
+        let totalMoney = 0;
+        let html = '';
+
+        snapshot.forEach(child => {
+          const trip = child.val();
+          totalTrips++;
+          totalMoney += trip.fare;
+
+          html += `
+            <tr>
+              <td>${totalTrips}</td>
+              <td>${trip.route}</td>
+              <td>${trip.fare.toLocaleString('vi-VN')} ₫</td>
+              <td>${new Date(trip.timestamp).toLocaleString('vi-VN')}</td>
+            </tr>`;
+        });
+
+        tbody.innerHTML = html;
+
+        // Thống kê
+        document.getElementById('stats').innerHTML = `
+          <p><strong>Số chuyến hôm nay:</strong> ${totalTrips} chuyến</p>
+          <p><strong>Tổng thu nhập:</strong> ${totalMoney.toLocaleString('vi-VN')} ₫</p>
+          <hr>
+          <h4>Báo cáo phiên làm việc</h4>
+          <p>Tài xế <strong>${currentUser.displayName || currentUser.email}</strong> đã hoàn thành <strong>${totalTrips}</strong> chuyến xe trong phiên hôm nay, thu về tổng cộng <strong>${totalMoney.toLocaleString('vi-VN')} VNĐ</strong>.</p>
+        `;
+      });
+    }
+
+    function logout() {
+      auth.signOut().then(() => location.reload());
+    }
+
+    // Theo dõi trạng thái đăng nhập
+    auth.onAuthStateChanged(user => {
+      if (user) showDashboard(user);
+    });
+  </script>
+</body>
+</html>
