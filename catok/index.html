@@ -3,61 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CatTrip - Chuyến Xe & Mèo Nén</title>
+  <title> Mèo</title>
+  
+  <!-- Favicon / Icon cho Website -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
 
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:20px; background:#f0f8ff; }
-    .container { max-width: 900px; margin:auto; background:white; padding:20px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.1); }
-    button { padding:12px 20px; margin:5px; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
-    .google { background:#db4437; color:white; }
-    .facebook { background:#1877f2; color:white; }
-    .logout { background:#666; color:white; }
-    input, select { padding:10px; margin:8px 0; width:100%; max-width:400px; }
-    img { max-width:180px; border-radius:10px; margin:10px 0; }
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg-color: #f3f4f6;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 20px 12px;
+    }
+
+    .container { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      background: var(--card-bg); 
+      padding: 28px; 
+      border-radius: 16px; 
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); 
+    }
+
+    /* Header */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--bg-color);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    .app-title { font-size: 24px; font-weight: 700; color: #111827; display: flex; align-items: center; gap: 8px; }
+
+    /* Buttons */
+    button { 
+      padding: 10px 18px; 
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-size: 14px; 
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary { background: var(--primary); color: white; }
+    .google { background: #ea4335; color: white; }
+    .facebook { background: #1877f2; color: white; }
+    .logout { background: #ef4444; color: white; padding: 6px 12px; font-size: 13px; }
+
+    /* Login Screen */
+    #loginSection { text-align: center; padding: 40px 10px; }
+    #loginSection h2 { margin-bottom: 12px; font-size: 20px; }
+    #loginSection p { color: var(--text-muted); margin-bottom: 24px; }
+    .auth-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* Forms & Inputs */
+    .form-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    input, select { 
+      padding: 12px 14px; 
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      flex: 1;
+      min-width: 200px;
+    }
+    input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+    input[type="file"] { padding: 8px; background: #f9fafb; cursor: pointer; }
+
+    /* Stats Cards */
+    .stats-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 16px; 
+      margin: 20px 0 28px 0; 
+    }
+    .stat-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .stat-card .label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .stat-card .value { font-size: 22px; font-weight: 700; color: var(--primary); margin-top: 4px; }
+
+    /* Table */
+    .table-container { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border-color); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th { background: #f9fafb; padding: 12px 16px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-weight: 600; }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background-color: #f9fafb; }
+    
+    /* Image thumbnails */
+    .cat-thumb { 
+      width: 50px; 
+      height: 50px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .no-img { color: var(--text-muted); font-size: 12px; font-style: italic; }
+
+    .user-info { display: flex; align-items: center; gap: 12px; }
+    .user-details span { font-weight: 600; }
+    .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #374151; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🐱 CatTrip - Thống Kê Chuyến Xe + Mèo Siêu Nén</h1>
-
-    <!-- Login -->
-    <div id="loginSection">
-      <h2>Đăng nhập</h2>
-      <button class="google" onclick="loginWithGoogle()">Google</button>
-      <button class="facebook" onclick="loginWithFacebook()">Facebook</button>
-    </div>
-
-    <!-- Dashboard -->
-    <div id="dashboard" style="display:none;">
-      <div style="display:flex; justify-content:space-between;">
-        <h2>Xin chào, <span id="userName"></span> 🐱</h2>
+    <div class="app-header">
+      <div class="app-title">🐱 CatTrip</div>
+      <div id="userInfo" class="user-info" style="display:none;">
+        <div class="user-details">
+          <span id="userName">Tài xế</span>
+        </div>
         <button class="logout" onclick="logout()">Đăng xuất</button>
       </div>
-      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+    </div>
 
-      <h3>📍 Thêm chuyến xe + Ảnh mèo</h3>
-      <input type="text" id="route" placeholder="Tuyến đường">
-      <input type="number" id="fare" placeholder="Tiền chuyến (VND)">
+    <!-- Login Section -->
+    <div id="loginSection">
+      <h2>Chào mừng bạn đến với CatTrip!</h2>
+      <p>Quản lý chuyến xe và lưu trữ hình ảnh mèo nén dung lượng siêu nhỏ.</p>
+      <div class="auth-buttons">
+        <button class="google" onclick="loginWithGoogle()">Đăng nhập Google</button>
+        <button class="facebook" onclick="loginWithFacebook()">Đăng nhập Facebook</button>
+      </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" style="display:none;">
       
-      <input type="file" id="catImage" accept="image/*">
-      <button onclick="addTripWithCat()">✅ Thêm chuyến + Nén mèo</button>
+      <!-- Stats Summary -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Tổng số chuyến</div>
+          <div class="value" id="statTrips">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Tổng doanh thu</div>
+          <div class="value" id="statMoney">0 ₫</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Trung bình / Chuyến</div>
+          <div class="value" id="statAvg">0 ₫</div>
+        </div>
+      </div>
 
-      <h3>📋 Danh sách chuyến</h3>
-      <table id="tripTable" style="width:100%; border-collapse:collapse;">
-        <thead><tr><th>STT</th><th>Tuyến</th><th>Tiền</th><th>Ảnh mèo</th><th>Thời gian</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <!-- Add Trip Form -->
+      <div style="background: #f9fafb; padding: 20px; border-radius: 12px; margin-bottom: 28px;">
+        <div class="section-title">📍 Thêm chuyến xe & Ảnh mèo</div>
+        <div class="form-group">
+          <div class="form-row">
+            <input type="text" id="route" placeholder="Tuyến đường (VD: Hà Nội - Nội Bài)">
+            <input type="number" id="fare" placeholder="Tiền chuyến (VND)">
+          </div>
+          <div class="form-row">
+            <input type="file" id="catImage" accept="image/*">
+            <button class="btn-primary" onclick="addTripWithCat()">➕ Thêm chuyến xe</button>
+          </div>
+        </div>
+      </div>
 
-      <div id="stats"></div>
+      <!-- Trip Table -->
+      <div class="section-title">📋 Lịch sử chuyến xe</div>
+      <div class="table-container">
+        <table id="tripTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tuyến đường</th>
+              <th>Tiền chuyến</th>
+              <th>Mèo nén</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <script>
-    const firebaseConfig = { /* Giữ nguyên config của bạn */ 
+    const firebaseConfig = {
       apiKey: "AIzaSyCR_2mrPthGL8gOzkbjThM5mlI7fKEG7Vg",
       authDomain: "sound-19c50.firebaseapp.com",
       databaseURL: "https://sound-19c50-default-rtdb.firebaseio.com",
@@ -70,7 +223,6 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.database();
-    const storage = firebase.storage();
 
     let currentUser = null;
 
@@ -88,12 +240,12 @@
       currentUser = user;
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
-      document.getElementById('userName').textContent = user.displayName || "Tài xế";
-      document.getElementById('userEmail').textContent = user.email;
+      document.getElementById('userInfo').style.display = 'flex';
+      document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
       loadTrips();
     }
 
-    // ==================== NÉN ẢNH MÈO SIÊU NHỎ ====================
+    // Nén ảnh mèo tối ưu
     async function compressCatImage(file) {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -116,8 +268,8 @@
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, width, height);
 
-            // Quality thấp để cực nhỏ
-            const base64 = canvas.toDataURL('image/jpeg', 0.28); // 28% quality
+            // Nén xuống ~28% chất lượng
+            const base64 = canvas.toDataURL('image/jpeg', 0.28);
             resolve(base64);
           };
           img.src = e.target.result;
@@ -129,12 +281,15 @@
     async function addTripWithCat() {
       if (!currentUser) return;
 
-      const route = document.getElementById('route').value.trim();
-      const fare = parseInt(document.getElementById('fare').value);
+      const routeInput = document.getElementById('route');
+      const fareInput = document.getElementById('fare');
       const fileInput = document.getElementById('catImage');
 
-      if (!route || !fare) {
-        alert("Vui lòng nhập tuyến đường và tiền chuyến!");
+      const route = routeInput.value.trim();
+      const fare = parseInt(fareInput.value);
+
+      if (!route || isNaN(fare)) {
+        alert("Vui lòng nhập đầy đủ tuyến đường và tiền chuyến hợp lệ!");
         return;
       }
 
@@ -150,10 +305,9 @@
         catImage: catBase64,
         timestamp: new Date().toISOString()
       }).then(() => {
-        alert("✅ Đã thêm chuyến và nén ảnh mèo thành công!");
-        document.getElementById('route').value = '';
-        document.getElementById('fare').value = '';
-        document.getElementById('catImage').value = '';
+        routeInput.value = '';
+        fareInput.value = '';
+        fileInput.value = '';
         loadTrips();
       });
     }
@@ -165,38 +319,49 @@
       let totalTrips = 0, totalMoney = 0;
 
       db.ref('catTrips/' + currentUser.uid).once('value', snapshot => {
+        const trips = [];
         snapshot.forEach(child => {
-          const t = child.val();
+          trips.push({ id: child.key, ...child.val() });
+        });
+
+        // Đảo ngược danh sách để chuyến mới nhất nằm ở trên
+        trips.reverse().forEach((t, index) => {
           totalTrips++;
           totalMoney += t.fare || 0;
 
           let imgHtml = t.catImage 
-            ? `<img src="${t.catImage}" alt="mèo">` 
-            : 'Không có ảnh';
+            ? `<img class="cat-thumb" src="${t.catImage}" alt="Cat">` 
+            : `<span class="no-img">Không ảnh</span>`;
 
           const row = `
             <tr>
-              <td>${totalTrips}</td>
-              <td>${t.route}</td>
-              <td>${(t.fare||0).toLocaleString('vi-VN')} ₫</td>
+              <td><strong>${trips.length - index}</strong></td>
+              <td><strong>${t.route}</strong></td>
+              <td>${(t.fare || 0).toLocaleString('vi-VN')} ₫</td>
               <td>${imgHtml}</td>
-              <td>${new Date(t.timestamp).toLocaleString('vi-VN')}</td>
+              <td style="color: var(--text-muted); font-size: 13px;">
+                ${new Date(t.timestamp).toLocaleString('vi-VN')}
+              </td>
             </tr>`;
           tbody.innerHTML += row;
         });
 
-        document.getElementById('stats').innerHTML = `
-          <h3>📊 Thống kê phiên</h3>
-          <p><strong>Số chuyến:</strong> ${totalTrips}</p>
-          <p><strong>Tổng thu:</strong> ${totalMoney.toLocaleString('vi-VN')} ₫</p>
-          <p>🐱 Đã nén ${totalTrips} ảnh mèo với kích thước siêu nhỏ!</p>
-        `;
+        // Cập nhật thẻ Thống kê
+        document.getElementById('statTrips').textContent = totalTrips;
+        document.getElementById('statMoney').textContent = totalMoney.toLocaleString('vi-VN') + ' ₫';
+        document.getElementById('statAvg').textContent = totalTrips > 0 
+          ? Math.round(totalMoney / totalTrips).toLocaleString('vi-VN') + ' ₫' 
+          : '0 ₫';
       });
     }
 
-    function logout() { auth.signOut().then(() => location.reload()); }
+    function logout() { 
+      auth.signOut().then(() => location.reload()); 
+    }
 
-    auth.onAuthStateChanged(user => { if (user) showDashboard(user); });
+    auth.onAuthStateChanged(user => { 
+      if (user) showDashboard(user); 
+    });
   </script>
 </body>
 </html>
