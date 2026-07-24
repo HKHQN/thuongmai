@@ -4,20 +4,208 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thống Kê Chuyến Xe - Driver App</title>
+  
+  <!-- Favicon (Taxi Icon) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'><path d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4h14v4z'/><circle cx='7.5' cy='14.5' r='1.5'/><circle cx='16.5' cy='14.5' r='1.5'/></svg>">
+
+  <!-- Firebase Legacy SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
-    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    button { padding: 12px 20px; margin: 5px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; }
+    :root {
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --success-color: #28a745;
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --border-color: #e9ecef;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      background: var(--card-bg);
+      padding: 25px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+      text-align: center;
+      color: #1a1a1a;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    h2 { font-size: 20px; margin-bottom: 15px; }
+    h3 { font-size: 16px; color: #555; margin-top: 25px; margin-bottom: 12px; }
+
+    /* Login Section */
+    .login-box {
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .btn-login {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
     .google { background: #db4437; color: white; }
+    .google:hover { background: #c23327; }
+
     .facebook { background: #1877f2; color: white; }
-    .logout { background: #666; color: white; }
-    input, select { padding: 10px; margin: 8px 0; width: 100%; max-width: 400px; }
-    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-    th { background: #007bff; color: white; }
+    .facebook:hover { background: #1164d4; }
+
+    /* Dashboard Layout */
+    .user-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8f9fa;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .user-info p { margin: 4px 0 0 0; color: #6c757d; font-size: 14px; }
+    .user-info h2 { margin: 0; font-size: 18px; }
+
+    .logout-btn {
+      background: #e2e6ea;
+      color: #495057;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .logout-btn:hover { background: #dae0e5; color: #212529; }
+
+    /* Input Form */
+    .form-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 15px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+    }
+
+    .btn-add {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--primary-hover); }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .stat-card {
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 15px 20px;
+      border-radius: 8px;
+    }
+
+    .stat-card.money { border-left-color: var(--success-color); }
+    .stat-card .label { font-size: 13px; color: #6c757d; text-transform: uppercase; font-weight: 600; }
+    .stat-card .value { font-size: 22px; font-weight: bold; margin-top: 5px; color: #212529; }
+    .stat-card.money .value { color: var(--success-color); }
+
+    /* Table Design */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+
+    th {
+      background: #f8f9fa;
+      color: #495057;
+      font-weight: 600;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background-color: #f1f3f5; }
+
+    .fare-text { font-weight: 600; color: var(--success-color); }
+    .empty-msg { text-align: center; color: #888; padding: 20px; }
+
+    @media (max-width: 600px) {
+      .form-group { flex-direction: column; }
+      input, .btn-add { width: 100%; }
+      .user-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .logout-btn { align-self: flex-end; }
+    }
   </style>
 </head>
 <body>
@@ -25,35 +213,57 @@
     <h1>📊 Thống Kê Chuyến Xe</h1>
 
     <!-- Phần Login -->
-    <div id="loginSection">
-      <h2>Đăng nhập để bắt đầu phiên làm việc</h2>
-      <button class="google" onclick="loginWithGoogle()">Đăng nhập bằng Google</button>
-      <button class="facebook" onclick="loginWithFacebook()">Đăng nhập bằng Facebook</button>
+    <div id="loginSection" class="login-box">
+      <h2>Đăng nhập để bắt đầu làm việc</h2>
+      <button class="btn-login google" onclick="loginWithGoogle()">Đăng nhập bằng Google</button><br>
+      <button class="btn-login facebook" onclick="loginWithFacebook()">Đăng nhập bằng Facebook</button>
     </div>
 
     <!-- Phần Dashboard -->
     <div id="dashboard" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>Xin chào, <span id="userName"></span></h2>
-        <button class="logout" onclick="logout()">Đăng xuất</button>
+      <div class="user-header">
+        <div class="user-info">
+          <h2>Xin chào, <span id="userName">---</span></h2>
+          <p><strong>Email:</strong> <span id="userEmail">---</span></p>
+        </div>
+        <button class="logout-btn" onclick="logout()">Đăng xuất</button>
       </div>
-      <p><strong>Email:</strong> <span id="userEmail"></span></p>
 
       <h3>📍 Ghi nhận chuyến xe mới</h3>
-      <input type="text" id="route" placeholder="Tuyến đường (VD: Quận 1 - Quận 7)">
-      <input type="number" id="fare" placeholder="Tiền chuyến (VND)">
-      <button onclick="addTrip()">✅ Thêm chuyến</button>
+      <div class="form-group">
+        <input type="text" id="route" placeholder="Tuyến đường (VD: Quận 1 - Quận 7)" onkeyup="handleKeyPress(event)">
+        <input type="number" id="fare" placeholder="Tiền chuyến (VND)" onkeyup="handleKeyPress(event)">
+        <button class="btn-add" onclick="addTrip()">+ Thêm chuyến</button>
+      </div>
 
       <h3>📋 Danh sách chuyến hôm nay</h3>
-      <table id="tripTable">
-        <thead>
-          <tr><th>STT</th><th>Tuyến đường</th><th>Tiền</th><th>Thời gian</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div class="table-container">
+        <table id="tripTable">
+          <thead>
+            <tr>
+              <th style="width: 60px;">STT</th>
+              <th>Tuyến đường</th>
+              <th>Giá cước</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4" class="empty-msg">Chưa có dữ liệu chuyến xe...</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>📊 Thống kê phiên làm việc</h3>
-      <div id="stats"></div>
+      <div id="stats" class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Tổng số chuyến</div>
+          <div class="value" id="statTrips">0 chuyến</div>
+        </div>
+        <div class="stat-card money">
+          <div class="label">Tổng thu nhập</div>
+          <div class="value" id="statMoney">0 ₫</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -80,14 +290,14 @@
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider)
         .then(result => showDashboard(result.user))
-        .catch(error => alert("Lỗi: " + error.message));
+        .catch(error => alert("Lỗi đăng nhập Google: " + error.message));
     }
 
     function loginWithFacebook() {
       const provider = new firebase.auth.FacebookAuthProvider();
       auth.signInWithPopup(provider)
         .then(result => showDashboard(result.user))
-        .catch(error => alert("Lỗi: " + error.message));
+        .catch(error => alert("Lỗi đăng nhập Facebook: " + error.message));
     }
 
     // ==================== DASHBOARD ====================
@@ -97,20 +307,30 @@
       document.getElementById('dashboard').style.display = 'block';
       
       document.getElementById('userName').textContent = user.displayName || "Tài xế";
-      document.getElementById('userEmail').textContent = user.email;
+      document.getElementById('userEmail').textContent = user.email || "Chưa cập nhật";
 
       loadTrips();
+    }
+
+    // Hỗ trợ nhấn phím Enter để thêm chuyến
+    function handleKeyPress(e) {
+      if (e.key === 'Enter') {
+        addTrip();
+      }
     }
 
     // ==================== THÊM CHUYẾN ====================
     function addTrip() {
       if (!currentUser) return;
 
-      const route = document.getElementById('route').value.trim();
-      const fare = parseInt(document.getElementById('fare').value);
+      const routeInput = document.getElementById('route');
+      const fareInput = document.getElementById('fare');
 
-      if (!route || !fare) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
+      const route = routeInput.value.trim();
+      const fare = parseInt(fareInput.value);
+
+      if (!route || isNaN(fare) || fare <= 0) {
+        alert("Vui lòng nhập tuyến đường và số tiền hợp lệ!");
         return;
       }
 
@@ -120,48 +340,58 @@
         fare: fare,
         timestamp: new Date().toISOString()
       }).then(() => {
-        alert("✅ Đã ghi nhận chuyến xe!");
-        document.getElementById('route').value = '';
-        document.getElementById('fare').value = '';
+        routeInput.value = '';
+        fareInput.value = '';
+        routeInput.focus();
         loadTrips();
+      }).catch(error => {
+        alert("Không thể lưu chuyến xe: " + error.message);
       });
     }
 
     // ==================== LOAD CHUYẾN ====================
     function loadTrips() {
       const tbody = document.querySelector('#tripTable tbody');
-      tbody.innerHTML = '';
 
       db.ref('trips/' + currentUser.uid).once('value', snapshot => {
         let totalTrips = 0;
         let totalMoney = 0;
         let html = '';
 
+        if (!snapshot.exists()) {
+          tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">Chưa có chuyến xe nào được ghi nhận hôm nay.</td></tr>';
+          document.getElementById('statTrips').textContent = '0 chuyến';
+          document.getElementById('statMoney').textContent = '0 ₫';
+          return;
+        }
+
         snapshot.forEach(child => {
           const trip = child.val();
           totalTrips++;
           totalMoney += trip.fare;
 
+          const dateStr = trip.timestamp ? new Date(trip.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '---';
+
           html += `
             <tr>
-              <td>${totalTrips}</td>
-              <td>${trip.route}</td>
-              <td>${trip.fare.toLocaleString('vi-VN')} ₫</td>
-              <td>${new Date(trip.timestamp).toLocaleString('vi-VN')}</td>
+              <td><strong>#${totalTrips}</strong></td>
+              <td>${escapeHtml(trip.route)}</td>
+              <td class="fare-text">${trip.fare.toLocaleString('vi-VN')} ₫</td>
+              <td>${dateStr}</td>
             </tr>`;
         });
 
         tbody.innerHTML = html;
 
-        // Thống kê
-        document.getElementById('stats').innerHTML = `
-          <p><strong>Số chuyến hôm nay:</strong> ${totalTrips} chuyến</p>
-          <p><strong>Tổng thu nhập:</strong> ${totalMoney.toLocaleString('vi-VN')} ₫</p>
-          <hr>
-          <h4>Báo cáo phiên làm việc</h4>
-          <p>Tài xế <strong>${currentUser.displayName || currentUser.email}</strong> đã hoàn thành <strong>${totalTrips}</strong> chuyến xe trong phiên hôm nay, thu về tổng cộng <strong>${totalMoney.toLocaleString('vi-VN')} VNĐ</strong>.</p>
-        `;
+        // Cập nhật thẻ thống kê
+        document.getElementById('statTrips').textContent = `${totalTrips} chuyến`;
+        document.getElementById('statMoney').textContent = `${totalMoney.toLocaleString('vi-VN')} ₫`;
       });
+    }
+
+    // Lọc ký tự đặc biệt phòng chống XSS
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
     function logout() {
@@ -170,7 +400,12 @@
 
     // Theo dõi trạng thái đăng nhập
     auth.onAuthStateChanged(user => {
-      if (user) showDashboard(user);
+      if (user) {
+        showDashboard(user);
+      } else {
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('dashboard').style.display = 'none';
+      }
     });
   </script>
 </body>
