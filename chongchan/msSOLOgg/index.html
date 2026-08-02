@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Production Notes</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#f4f6fa;
+padding:15px;
+
+}
+
+.container{
+
+max-width:700px;
+margin:auto;
+
+}
+
+.card{
+
+background:white;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+margin-top:15px;
+
+}
+
+button{
+
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:17px;
+cursor:pointer;
+
+}
+
+.google{
+
+background:#4285F4;
+color:white;
+
+}
+
+.logout{
+
+background:#ff5252;
+color:white;
+margin-top:10px;
+
+}
+
+.save{
+
+background:#00b894;
+color:white;
+margin-top:10px;
+
+}
+
+textarea{
+
+width:100%;
+height:130px;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+font-size:16px;
+
+}
+
+.note{
+
+background:#f8f8f8;
+padding:12px;
+border-radius:10px;
+margin-top:10px;
+
+}
+
+.time{
+
+font-size:12px;
+color:gray;
+margin-top:8px;
+
+}
+
+.action{
+
+display:flex;
+gap:10px;
+margin-top:10px;
+
+}
+
+.action button{
+
+flex:1;
+
+}
+
+.edit{
+
+background:#0984e3;
+color:white;
+
+}
+
+.delete{
+
+background:#d63031;
+color:white;
+
+}
+
+img{
+
+width:70px;
+height:70px;
+border-radius:50%;
+margin-top:10px;
+
+}
+
+h2{
+
+margin-bottom:10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card" id="loginCard">
+
+<h2>Ngành sản xuất</h2>
+
+<p>Đăng nhập Google để lưu ghi chú.</p>
+
+<button class="google" id="login">
+
+Đăng nhập bằng Google
+
+</button>
+
+</div>
+
+<div class="card" id="appCard" style="display:none">
+
+<center>
+
+<img id="avatar">
+
+<h3 id="name"></h3>
+
+<p id="email"></p>
+
+</center>
+
+<textarea id="note" placeholder="Nhập ghi chú về sản xuất..."></textarea>
+
+<button class="save" id="save">
+
+Lưu ghi chú
+
+</button>
+
+<button class="logout" id="logout">
+
+Đăng xuất
+
+</button>
+
+<hr style="margin:20px 0">
+
+<div id="list"></div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+
+import {
+
+getAuth,
+
+GoogleAuthProvider,
+
+signInWithPopup,
+
+signOut,
+
+onAuthStateChanged
+
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+import {
+
+getDatabase,
+
+ref,
+
+push,
+
+set,
+
+onValue,
+
+remove,
+
+update
+
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+const firebaseConfig={
+
+apiKey:"AIzaSyASfKSM4k9PVqGSu2ycd5Uv1ax0vbScg0I",
+
+authDomain:"soloskill.firebaseapp.com",
+
+databaseURL:"https://soloskill-default-rtdb.europe-west1.firebasedatabase.app",
+
+projectId:"soloskill",
+
+storageBucket:"soloskill.firebasestorage.app",
+
+messagingSenderId:"959816905162",
+
+appId:"1:959816905162:web:2a7c6b8dd0cb985a71df33",
+
+measurementId:"G-05TCE6B63Y"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getDatabase(app);
+
+const provider=new GoogleAuthProvider();
+
+let uid="";
+
+let editId=null;
+
+login.onclick=()=>{
+
+signInWithPopup(auth,provider);
+
+};
+
+logout.onclick=()=>{
+
+signOut(auth);
+
+};
+
+onAuthStateChanged(auth,user=>{
+
+if(user){
+
+uid=user.uid;
+
+loginCard.style.display="none";
+
+appCard.style.display="block";
+
+avatar.src=user.photoURL;
+
+name.innerHTML=user.displayName;
+
+email.innerHTML=user.email;
+
+loadNotes();
+
+}else{
+
+loginCard.style.display="block";
+
+appCard.style.display="none";
+
+}
+
+});
+
+save.onclick=()=>{
+
+if(note.value.trim()=="")return;
+
+if(editId){
+
+update(ref(db,"notes/"+uid+"/"+editId),{
+
+text:note.value
+
+});
+
+editId=null;
+
+}else{
+
+const id=push(ref(db,"notes/"+uid)).key;
+
+set(ref(db,"notes/"+uid+"/"+id),{
+
+text:note.value,
+
+time:new Date().toLocaleString()
+
+});
+
+}
+
+note.value="";
+
+};
+
+function loadNotes(){
+
+onValue(ref(db,"notes/"+uid),snap=>{
+
+list.innerHTML="";
+
+snap.forEach(data=>{
+
+const v=data.val();
+
+const div=document.createElement("div");
+
+div.className="note";
+
+div.innerHTML=`
+
+<div>${v.text}</div>
+
+<div class="time">${v.time||""}</div>
+
+<div class="action">
+
+<button class="edit">Sửa</button>
+
+<button class="delete">Xóa</button>
+
+</div>
+
+`;
+
+div.querySelector(".edit").onclick=()=>{
+
+note.value=v.text;
+
+editId=data.key;
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+div.querySelector(".delete").onclick=()=>{
+
+remove(ref(db,"notes/"+uid+"/"+data.key));
+
+};
+
+list.appendChild(div);
+
+});
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
