@@ -63,7 +63,6 @@
                 </div>
             </div>
 
-            <!-- Tổng quan số dư tài chính cấp cao -->
             <div class="px-4 py-4 grid grid-cols-3 gap-2 text-center bg-slate-950/40">
                 <div class="border-r border-slate-800/60">
                     <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tổng Thu</span>
@@ -79,7 +78,6 @@
                 </div>
             </div>
 
-            <!-- Thanh điều hướng chuyển Tab Audit -->
             <div class="px-4 py-2 bg-slate-900">
                 <div class="bg-slate-950 p-1 rounded-xl flex">
                     <button onclick="switchTab(0)" id="tab-0" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 bg-transparent">
@@ -92,22 +90,18 @@
             </div>
         </header>
 
-        <!-- CHRONOLOGICAL AUDIT LIST -->
         <main class="flex-1 overflow-y-auto pb-safe-fab bg-slate-100">
-            <!-- Tab Chi Tiêu -->
             <div id="content-0" class="tab-content hidden">
                 <div id="audit-log-chi" class="space-y-4"></div>
                 <div id="pagination-chi" class="flex justify-center gap-2 py-5"></div>
             </div>
             
-            <!-- Tab Thu Nhập -->
             <div id="content-1" class="tab-content hidden">
                 <div id="audit-log-thu" class="space-y-4"></div>
                 <div id="pagination-thu" class="flex justify-center gap-2 py-5"></div>
             </div>
         </main>
 
-        <!-- NÚT THÊM NHANH (FAB) -->
         <button onclick="showAddModal()" class="fixed bottom-6 right-5 w-14 h-14 bg-slate-900 text-white rounded-full flex items-center justify-center shadow-xl border border-slate-800 active:scale-95 transition-transform z-40 safe-bottom">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -115,7 +109,7 @@
         </button>
     </div>
 
-    <!-- MODAL ĐÁY (BOTTOM SHEET) -->
+    <!-- MODAL -->
     <div id="modal-backdrop" onclick="hideModal()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0"></div>
     <div id="modal" class="bottom-sheet fixed bottom-0 left-0 right-0 bg-white rounded-t-[2rem] z-50 flex flex-col max-h-[85vh] safe-bottom shadow-2xl text-slate-900">
         <div class="w-12 h-1 bg-slate-200 rounded-full mx-auto my-3 flex-shrink-0" onclick="hideModal()"></div>
@@ -134,20 +128,20 @@
             </div>
             <div>
                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Danh mục kiểm toán</label>
-                <input type="text" id="danh_muc" required placeholder="Nguồn thu hoặc Khoản mục chi..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+                <input type="text" id="danh_muc" required maxlength="100" placeholder="Nguồn thu hoặc Khoản mục chi..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
             </div>
             <div>
                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Nội dung diễn giải</label>
-                <input type="text" id="mo_ta" required placeholder="Ghi chú chi tiết lý do..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+                <input type="text" id="mo_ta" required maxlength="300" placeholder="Ghi chú chi tiết lý do..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Số tiền quy đổi (đ)</label>
-                    <input type="number" id="so_tien" required placeholder="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-bold text-base mt-1">
+                    <input type="number" id="so_tien" required min="0" max="999999999999" placeholder="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-bold text-base mt-1">
                 </div>
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mã tham chiếu / Note</label>
-                    <input type="text" id="ghi_chu" placeholder="Số hóa đơn, Số thẻ..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
+                    <input type="text" id="ghi_chu" maxlength="80" placeholder="Số hóa đơn, Số thẻ..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-slate-900 font-medium text-base mt-1">
                 </div>
             </div>
             <div class="pt-2">
@@ -159,6 +153,7 @@
     </div>
 
     <script>
+        // ====================== FIREBASE CONFIG ======================
         const firebaseConfig = {
             apiKey: "AIzaSyBIIWxW_jTP1BpGOaIa9atr_sFhRlz3fJ0",
             authDomain: "tienbothi.firebaseapp.com",
@@ -170,49 +165,105 @@
         };
 
         let app, auth, db, currentUser = null;
-        let ITEMS_PER_PAGE = 15; // Tăng số lượng bản ghi hiển thị trên mỗi trang để dễ đối soát chuyên sâu
+        const ITEMS_PER_PAGE = 15;
         let currentTab = 0;
         let allChi = {}, allThu = {};
+        let currentEditKey = null;
 
+        // ====================== INIT ======================
         function initFirebase() {
             app = firebase.initializeApp(firebaseConfig);
             auth = firebase.auth();
             db = firebase.database();
 
-            auth.onAuthStateChanged(user => {
+            auth.onAuthStateChanged(async (user) => {
                 currentUser = user;
                 if (user) {
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('main-app').classList.remove('hidden');
-                    document.getElementById('user-info').textContent = user.displayName;
-                    loadAllData();
-                    switchTab(0);
+                    try {
+                        // Bắt buộc tạo / cập nhật profile theo rules
+                        await ensureUserProfile(user);
+
+                        document.getElementById('login-screen').classList.add('hidden');
+                        document.getElementById('main-app').classList.remove('hidden');
+                        document.getElementById('user-info').textContent = user.displayName || user.email || 'User';
+                        loadAllData();
+                        switchTab(0);
+                    } catch (err) {
+                        console.error(err);
+                        alert('Không thể khởi tạo hồ sơ người dùng. Vui lòng thử lại.');
+                        auth.signOut();
+                    }
                 } else {
                     document.getElementById('login-screen').classList.remove('hidden');
                     document.getElementById('main-app').classList.add('hidden');
+                    allChi = {};
+                    allThu = {};
                 }
             });
         }
 
+        // ====================== PROFILE (phù hợp rules) ======================
+        async function ensureUserProfile(user) {
+            const userRef = db.ref(`users/${user.uid}`);
+            const snap = await userRef.once('value');
+
+            if (!snap.exists()) {
+                // Lần đầu đăng nhập → tạo profile đúng validate rules
+                await userRef.set({
+                    displayName: (user.displayName || user.email || 'Anonymous').substring(0, 49),
+                    createdAt: Date.now()
+                });
+            } else {
+                // Đã tồn tại → chỉ update displayName nếu cần (không đụng createdAt)
+                const data = snap.val();
+                if (!data.displayName || data.displayName !== user.displayName) {
+                    await userRef.update({
+                        displayName: (user.displayName || user.email || 'Anonymous').substring(0, 49)
+                    });
+                }
+            }
+        }
+
+        // ====================== AUTH ======================
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).catch(err => alert(err.message));
+            provider.setCustomParameters({ prompt: 'select_account' });
+            auth.signInWithPopup(provider).catch(err => {
+                console.error(err);
+                alert('Đăng nhập thất bại: ' + (err.message || 'Lỗi không xác định'));
+            });
         }
-        function logout() { auth.signOut(); }
-        function getUserRef(type) { return db.ref(`users/${currentUser.uid}/${type}`); }
+
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                auth.signOut();
+            }
+        }
+
+        // ====================== DATA ACCESS ======================
+        function getUserRef(type) {
+            if (!currentUser) throw new Error('Chưa đăng nhập');
+            // Chỉ cho phép 2 loại dữ liệu này
+            if (type !== 'chi-tieu' && type !== 'thu-nhap') {
+                throw new Error('Loại dữ liệu không hợp lệ');
+            }
+            return db.ref(`users/${currentUser.uid}/${type}`);
+        }
 
         function loadAllData() {
             if (!currentUser) return;
+
             getUserRef('chi-tieu').on('value', snap => {
                 allChi = snap.val() || {};
                 renderAuditLog('chi-tieu', 1);
                 calculateBalance();
-            });
+            }, err => console.error('Lỗi load chi-tieu:', err));
+
             getUserRef('thu-nhap').on('value', snap => {
                 allThu = snap.val() || {};
                 renderAuditLog('thu-nhap', 1);
                 calculateBalance();
-            });
+            }, err => console.error('Lỗi load thu-nhap:', err));
         }
 
         function calculateBalance() {
@@ -225,16 +276,18 @@
             document.getElementById('audit-balance').textContent = (totalThu - totalChi).toLocaleString('vi-VN') + ' đ';
         }
 
-        // THUẬT TOÁN ĐỐI SOÁT: GOM NHÓM DỮ LIỆU THEO NGÀY CHỨNG TỪ VÀ PHÂN TRANG
+        // ====================== RENDER ======================
         function renderAuditLog(type, page) {
             const data = type === 'chi-tieu' ? allChi : allThu;
             const isChi = type === 'chi-tieu';
             
-            // 1. Sắp xếp toàn bộ Key giao dịch theo thứ tự ngày mới nhất
-            const sortedKeys = Object.keys(data).sort((a,b) => new Date(data[b].ngay) - new Date(data[a].ngay));
+            const sortedKeys = Object.keys(data).sort((a, b) => {
+                const da = new Date(data[a].ngay || 0);
+                const db = new Date(data[b].ngay || 0);
+                return db - da;
+            });
             
-            // 2. Cắt dữ liệu thô theo phân trang trước để đảm bảo tốc độ phản hồi UI
-            const totalPages = Math.ceil(sortedKeys.length / ITEMS_PER_PAGE);
+            const totalPages = Math.ceil(sortedKeys.length / ITEMS_PER_PAGE) || 1;
             const start = (page - 1) * ITEMS_PER_PAGE;
             const pageKeys = sortedKeys.slice(start, start + ITEMS_PER_PAGE);
 
@@ -243,14 +296,14 @@
 
             if (pageKeys.length === 0) {
                 container.innerHTML = `<div class="text-center py-12 text-slate-400 text-xs">Không có dữ liệu chứng từ giao dịch.</div>`;
+                document.getElementById(isChi ? 'pagination-chi' : 'pagination-thu').innerHTML = '';
                 return;
             }
 
-            // 3. Tiến hành nhóm các bản ghi trong trang hiện tại vào các Day-Group (Ngày) tương ứng
             const groupedData = {};
             pageKeys.forEach(key => {
                 const item = data[key];
-                const dateStr = item.ngay; // Định dạng YYYY-MM-DD từ input date mặc định
+                const dateStr = item.ngay || 'unknown';
                 if (!groupedData[dateStr]) {
                     groupedData[dateStr] = { items: [], dayTotal: 0 };
                 }
@@ -258,22 +311,26 @@
                 groupedData[dateStr].dayTotal += Number(item.so_tien || 0);
             });
 
-            // 4. Xây dựng giao diện dạng Bảng Dòng (Compact Table Row) lồng trong khối Ngày
             Object.keys(groupedData).forEach(date => {
                 const group = groupedData[date];
-                const d = new Date(date);
-                const formatDayHeader = d.toLocaleDateString('vi-VN', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' });
-                
+                let formatDayHeader = date;
+                try {
+                    const d = new Date(date);
+                    if (!isNaN(d)) {
+                        formatDayHeader = d.toLocaleDateString('vi-VN', { 
+                            weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' 
+                        });
+                    }
+                } catch(e) {}
+
                 let groupHtml = `
                     <div class="bg-white border-y border-slate-200 shadow-sm overflow-hidden">
-                        <!-- Tiêu đề nhóm ngày + Tổng kết ngày (Kiểm toán nhanh) -->
                         <div class="bg-slate-50 px-4 py-2 border-b border-slate-200 flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-700 uppercase tracking-tight">${formatDayHeader}</span>
+                            <span class="text-xs font-bold text-slate-700 uppercase tracking-tight">${escapeHtml(formatDayHeader)}</span>
                             <span class="text-xs font-extrabold ${isChi ? 'text-rose-600' : 'text-emerald-600'}">
                                 Quy về ngày: ${isChi ? '-' : '+'}${group.dayTotal.toLocaleString('vi-VN')} đ
                             </span>
                         </div>
-                        <!-- Danh sách dòng chứng từ tinh gọn -->
                         <div class="divide-y divide-slate-100">`;
 
                 group.items.forEach(item => {
@@ -281,15 +338,14 @@
                         <div class="px-4 py-3 flex justify-between items-center gap-3 hover:bg-slate-50/60 transition-colors">
                             <div class="min-w-0 flex-1">
                                 <div class="flex items-baseline gap-2">
-                                    <span class="font-bold text-sm text-slate-800 truncate">${item.danh_muc}</span>
-                                    ${item.ghi_chu ? `<span class="bg-slate-100 text-slate-500 font-semibold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wide truncate max-w-[100px]">${item.ghi_chu}</span>` : ''}
+                                    <span class="font-bold text-sm text-slate-800 truncate">${escapeHtml(item.danh_muc || '')}</span>
+                                    ${item.ghi_chu ? `<span class="bg-slate-100 text-slate-500 font-semibold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wide truncate max-w-[100px]">${escapeHtml(item.ghi_chu)}</span>` : ''}
                                 </div>
-                                <div class="text-xs text-slate-500 truncate mt-0.5">${item.mo_ta}</div>
+                                <div class="text-xs text-slate-500 truncate mt-0.5">${escapeHtml(item.mo_ta || '')}</div>
                             </div>
-                            <!-- Thao tác kiểm toán nhanh dạng Inline nhỏ gọn -->
                             <div class="flex items-center gap-3 flex-shrink-0">
                                 <span class="font-bold text-sm ${isChi ? 'text-rose-600' : 'text-emerald-600'}">
-                                    ${isChi ? '-' : '+'}${Number(item.so_tien).toLocaleString('vi-VN')}
+                                    ${isChi ? '-' : '+'}${Number(item.so_tien || 0).toLocaleString('vi-VN')}
                                 </span>
                                 <div class="flex gap-1">
                                     <button onclick="editItem('${type}', '${item.key}')" class="p-1 text-slate-400 hover:text-amber-600 active:scale-90 transition-transform">
@@ -307,7 +363,7 @@
                 container.innerHTML += groupHtml;
             });
 
-            // Thanh phân trang thiết kế tối giản tinh gọn
+            // Pagination
             const pagContainer = document.getElementById(isChi ? 'pagination-chi' : 'pagination-thu');
             pagContainer.innerHTML = '';
             if (totalPages > 1) {
@@ -321,7 +377,7 @@
             }
         }
 
-        // Quản lý Tab Kiểm toán
+        // ====================== TAB ======================
         function switchTab(tab) {
             currentTab = tab;
             const btn0 = document.getElementById('tab-0');
@@ -340,8 +396,7 @@
             }
         }
 
-        let currentEditKey = null;
-
+        // ====================== MODAL & CRUD ======================
         function showAddModal() {
             currentEditKey = null;
             document.getElementById('modal-title').textContent = currentTab === 0 ? 'Kiểm toán Khoản Chi' : 'Kiểm toán Khoản Thu';
@@ -352,6 +407,7 @@
         }
 
         function editItem(type, key) {
+            if (!currentUser) return;
             currentEditKey = key;
             document.getElementById('node-type').value = type;
             document.getElementById('modal-title').textContent = 'Điều chỉnh Chứng từ';
@@ -366,6 +422,9 @@
                     document.getElementById('ghi_chu').value = d.ghi_chu || '';
                     showSheet();
                 }
+            }).catch(err => {
+                console.error(err);
+                alert('Không thể tải dữ liệu chứng từ.');
             });
         }
 
@@ -387,29 +446,83 @@
             setTimeout(() => { backdrop.classList.add('hidden'); }, 300);
         }
 
-        function handleSubmit(e) {
-            e.preventDefault();
-            const type = document.getElementById('node-type').value;
-            const ref = getUserRef(type);
-            const key = currentEditKey;
+        // Sanitize & validate trước khi ghi
+        function sanitizePayload() {
+            const danh_muc = document.getElementById('danh_muc').value.trim().substring(0, 100);
+            const mo_ta = document.getElementById('mo_ta').value.trim().substring(0, 300);
+            const ngay = document.getElementById('ngay').value;
+            const so_tien = parseInt(document.getElementById('so_tien').value, 10) || 0;
+            const ghi_chu = document.getElementById('ghi_chu').value.trim().substring(0, 80) || null;
 
-            const payload = {
-                danh_muc: document.getElementById('danh_muc').value.trim(),
-                mo_ta: document.getElementById('mo_ta').value.trim(),
-                ngay: document.getElementById('ngay').value,
-                so_tien: parseInt(document.getElementById('so_tien').value) || 0,
-                ghi_chu: document.getElementById('ghi_chu').value.trim() || null,
+            if (!danh_muc || !mo_ta || !ngay) {
+                throw new Error('Vui lòng điền đầy đủ thông tin bắt buộc');
+            }
+            if (so_tien < 0 || so_tien > 999999999999) {
+                throw new Error('Số tiền không hợp lệ');
+            }
+            // Kiểm tra định dạng ngày đơn giản
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) {
+                throw new Error('Ngày chứng từ không hợp lệ');
+            }
+
+            return {
+                danh_muc,
+                mo_ta,
+                ngay,
+                so_tien,
+                ghi_chu,
                 thoi_gian: Date.now()
             };
+        }
 
-            if (key) ref.child(key).update(payload).then(() => hideModal());
-            else ref.push(payload).then(() => hideModal());
+        function handleSubmit(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                alert('Bạn chưa đăng nhập');
+                return;
+            }
+
+            try {
+                const type = document.getElementById('node-type').value;
+                if (type !== 'chi-tieu' && type !== 'thu-nhap') {
+                    throw new Error('Loại giao dịch không hợp lệ');
+                }
+
+                const payload = sanitizePayload();
+                const ref = getUserRef(type);
+
+                const promise = currentEditKey 
+                    ? ref.child(currentEditKey).update(payload)
+                    : ref.push(payload);
+
+                promise
+                    .then(() => hideModal())
+                    .catch(err => {
+                        console.error(err);
+                        alert('Lỗi lưu dữ liệu: ' + (err.message || 'Permission denied hoặc lỗi mạng'));
+                    });
+            } catch (err) {
+                alert(err.message);
+            }
         }
 
         function deleteItem(type, key) {
-            if (confirm('Hủy bỏ chứng từ giao dịch này khỏi hệ thống cơ sở dữ liệu?')) {
-                getUserRef(type).child(key).remove();
-            }
+            if (!currentUser) return;
+            if (!confirm('Hủy bỏ chứng từ giao dịch này khỏi hệ thống cơ sở dữ liệu?')) return;
+
+            getUserRef(type).child(key).remove()
+                .catch(err => {
+                    console.error(err);
+                    alert('Không thể xóa: ' + (err.message || 'Lỗi quyền truy cập'));
+                });
+        }
+
+        // ====================== UTIL ======================
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         window.onload = initFirebase;
