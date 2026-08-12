@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Tiền Bỏ Thi - Audit Mode</title>
+    <title>MONEY TP EVERYWHERE</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" type="image/png">
@@ -33,18 +33,36 @@
 <body class="bg-slate-100 h-full flex flex-col text-slate-900 select-none">
 
     <!-- LOGIN SCREEN -->
-    <div id="login-screen" class="flex flex-col items-center justify-between h-full px-8 py-12 safe-top safe-bottom">
-        <div class="my-auto text-center">
+    <div id="login-screen" class="flex flex-col items-center justify-between h-full px-8 py-12 safe-top safe-bottom overflow-y-auto">
+        <div class="my-auto text-center w-full max-w-sm">
             <div class="inline-flex items-center justify-center w-24 h-24 bg-emerald-50 rounded-[2rem] shadow-xl shadow-emerald-100/50 mb-6">
                 <img src="https://cdn-icons-png.flaticon.com/512/1040/1040249.png" alt="Icon" class="w-14 h-14">
             </div>
             <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Tiền Bỏ Thi</h1>
-            <p class="text-slate-500 mt-1.5 text-sm font-medium">Báo cáo & Kiểm toán Tài chính</p>
+            <p class="text-slate-500 mt-1.5 text-sm font-medium mb-8">Báo cáo & Kiểm toán Tài chính</p>
+
+            <div class="space-y-3">
+                <button onclick="loginWithGoogle()" class="w-full flex items-center justify-center gap-x-3 bg-white border border-slate-200 active:scale-95 transition-all shadow-sm py-3.5 rounded-2xl font-semibold text-slate-800">
+                    <img src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" class="w-5 h-5" alt="Google">
+                    Đăng nhập bằng Google
+                </button>
+
+                <div class="relative flex py-2 items-center">
+                    <div class="flex-grow border-t border-slate-200"></div>
+                    <span class="flex-shrink mx-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Hoặc Email Link</span>
+                    <div class="flex-grow border-t border-slate-200"></div>
+                </div>
+
+                <!-- Form đăng nhập Email không mật khẩu -->
+                <form onsubmit="sendEmailLink(event)" class="space-y-2">
+                    <input type="email" id="email-input" required placeholder="Nhập email của bạn..." class="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:border-slate-900 font-medium text-sm text-center shadow-sm">
+                    <button type="submit" id="btn-send-email" class="w-full bg-slate-900 active:scale-95 transition-all shadow-sm py-3.5 rounded-2xl font-semibold text-white text-sm">
+                        Gửi link đăng nhập
+                    </button>
+                </form>
+                <p id="email-status-msg" class="text-xs font-medium text-emerald-600 hidden mt-2"></p>
+            </div>
         </div>
-        <button onclick="loginWithGoogle()" class="w-full max-w-sm flex items-center justify-center gap-x-3 bg-white border border-slate-200 active:scale-95 transition-all shadow-sm py-4 rounded-2xl font-semibold text-slate-800">
-            <img src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" class="w-5 h-5" alt="Google">
-            Đăng nhập bằng Google
-        </button>
     </div>
 
     <!-- MAIN APP -->
@@ -176,11 +194,13 @@
             auth = firebase.auth();
             db = firebase.database();
 
+            // Kiểm tra xem người dùng có quay lại từ Link xác thực email không
+            handleEmailLinkSignIn();
+
             auth.onAuthStateChanged(async (user) => {
                 currentUser = user;
                 if (user) {
                     try {
-                        // Bắt buộc tạo / cập nhật profile theo rules
                         await ensureUserProfile(user);
 
                         document.getElementById('login-screen').classList.add('hidden');
@@ -202,23 +222,22 @@
             });
         }
 
-        // ====================== PROFILE (phù hợp rules) ======================
+        // ====================== PROFILE ======================
         async function ensureUserProfile(user) {
             const userRef = db.ref(`users/${user.uid}`);
             const snap = await userRef.once('value');
 
             if (!snap.exists()) {
-                // Lần đầu đăng nhập → tạo profile đúng validate rules
                 await userRef.set({
                     displayName: (user.displayName || user.email || 'Anonymous').substring(0, 49),
                     createdAt: Date.now()
                 });
             } else {
-                // Đã tồn tại → chỉ update displayName nếu cần (không đụng createdAt)
                 const data = snap.val();
-                if (!data.displayName || data.displayName !== user.displayName) {
+                const currentName = user.displayName || user.email || 'Anonymous';
+                if (!data.displayName || data.displayName !== currentName) {
                     await userRef.update({
-                        displayName: (user.displayName || user.email || 'Anonymous').substring(0, 49)
+                        displayName: currentName.substring(0, 49)
                     });
                 }
             }
@@ -234,6 +253,60 @@
             });
         }
 
+        // Gửi link đăng nhập vào Email người dùng
+        function sendEmailLink(e) {
+            e.preventDefault();
+            const email = document.getElementById('email-input').value.trim();
+            const btn = document.getElementById('btn-send-email');
+            const statusMsg = document.getElementById('email-status-msg');
+
+            if (!email) return;
+
+            const actionCodeSettings = {
+                url: window.location.href, // Link sẽ điều hướng quay lại đúng trang này
+                handleCodeInApp: true
+            };
+
+            btn.disabled = true;
+            btn.textContent = 'Đang gửi...';
+
+            auth.sendSignInLinkToEmail(email, actionCodeSettings)
+                .then(() => {
+                    window.localStorage.setItem('emailForSignIn', email);
+                    statusMsg.textContent = 'Đã gửi liên kết đăng nhập vào Email! Vui lòng kiểm tra hộp thư.';
+                    statusMsg.classList.remove('hidden');
+                    btn.textContent = 'Đã gửi thành công';
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Lỗi gửi email: ' + error.message);
+                    btn.disabled = false;
+                    btn.textContent = 'Gửi link đăng nhập';
+                });
+        }
+
+        // Xử lý xác thực khi người dùng nhấp vào link từ Email
+        function handleEmailLinkSignIn() {
+            if (auth.isSignInWithEmailLink(window.location.href)) {
+                let email = window.localStorage.getItem('emailForSignIn');
+                if (!email) {
+                    email = window.prompt('Vui lòng xác nhận lại Email của bạn để hoàn tất đăng nhập:');
+                }
+                if (email) {
+                    auth.signInWithEmailLink(email, window.location.href)
+                        .then((result) => {
+                            window.localStorage.removeItem('emailForSignIn');
+                            // Clean URL parameters
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            alert('Xác thực thất bại: ' + error.message);
+                        });
+                }
+            }
+        }
+
         function logout() {
             if (confirm('Bạn có chắc muốn đăng xuất?')) {
                 auth.signOut();
@@ -243,7 +316,6 @@
         // ====================== DATA ACCESS ======================
         function getUserRef(type) {
             if (!currentUser) throw new Error('Chưa đăng nhập');
-            // Chỉ cho phép 2 loại dữ liệu này
             if (type !== 'chi-tieu' && type !== 'thu-nhap') {
                 throw new Error('Loại dữ liệu không hợp lệ');
             }
@@ -446,7 +518,6 @@
             setTimeout(() => { backdrop.classList.add('hidden'); }, 300);
         }
 
-        // Sanitize & validate trước khi ghi
         function sanitizePayload() {
             const danh_muc = document.getElementById('danh_muc').value.trim().substring(0, 100);
             const mo_ta = document.getElementById('mo_ta').value.trim().substring(0, 300);
@@ -460,7 +531,6 @@
             if (so_tien < 0 || so_tien > 999999999999) {
                 throw new Error('Số tiền không hợp lệ');
             }
-            // Kiểm tra định dạng ngày đơn giản
             if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) {
                 throw new Error('Ngày chứng từ không hợp lệ');
             }
